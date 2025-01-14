@@ -10,7 +10,7 @@ use App\Http\Controllers\Site\AccountController;
 use App\Http\Controllers\Site\PasswordController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\RegisterController;
-
+use Illuminate\Http\Request;
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\BookingController;

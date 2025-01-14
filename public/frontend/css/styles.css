@@ -72,10 +72,14 @@
 
   .content_box {
     width:100%;
-    max-width:1220px;
+    max-width:1120px;
     text-align:left;
     padding:0;
     margin:0 auto 30px auto;
+  }
+
+  .bg-email-verify {
+    background-color: #313131;
   }
 
   .center {
@@ -1422,4 +1426,12 @@ h6 {font-size:14px;font-weight:400;color:#fff;padding:5px;}
   text-align: left;
   /* margin-top: 0px; */
   margin-bottom: 0px;
+}
+
+.mt-30 {
+  margin-top: 30px;
+}
+
+.pt-30 {
+  padding-top: 30px;
 }

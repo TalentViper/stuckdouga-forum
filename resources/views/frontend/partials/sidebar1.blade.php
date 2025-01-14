@@ -1,5 +1,5 @@
 <div class="col-md-2 sider">
-    <div class="side_title"><h5>Krenky</h5></div>
+    <div class="side_title"><h5>{{ auth()->user()->full_name }}</h5></div>
     <div class="tag-page-gallery mb30">
         <img src="{{ static_asset('images/img/art_thumb.jpg') }}" alt="">
         <div class="menu">

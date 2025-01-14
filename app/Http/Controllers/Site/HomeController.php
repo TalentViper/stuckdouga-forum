@@ -33,11 +33,15 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */    
-    public function account()
+    public function account(Request $request)
     {
         //super
+        $user = auth()->user();
         
-        return view('frontend.account');
+        return view('frontend.account')->with([
+            'user' => $user,
+            'gallery_count' => Gallery::where('user_id', $user->id)->count(),
+        ]);
     }
     public function artwork($id)
     {

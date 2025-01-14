@@ -12,10 +12,10 @@
                         <h1>MY ACCOUNT</h1>
                         <img src="{{ static_asset('images/img/account_bg.jpg') }}" alt="" class="bg-1">
                         <div class="user-info">
-                            <span class="name">Krenky</span>
-                            <span class="location">From:  London UK</span>
-                            <span class="created">Joined: 09.09.24</span>
-                            <span class="posts">Galleries: 12</span>
+                            <span class="name">{{ $user->full_name }}</span>
+                            <span class="location">From:  {{ $user->location }}</span>
+                            <span class="created">Joined: {{ $user->created_at->format('d.m.Y') }}</span>
+                            <span class="posts">Galleries: {{ $gallery_count }}</span>
                         </div>
                         <div class="user-archive-info">
                             <div class="row">
