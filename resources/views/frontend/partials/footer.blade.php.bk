@@ -1,0 +1,19 @@
+<!-- ======= Footer ======= -->
+<footer id="footer">
+
+      <div class="copy">Stuckdouga &copy;2024 | All right reserved | This site is intended for over 18 years of age.</div>
+
+          <div class="foot_nav">
+              <a href="#">home</a> &nbsp;&bull;&nbsp; 
+              <a href="#">galleries</a> &nbsp;&bull;&nbsp; 
+              <a href="#">news</a> &nbsp;&bull;&nbsp; 
+              <a href="#">forum</a> &nbsp;&bull;&nbsp; 
+              <a href="#">shop</a> &nbsp;&bull;&nbsp; 
+              <a href="#">resources</a> &nbsp;&bull;&nbsp; 
+              <a href="#">my account</a> &nbsp;&bull;&nbsp; 
+              <a href="#">privacy policy</a> &nbsp;&bull;&nbsp; 
+              <a href="#">send feedback</a> 
+          </div>
+
+      </div>
+</footer><!-- End Footer -->

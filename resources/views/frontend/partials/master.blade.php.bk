@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Elite Providers | Top Gardening Service in London</title>
+  <meta name="description" content="We provide wide range of services in London: Waste Removal, Building Refurbishment, Home Removal, Landscaping, Pest Control, Cleaning Service, Jet Wash">
+  <meta name="keywords" content="gardening london, waste removal london, cleaning service london, building refurbishment london, home removal service, landscaping service, jet pressure service, pest control service">
+
+  <!-- Favicons -->
+  <link href="https://eliteproviders.uk/public/images/elite/favicon.png" rel="icon">
+  <link href="https://eliteproviders.uk/public/images/elite/favicon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <!-- Vendor CSS Files -->
+  <link href="{{ static_asset('frontend/vendor/aos/aos.css') }}" rel="stylesheet">
+  <link href="{{ static_asset('frontend/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+  <link href="{{ static_asset('frontend/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+  <link href="{{ static_asset('frontend/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.theme.min.css">
+
+  <!-- Template Main CSS File -->
+  <link href="{{ static_asset('frontend/css/main_style.css') }}" rel="stylesheet">
+  <link rel="stylesheet" href="{{ static_asset('admin/css/toastr.min.css') }}">
+
+  <!-- =======================================================
+  * Template Name: Arsha
+  * Updated: May 30 2023 with Bootstrap v5.3.0
+  * Template URL: https://bootstrapmade.com/arsha-free-bootstrap-html-template-corporate/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+    @include('frontend.partials.header')
+
+    @yield('main-content')
+
+    @include('frontend.partials.footer')
+
+    <div id="preloader"></div>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i></a>
+
+    @include('cookie-consent::bar', ['text' => 'Your experience on this site will be improved by allowing cookies.', 'accept' => 'Accept', 'cancel' => 'Refuse'])
+    <!-- Vendor JS Files -->
+    <script src="{{ static_asset('frontend/vendor/aos/aos.js') }}"></script>
+    <script src="{{ static_asset('frontend/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="{{ static_asset('frontend/js/main.js') }}"></script>
+    <script type="text/javascript" src="{{ static_asset('admin/js/toastr.min.js') }}"></script>
+    {!! Toastr::message() !!}
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0XEE1YGZ7J"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-0XEE1YGZ7J');
+    </script>
+
+    @yield('script')
+    <script type="text/javascript" id="zsiqchat">var $zoho=$zoho || {};$zoho.salesiq = $zoho.salesiq || {widgetcode: "siqb096f223973fba7b03d7d778de838b9ea4e463635f6801b1cfadbf6fa25fc2d8", values:{},ready:function(){}};var d=document;s=d.createElement("script");s.type="text/javascript";s.id="zsiqscript";s.defer=true;s.src="https://salesiq.zohopublic.eu/widget";t=d.getElementsByTagName("script")[0];t.parentNode.insertBefore(s,t);</script>
+</body>
+
+</html>
