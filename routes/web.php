@@ -149,7 +149,7 @@ Route::prefix('beta')->group(function () {
     Route::get('/update/{keyword?}', [GalleryController::class, 'search'])->name('update');
     Route::get('/populartag/{keyword?}', [GalleryController::class, 'search'])->name('populartag');
 });
-
+Route::post('/usersbykey', [UserController::class, 'getUsersBykey'])->name('usersbykey');
 
 // admin route
 Route::prefix('admin')->name('admin.')->group(function () {

@@ -40,6 +40,7 @@ class MessageController extends Controller
         $request->validate([
             'receiver_id' => 'required|exists:users,email',
             'content' => 'required|string',
+            'attach_file_path' => 'nullable|string',
         ]);
 
         $user = User::where('email', $request->receiver_id)->first();
@@ -47,8 +48,8 @@ class MessageController extends Controller
             'sender_id' => Auth::id(),
             'receiver_id' => $user->id,
             'content' => $request->content,
+            'attach_file_path' => $request->attach_file_path
         ]);
-        
 
         return redirect()->route('accountmessage');
     }
