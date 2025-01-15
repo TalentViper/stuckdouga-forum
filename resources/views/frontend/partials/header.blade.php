@@ -1,10 +1,10 @@
 <!-- ======= Header ======= -->
-<header id="header">
-    <div id="header_box">
+<header id="header" >
+    <div id="header_box" class="fade-in">
 
         <a href="{{route('home')}}" class="hover"><img src="{{ static_asset('images/img/stuckdouga_logo.jpg') }}" alt="Stuck Douga" /></a>
 
-        <div class="navigation">
+        <div class="navigation ">
             <ul>
                 <li class="header-search">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#e30512" class="bi bi-search search-ic hover" viewBox="0 0 16 16" onclick="toggleSearchPopup()">

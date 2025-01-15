@@ -116,11 +116,11 @@ class UserController extends Controller
         return response()->json(['msg' => 'User has been removed!' ]);
     }
 
-
-
-
-
-
+    public function getUsersBykey(Request $request) {
+        $keyword = $request->input('username');
+        $users = User::where('full_name', 'like', '%'.$keyword.'%')->orWhere('email', 'like', '%'.$keyword.'%')->get();
+        return response()->json($users);
+    }
 
     public function searchCustomer(Request $request)
     {

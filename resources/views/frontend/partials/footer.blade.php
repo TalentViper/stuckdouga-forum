@@ -1,5 +1,5 @@
 <!-- ======= Footer ======= -->
-<footer id="footer">
+<footer id="footer" class="fade-in">
       <div class="copy" style="padding-top:20px">Stuckdouga &copy;2025 | All right reserved | This site is intended for over 18 years of age.</div>
 
           <div class="foot_nav">
