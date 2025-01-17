@@ -47,9 +47,9 @@
                   <div class="mb-3 row form-group pb30">
                     <label for="user_name" class="col-sm-4 col-form-label">Choose Username:</label>
                     <div class="col-sm-8">
-                      <input type="text" class="form-control" id="user_name" name="user_name" placeholder="" value="{{ old('user_name') }}" required>
+                      <input type="text" class="form-control" id="user_name" name="username" placeholder="" value="{{ old('username') }}" required>
                     </div>
-                    @error('user_name')
+                    @error('username')
                         <span class="bg-danger mt-1 py-1 rounded-1 small text-center text-white">{{ $message }}</span>
                     @enderror
                   </div>

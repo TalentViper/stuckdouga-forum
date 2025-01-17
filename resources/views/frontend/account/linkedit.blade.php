@@ -9,69 +9,38 @@
                 <div class="row">
                     @include('frontend.partials.sidebar1')
                     <div class="col-md-10 center primary p-4">
-                        <h2>LINKS  <button id="toggleButton" class="toggle-button flex-end">+</button></h2>  
-                        <div id="uploadSection" style="display: none;">
-                            <form action="{{ route('links.store') }}" method="POST">
-                                <h5 class="mt-5 mb-5">ADD NEW LINK</h5>
+                        <h2>LINKS <a href="{{ redirect()->back()->getTargetUrl() }}" class="toggle-button flex-end">Go back</a></h2>  
+                        <div id="uploadSection" >
+                            <form action="{{ route('link.update') }}" method="POST">
+                                <h5 class="mt-5 mb-5">UPDATE LINK</h5>
                                 @csrf
                                 <div class="gallery-form">
+                                    <input type="hidden" name="id" value="{{ $link->id }}">
                                     <div class="mb-3 row form-group">
                                         <label for="name" class="col-sm-2 col-form-label" required>Link Name:</label>
                                         <div class="col-sm-4">
-                                            <input type="text" class="form-control" id="name" name="name" placeholder="" required>
+                                            <input type="text" class="form-control" id="name" name="name" placeholder="" required value="{{ $link->name }}">
                                         </div>
                                     </div>
                                     <div class="mb-3 row form-group">
                                         <label for="url" class="col-sm-2 col-form-label" required>URL:</label>
                                         <div class="col-sm-4">
-                                            <input type="text" class="form-control" id="url" name="url" placeholder="" required>
+                                            <input type="text" class="form-control" id="url" name="url" placeholder="" required value="{{ $link->url }}">
                                         </div>
                                     </div>
                                     <div class="mb-3 row form-group">
                                         <label for="desc" class="col-sm-2 col-form-label" required>Description:</label>
                                         <div class="col-sm-7">
-                                            <textarea class="form-control" id="desc" name="desc" rows="10"></textarea>
+                                            <textarea class="form-control" id="desc" name="desc" rows="10">{{ $link->desc }}</textarea>
                                         </div>
                                     </div>
                                     <div class="mb-3 row">
                                         <div class="col-sm-9">
-                                            <button type="submit" class="create">Add Link</button>
+                                            <button type="submit" class="create">Update Link</button>
                                         </div>
                                     </div>
                                 </div>
                             </form>
-                        </div>
-                        <div class="my-contents">
-                            <h5 class="mt-5 mb-5">YOUR LINKS:</h5>
-                            <table class="table table-striped table-md">
-                                <thead>
-                                    <tr>
-                                        <th width="20%">Name:</th>
-                                        <th wdith="60%">Description:</th>
-                                        <th width="20%">Actions:</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="result">
-                                    @if($links->isEmpty())
-                                        <p>No Links found.</p>
-                                    @else
-                                        @foreach($links as $link)
-                                            <tr data-id="{{ $link->id }}">
-                                                <td>{{ $link->name }}</td>
-                                                <td>{{ $link->desc }}</td>
-                                                <td>
-                                                    <a href="{{ route('link.edit', $link->id) }}">
-                                                        <i class="bi bi-pencil-square"></i>
-                                                    </a>
-                                                    <a href="#" class="remove-button" data-id="{{ $link->id }}">
-                                                        <i class="bi bi-trash"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                            @endforeach
-                                    @endif
-                                </tbody>
-                            </table>
                         </div>
                     </div>
                 </div>
@@ -143,7 +112,8 @@
         border: none;
         padding: 10px 20px;
         cursor: pointer;
-        font-size: 20px;
+        font-size: 13px;
+        text-decoration: none;
         float: right;
         margin-top: -10px;
     }

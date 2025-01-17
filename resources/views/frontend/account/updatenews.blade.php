@@ -2,13 +2,7 @@
 <link rel="stylesheet" href="https://icons.getbootstrap.com/assets/font/bootstrap-icons.min.css">
 <link rel="stylesheet" href="{{ static_asset('frontend/plugin/password_strength.css') }}" />
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="{{ static_asset('frontend/plugin/jquery.hippo-password-strength.js') }}"></script>
-<script>
-$(function($){
-    $('#password').hippoPasswordStrength({
-        indicator_prefix: "pass_state0" // default "password_strength"
-    });
-});
+
 </script>
 @section('main-content')
 <main id="main" class="main-content">
@@ -19,86 +13,26 @@ $(function($){
                 <div class="row">
                     @include('frontend.partials.sidebar1')
                     <div class="col-md-10 center primary p-4">
-                        <h2>NEWS & UPDATES  <button id="toggleButton" class="toggle-button flex-end">+</button></h2>
-                        <div id="uploadSection" style="display: none;">
-                            <form class="pt-4">
+                        <h2>UPDATES <a href="{{ redirect()->back()->getTargetUrl() }}" class="toggle-button flex-end">Go back</a> </h2>
+                        <div id="uploadSection" >
+                            
+                            <form id="newsForm" action="{{ route('news.save') }}"  method="POST">
                                 @csrf
-                                <div class="mb-3 row">
-                                    <div class="col-md-6">
-                                        <div class="mb-3 row form-group">
-                                            <label for="password" class="col-sm-5 col-form-label" required >Set Password:</label>
-                                            <div class="col-sm-7">
-                                                <input type="password" class="form-control" id="password"  data-indicator="strengthLevel" name="password" placeholder="" value="{{ old('password') }}" required>
-                                            </div>
-                                        </div>
-                                        <div class="mb-3 row form-group">
-                                            <label for="confirmpassword" class="col-sm-5 col-form-label" required >Confirm Password:</label>
-                                            <div class="col-sm-7">
-                                                <input type="password" class="form-control" id="confirmpassword" name="confirmpassword" placeholder=""  required>
-                                                <div id="strengthLevel" class="password_strength pass_state01"></div>
-                                            </div>
-                                        </div>
-                                        <div class="mb-3 row form-group">
-                                            <div class="col-md-12">
-                                                <span id="passwordError" style="color: red;"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 d-flex justify-content-center align-items-center" style="height: 108px">
-                                        <button type="button" class="change" id="changePasswordBtn">Change Password</button>
-                                    </div>
-
-                                </div>
-                            </form>
-                            <form id="newsForm" action="{{ route('newsupdates.store') }}"  method="POST">
-                                @csrf
-                                <h5 class="mt-5 mb-5">ADD NEW ITEM TO NEWS:</h5>
+                                <h5 class="mt-5 mb-5">UPDATE NEW ITEM TO NEWS:</h5>
                                 <h6>Today's date {{ \Carbon\Carbon::now()->format('d/m/Y') }}</h6>
+                                <input type="hidden" name="id" value="{{ $news->id }}">
                                 <div class="row">
                                     <label for="description" class="col-sm-2 col-form-label" required >News Content:</label>
                                     <div class="col-sm-10">
-                                        <textarea name="content" id="editor"></textarea>
+                                        <textarea name="content" id="editor">{{ $news->content }}</textarea>
                                     </div>
                                 </div>
                                 <div class="mb-3 row mt-3">
                                     <div class="col-sm-12">
-                                        <button type="submit" class="create">Add News</button>
+                                        <button type="submit" class="create">Update News</button>
                                     </div>
                                 </div>
                             </form>
-                        </div>
-                        <div class="my-contents">
-                            <h5 class="mt-5 mb-5">NEWS HISTORY:</h5>
-                            <table class="table table-striped table-md">
-                                <thead>
-                                    <tr>
-                                        <th width="20%">Date:</th>
-                                        <th wdith="60%">Content:</th>
-                                        <th width="20%">Actions:</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="result">
-                                    @if($news->isEmpty())
-                                        <p>No News found.</p>
-                                    @else
-                                            @foreach($news as $new)
-                                                <tr data-id="{{ $new->id }}">
-                                                <td>{{ \Carbon\Carbon::parse($new->created_at)->format('d-m-Y') }}</td>
-                                                <td>@stripBBCode($new->content)</td>
-                                                <td>
-                                                    <a href="{{ route('news.update', $new->id) }}" class="edit-button">
-                                                        <i class="bi bi-pencil-square"></i>
-                                                    </a>
-                                                    <a href="#" class="remove-button"  data-id="{{ $new->id }}">
-                                                        <i class="bi bi-trash"></i>
-                                                    </a>
-                                                </td>
-                                                </tr>
-                                            @endforeach
-                                    @endif
-                                    </tr>
-                                </tbody>
-                            </table>
                         </div>
                     </div>
                 </div>
@@ -201,7 +135,8 @@ $(function($){
         border: none;
         padding: 10px 20px;
         cursor: pointer;
-        font-size: 20px;
+        font-size: 13px;
+        text-decoration: none;
         float: right;
         margin-top: -10px;
     }
@@ -289,16 +224,16 @@ $(function($){
         }
 
         // Edit button click event
-        // $(".edit-button").on('click', function(e) {
-        //     e.preventDefault();
-        //     var newsId = $(this).closest('tr').data('id');
-        //     var newsContent = $(this).closest('tr').find('td').eq(1).text();
+        $(".edit-button").on('click', function(e) {
+            e.preventDefault();
+            var newsId = $(this).closest('tr').data('id');
+            var newsContent = $(this).closest('tr').find('td').eq(1).text();
 
-        //     // Populate the form with the news content
-        //     $("#editor").val(newsContent);
-        //     $("#newsForm").attr('action', '{{ route('newsupdates.update', ':id') }}'.replace(':id', newsId));
-        //     $("#newsForm").append('<input type="hidden" name="_method" value="PUT">');
-        // });
+            // Populate the form with the news content
+            $("#editor").val(newsContent);
+            $("#newsForm").attr('action', '{{ route('newsupdates.update', ':id') }}'.replace(':id', newsId));
+            $("#newsForm").append('<input type="hidden" name="_method" value="PUT">');
+        });
 
         // Remove button click event
         $(".remove-button").on('click', function(e) {

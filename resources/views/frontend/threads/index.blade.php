@@ -8,7 +8,9 @@
                     <h1>COMMUNITY</h1>
                     <div class="sort-buttons">
                         <button type="button" class="latest-button">Latest Posts</button>
-                        <button type="button" class="post-button">Post a New Topic</button>
+                        @if (Auth::check())
+                            <button type="button" class="post-button">Post a New Topic</button>
+                        @endif
                     </div>
                     <div class="card">
                         <div class="card-header">
