@@ -24,6 +24,11 @@ class NewsController extends Controller
         return view('news.create');
     }
 
+    public function upgradenews(Request $request, $newsId) {
+        $news = News::find($newsId);
+        return view('frontend.account.updatenews', compact('news'));
+    }
+
     // Method to store a newly created user in the database
     public function store(Request $request)
     {
@@ -55,10 +60,17 @@ class NewsController extends Controller
     }
 
     // Method to update a user in the database
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        // Logic to update the user
-        return redirect()->route('news.index');
+        $request->validate([
+            'content' => 'required',
+        ]);
+
+        $news = News::find($request->id);
+        $news->content = $request->content;
+        $news->save();
+
+        return redirect()->route('news');
     }
 
     // Method to delete a user from the database

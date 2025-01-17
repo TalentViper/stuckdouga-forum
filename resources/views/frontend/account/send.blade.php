@@ -163,11 +163,17 @@
                             @csrf
                             <div class="form-group mt-3 row">
                                 <label for="receiver_id" class="col-md-4">Receiver Username:</label>
-                                <input type="text" id="receiver_id" name="receiver_id" class="col-md-8" required>
+                                <input type="text" id="receiver_id" name="username" class="col-md-8" required value="{{ $to_admin ? $to_admin : old('username') }}">
+                                @error('username')
+                                    <span class="bg-danger mt-1 py-1 rounded-1 small text-center text-white">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="form-group mt-3 row">
                                 <label for="message_content" class="col-md-4" >Message:</label>
-                                <textarea id="message_content" name="content" class="col-md-8"  required></textarea>
+                                <textarea id="message_content" name="content" class="col-md-8"  required>{{ old('content') }}</textarea>
+                                @error('content')
+                                    <span class="bg-danger mt-1 py-1 rounded-1 small text-center text-white">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="form-group mt-3 row">
                                 <label for="thumbnail" class="col-md-4 col-form-label text-center" name="thumbnail" required >Attatch:</label>
@@ -180,7 +186,7 @@
                                 </div>
                                 <input type="text" class="form-control gallery-url" name="attach_file_path" placeholder="" hidden>
                             </div>
-                            <button type="submit mt-3" class="send">Send Message</button>
+                            <button type="submit" class="send mt-3">Send Message</button>
                         </form>
                     </div>
                 </div>

@@ -9,16 +9,17 @@
                 <div class="row">
                     @include('frontend.partials.sidebar1')
                     <div class="col-md-10 center primary p-4">
-                        <h2>WISHLIST  <button id="toggleButton" class="toggle-button flex-end">+</button></h2>  
-                        <div id="uploadSection" style="display: none;">
-                            <form method="POST" action="{{ route('wishlists.store' )}}">
-                                <h5 class="mt-5 mb-5">ADD NEW ITEM TO WISHLIST</h5>
+                        <h2>WISHLIST <a href="{{ redirect()->back()->getTargetUrl() }}" class="toggle-button flex-end">Go back</a></h2>  
+                        <div id="uploadSection" >
+                            <form method="POST" action="{{ route('wishlist.update' )}}">
+                                <h5 class="mt-5 mb-5">UPDATE WISHLIST ITEM</h5>
                                 @csrf
                                 <div class="gallery-form">
+                                    <input type="hidden" name="id" value="{{ $wishitem->id }}">
                                     <div class="mb-3 row form-group">
                                         <label for="description" class="col-sm-2 col-form-label"  required >Description:</label>
                                         <div class="col-sm-7">
-                                            <textarea class="form-control" id="description" rows="10" name="description"></textarea>
+                                            <textarea class="form-control" id="description" rows="10" name="description">{{ $wishitem->description }}</textarea>
                                         </div>
                                     </div>
                                     <div class="mb-3 row">
@@ -28,18 +29,18 @@
                                             <div class="progress mt-2" style="display: none;">
                                                 <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
-                                            <input type="text" class="form-control wish-url" name="url" placeholder="" hidden>
+                                            <input type="text" class="form-control wish-url" name="url" placeholder="" hidden value="{{ $wishitem->url }}">
                                         </div>
                                         <label class="col-sm-1"></label>
                                         <label for="series" class="col-sm-1 col-form-label" required >Series:</label>
                                         <div class="col-sm-4">
-                                            <input type="text" class="form-control" id="series" name="series" placeholder=""  required>
+                                            <input type="text" class="form-control" id="series" name="series" placeholder=""  required value="{{ $wishitem->series }}">
                                         </div>
                                     </div>
                                     <div class="mb-3 row">
                                         <label for="type" class="col-sm-2 col-form-label" name="type" required >Priority:</label>
                                         <div class="col-sm-4">
-                                            <select class="form-control" name="priority">
+                                            <select class="form-control" name="priority" value="{{ $wishitem->priority }}">
                                                 <option value="NORMAL">NORMAL</option>
                                                 <option value="LOW">LOW</option>
                                                 <option value="HIGH">HIGH</option>
@@ -49,52 +50,14 @@
                                         <label class="col-sm-1"></label>
                                         <label for="tag" class="col-sm-1 col-form-label" required >Other Series:</label>
                                         <div class="col-sm-4">
-                                            <input type="text" class="form-control" id="tag" name="oseries" placeholder=""  required>
+                                            <input type="text" class="form-control" id="tag" name="oseries" placeholder=""  required value="{{ $wishitem->oseries }}">
                                         </div>
                                     </div>
                                     <div class="mb-3">
-                                        <button type="submit" class="create">Add Wishlist Item</button>
+                                        <button type="submit" class="create">Update Wishlist Item</button>
                                     </div>
                                 </div>
                             </form>
-                        </div>
-                        <div class="my-contents">
-                            <h5 class="mt-5 mb-5">YOUR WISHLIST:</h5>
-                            <table class="table table-striped table-md">
-                                <thead>
-                                    <tr>
-                                        <th width="50%">Description:</th>
-                                        <th width="20%">Sample:</th>
-                                        <th width="15%">Priority:</th>
-                                        <th width="15%">Actions:</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="result">
-                                    @if($wishlists->isEmpty())
-                                        <p>No wishlists found.</p>
-                                    @else
-                                            @foreach($wishlists as $wishlist)
-                                                <tr>
-                                                    <td>{{ $wishlist->description }}</td>
-                                                    <td>
-                                                        <img src="{{ static_asset('uploads') . '/' . $wishlist->url }}" alt="{{ $wishlist->url }}" width="100px"/>
-                                                    </td>
-                                                    <td> {{ $wishlist->priority }}</td>
-                                                    <td>
-                                                        <a href="{{ route('wishlist.edit', $wishlist->id) }}">
-                                                            <i class="bi bi-pencil-square"></i>
-                                                        </a>
-                                                        <a href="#" class="delete-button" data-id="{{ $wishlist->id }}">
-                                                            <i class="bi bi-trash"></i>
-                                                        </a>
-                                                    </td>
-                                                    <!-- Add more fields as needed -->
-                                                </tr>
-                                            @endforeach
-                                    @endif
-                                    
-                                </tbody>
-                            </table>
                         </div>
                     </div>
                 </div>
@@ -158,7 +121,9 @@
         border: none;
         padding: 10px 20px;
         cursor: pointer;
-        font-size: 20px;
+        font-size: 14px;
+        font-weight: 200;
+        text-decoration: none;
         float: right;
         margin-top: -10px;
     }

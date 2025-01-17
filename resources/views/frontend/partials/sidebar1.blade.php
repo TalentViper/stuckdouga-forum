@@ -18,9 +18,6 @@
                     <a href="{{ route('news') }}">News & Updates</a>
                 </li>
                 <li>
-                    <a href="{{ route('accountgallery') }}">Galleries</a>
-                </li>
-                <li>
                     <a href="{{ route('private') }}">Private Area</a>
                 </li>
                 <li>

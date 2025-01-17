@@ -18,6 +18,12 @@ class LinkController extends Controller
         
     }
 
+    public function edit(Request $request, $id)
+    {
+        $link = Link::find($id);
+        return view('frontend.account.linkedit', compact('link'));
+    }
+
     public function store(Request $request)
     {
         $link = new Link();
@@ -28,6 +34,17 @@ class LinkController extends Controller
         $link->save();
         
         return redirect()->back()->with('success', 'Link created successfully!');
+    }
+
+    public function update(Request $request)
+    {
+        $link = Link::find($request->id);
+        $link->name = $request->name;
+        $link->url = $request->url;
+        $link->desc = $request->desc;
+        $link->save();
+
+        return redirect()->route('link');
     }
 
     public function destroy($id)

@@ -40,11 +40,27 @@ class WishListController extends Controller
         return redirect()->route('wishlist');
     }
 
+    public function update(Request $request) {
+        $wishlist = WishList::where('id', $request->id)->first();
+        $wishlist->description = $request->description;
+        if($request->url != null) {
+            $wishlist->url = $request->url;
+        }
+        $wishlist->priority = $request->priority;
+        $wishlist->series = $request->series;
+        $wishlist->oseries = $request->oseries;
+        $wishlist->user_id = Auth::id();
+        $wishlist->save();
+
+        return redirect()->route('wishlist');
+    }
+
     // Method to display a specific user
-    public function show($id)
+    public function show(Request $request, $id)
     {
+        $wishitem = WishList::where("id", $id)->first();
         // Logic to display the user
-        return view('wishlist.show', compact('id'));
+        return view('frontend.account.wishlistedit', compact('wishitem'));
     }
 
     // Method to display a form to edit a user
@@ -52,13 +68,6 @@ class WishListController extends Controller
     {
         // Logic to display the edit user form
         return view('wishlist.edit', compact('id'));
-    }
-
-    // Method to update a user in the database
-    public function update(Request $request, $id)
-    {
-        // Logic to update the user
-        return redirect()->route('wishlist.index');
     }
 
     // Method to delete a user from the database
