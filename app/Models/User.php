@@ -84,4 +84,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsToMany(User::class, 'user_follows', 'followed_user_id', 'user_id')->withTimestamps();
     }
+
+    public function sendEmailVerificationNotification()
+    {
+        $this->notify(new \App\Notifications\VerifyEmail);
+    }
 }
