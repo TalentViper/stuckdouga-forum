@@ -72,7 +72,7 @@
 
   .content_box {
     width:100%;
-    max-width:1120px;
+    max-width: 1400px;
     text-align:left;
     padding:0;
     margin:0 auto 30px auto;
@@ -134,6 +134,10 @@
     padding:1px 15px;
   }
 
+  .tag-item:hover {
+    background-color: #3c3c3c;
+    color: #cdcdcd !important;
+  }
 
   .my_but2:hover {
     color:#e30512;
@@ -344,8 +348,17 @@ h6 {font-size:14px;font-weight:400;color:#fff;padding:5px;}
   font-size: 14px!important;
   text-decoration: none!important;
   display: block;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.tag-page-gallery .menu a {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.tag-page-gallery a.active {
+  background-color: #707070;
 }
 
 .tag-page-browsername {

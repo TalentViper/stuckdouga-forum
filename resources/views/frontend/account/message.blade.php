@@ -53,7 +53,7 @@
                                                 <input class="form-check-input message-checkbox m-2" type="checkbox">
                                             </td>
                                             <td style="width: 10%;">
-                                                <img src="{{ static_asset('uploads') . '/' . $message->sender->avatar }}" alt="" width="50px">
+                                                <img src="{{ $message->sender->avatar ? (static_asset('uploads') . '/' . $message->sender->avatar) : ($message->sender->gender == 'female' ? static_asset('images/img/female_default.jpg') : static_asset('images/img/male_default.jpg') ) }}" alt="" width="50px">
                                             </td>
                                             <td style="width: 15%;">{{ $message->sender->full_name }}</td>
                                             <td style="width: 50%; text-align: center;">{{ $message->content }}</td>

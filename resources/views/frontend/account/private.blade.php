@@ -52,7 +52,7 @@
                             @csrf
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <textarea name="content" id="editor" name="content">{{$user->private_content}}</textarea>
+                                    <textarea name="content" id="editor" name="content">{{ $user->private_content}}</textarea>
                                 </div>
                             </div>
                             <div class="mb-3 row mt-3">

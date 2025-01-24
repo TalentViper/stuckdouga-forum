@@ -97,7 +97,7 @@
                                             </div>
                                         </div>
                                         <div class="row mt-3 position-relative">
-                                            <img src="{{ $user->avatar == NULL ? ($user->gender == 'male' ? static_asset('images/img/male_default.jpg') : static_asset('images/img/female_default.jpg')) : static_asset('uploads') . '/' . $user->avatar }}" alt="" width="200px" class="avatar-img">
+                                            <img src="{{ $user->avatar == NULL ? ($user->gender == 'female' ? static_asset('images/img/female_default.jpg') : static_asset('images/img/male_default.jpg')) : static_asset('uploads') . '/' . $user->avatar }}" alt="" width="200px" class="avatar-img">
                                             <button type="button" class="remove-profile" id="removeThumbnail"><span aria-hidden="true">&times;</span></button>
                                         </div>
                                         <div class="row mt-3">

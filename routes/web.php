@@ -92,6 +92,7 @@ Route::prefix('beta')->group(function () {
 
     Route::get('/threads', [ThreadController::class, 'index'])->name('threads.index');
     Route::get('/threads/{thread}', [ThreadController::class, 'show'])->name('threads.show');
+    Route::post('/contact/send', [HomeController::class, 'contact_store'])->name('contact.send');
 
     Route::group(['middleware' => 'auth'], function () {
         Route::get('logout', [LoginController::class, 'logout'])->name('logout');
@@ -110,6 +111,7 @@ Route::prefix('beta')->group(function () {
             Route::get('/private', [AccountController::class, 'private'])->name('private');
             Route::get('/profile', [AccountController::class, 'profile'])->name('profile');
             Route::get('/upload/{galleryId}', [AccountController::class, 'upload'])->name('artworkupload');
+            Route::post('/artwork/changestate', [ArtWorkController::class, 'change_visible'])->name('artwork.change_visible');
             Route::get('/wishlist', [AccountController::class, 'wishlist'])->name('wishlist');  
             Route::get('/wishlist/{wishlistId}', [WishListController::class, 'show'])->name('wishlist.edit');  
             Route::post('/wishlist/save', [WishListController::class, 'update'])->name('wishlist.update');  

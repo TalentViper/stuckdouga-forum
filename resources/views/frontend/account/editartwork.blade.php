@@ -10,7 +10,7 @@
                 <div class="row">
                     @include('frontend.partials.sidebar1')
                     <div class="col-md-10 center primary p-4">
-                        <h2>ARTWORKS::{{ strtoupper($title) }} <button id="toggleButton" class="toggle-button flex-end">+</button></h2>  
+                        <h2>ARTWORKS::{{ strtoupper($title) }} <button id="toggleButton" class="toggle-button flex-end">+</button></h2>
                         <div id="uploadSection" style="display: none;">
                             <form id="artworkForm" method="POST" action="{{ route('artworks.update', $artwork->id) }}" enctype="multipart/form-data">
                                 @csrf
@@ -28,11 +28,11 @@
                                                 <div class="progress mt-2" style="display: none;">
                                                     <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                                                 </div>
-                                                <input type="text" class="form-control main-file" name="mainfile" value="{{$artwork->img_main}}" hidden>
+                                                <input type="text" class="form-control main-file" name="mainfile" value="{{$artwork->img_main}}" hidden required>
                                             </div>
                                         </div>
                                         <div class="col-md-6 row">
-                                            <label class="col-sm-4 col-form-label" required >Image #4:</label>
+                                            <label class="col-sm-4 col-form-label" >Image #4:</label>
                                             <div class="col-sm-8 item-box">
                                                  @if($artwork->img4)
                                                     <img src="{{ static_asset('uploads') . '/' . $artwork->img4 }}" class="edit-image"/>
@@ -50,7 +50,7 @@
                                     </div>
                                     <div class="row mt-3">
                                         <div class="col-md-6 row">
-                                            <label class="col-sm-4 col-form-label" required >Thumbnail:</label>
+                                            <label class="col-sm-4 col-form-label" >Thumbnail:</label>
                                             <div class="col-sm-8 item-box">
                                                 @if($artwork->thumbnail)
                                                     <img src="{{ static_asset('uploads') . '/' . $artwork->thumbnail }}" class="edit-image"/>
@@ -166,7 +166,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="row">
-                                                <label for="type" class="col-sm-4 col-form-label" required >Image Type:</label>
+                                                <label for="type" class="col-sm-4 col-form-label" >Image Type:</label>
                                                 <div class="col-sm-8">
                                                 <select name="type" class="form-control"  value="{{$artwork->type}}">
                                                     <option value="">-- Select Item Type -- </option>
@@ -189,7 +189,7 @@
                                                 </div>
                                             </div>
                                             <div class="row mt-3">
-                                                <label for="type" class="col-sm-4 col-form-label" required >Section:</label>
+                                                <label for="type" class="col-sm-4 col-form-label" >Section:</label>
                                                 <div class="col-sm-8">
                                                 <select name="section" class="form-control">
                                                     <option value="">-- Select Section -- </option>
@@ -198,7 +198,7 @@
                                                 </div>
                                             </div>
                                             <div class="row mt-3">
-                                                <label for="type" class="col-sm-4 col-form-label" required >Info Position:</label>
+                                                <label for="type" class="col-sm-4 col-form-label" >Info Position:</label>
                                                 <div class="col-sm-8">
                                                     <select name="info" class="form-control"  value="{{$artwork->info}}">
                                                         <option value="0">Side</option>
@@ -207,7 +207,7 @@
                                                 </div>
                                             </div>
                                             <div class="row mt-3">
-                                                <label for="type" class="col-sm-4 col-form-label" required >Visibility:</label>
+                                                <label for="type" class="col-sm-4 col-form-label" >Visibility:</label>
                                                 <div class="col-sm-8">
                                                 <select name="visibility" class="form-control"  value="{{$artwork->visibility}}">
                                                     <option value="0">Visible to Public</option>
@@ -225,25 +225,25 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="row">
-                                                <label for="layers" class="col-sm-4 col-form-label" required >Layers:</label>
+                                                <label for="layers" class="col-sm-4 col-form-label" >Layers:</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" class="form-control" id="layers" name="layers" placeholder="" value=1  required value="{{$artwork->layers}}">
+                                                    <input type="text" class="form-control" id="layers" name="layers" placeholder="" value="1" value="{{$artwork->layers}}">
                                                 </div>
                                             </div>
                                             <div class="row mt-3">
-                                                <label for="sketch" class="col-sm-4 col-form-label" required >Sketches:</label>
+                                                <label for="sketch" class="col-sm-4 col-form-label" >Sketches:</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" class="form-control" id="sketch" name="sketch"  value="{{$artwork->sketch}}"  value=0 required>
+                                                    <input type="text" class="form-control" id="sketch" name="sketch"  value="{{$artwork->sketch}}"  value="0">
                                                 </div>
                                             </div>
                                             <div class="row mt-3">
-                                                <label for="snb" class="col-sm-4 col-form-label" required >Sequence Nb:</label>
+                                                <label for="snb" class="col-sm-4 col-form-label" >Sequence Nb:</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" class="form-control" id="snb" name="snb" value="{{$artwork->snb}}"  required>
+                                                    <input type="text" class="form-control" id="snb" name="snb" value="{{$artwork->snb}}" >
                                                 </div>
                                             </div>
                                             <div class="row mt-3">
-                                                <label for="condition" class="col-sm-4 col-form-label" required >Condition:</label>
+                                                <label for="condition" class="col-sm-4 col-form-label" >Condition:</label>
                                                 <div class="col-sm-8">
                                                 <select name="condition" class="form-control" value="{{$artwork->condition}}">
                                                     <option value="1">Excellent</option>
@@ -254,7 +254,7 @@
                                                 </div>
                                             </div>
                                             <div class="row mt-3">
-                                                <label for="oversize" class="col-sm-4 col-form-label" required >Oversize:</label>
+                                                <label for="oversize" class="col-sm-4 col-form-label" >Oversize:</label>
                                                 <div class="col-sm-8">
                                                 <select name="oversize" class="form-control" value="{{$artwork->oversize}}">
                                                     <option value="0">No</option>
@@ -266,7 +266,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="row">
-                                                <label for="source" class="col-sm-4 col-form-label" required >Source:</label>
+                                                <label for="source" class="col-sm-4 col-form-label" >Source:</label>
                                                 <div class="col-sm-8">
                                                 <select name="source" class="form-control" value="{{$artwork->source}}">
                                                     <option value="1">TV</option>
@@ -282,7 +282,7 @@
                                                 </div>
                                             </div>
                                             <div class="row mt-3">
-                                                <label for="background" class="col-sm-4 col-form-label" required >Background:</label>
+                                                <label for="background" class="col-sm-4 col-form-label" >Background:</label>
                                                 <div class="col-sm-8">
                                                 <select name="background" class="form-control" value="{{$artwork->background}}">
                                                     <option value="0">None</option>
@@ -295,7 +295,7 @@
                                                 </div>
                                             </div>
                                             <div class="row mt-3">
-                                                <label for="stype" class="col-sm-4 col-form-label" required >Sequence Type:</label>
+                                                <label for="stype" class="col-sm-4 col-form-label" >Sequence Type:</label>
                                                 <div class="col-sm-8">
                                                 <select name="stype" class="form-control" value="{{$artwork->stype}}">
                                                         <option value="1">Normal Production</option>
@@ -340,21 +340,21 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="row mt-4">
-                                                <label for="players" class="col-sm-4 col-form-label" required >Layers:</label>
+                                                <label for="players" class="col-sm-4 col-form-label" >Layers:</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" class="form-control" id="players" name="players" value="{{$artwork->players}}"  required>
+                                                    <input type="text" class="form-control" id="players" name="players" value="{{$artwork->players}}" >
                                                 </div>
                                             </div>
                                             <div class="row mt-3">
-                                                <label for="psketch" class="col-sm-4 col-form-label" required >Sketches:</label>
+                                                <label for="psketch" class="col-sm-4 col-form-label" >Sketches:</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" class="form-control" id="psketch" name="psketch" value="{{$artwork->psketch}}"  required>
+                                                    <input type="text" class="form-control" id="psketch" name="psketch" value="{{$artwork->psketch}}" >
                                                 </div>
                                             </div>
                                             <div class="row mt-3">
-                                                <label for="psnb" class="col-sm-4 col-form-label" required >Sequence Nb:</label>
+                                                <label for="psnb" class="col-sm-4 col-form-label" >Sequence Nb:</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" class="form-control" id="psnb" name="psnb" value="{{$artwork->psnb}}"  required>
+                                                    <input type="text" class="form-control" id="psnb" name="psnb" value="{{$artwork->psnb}}" >
                                                 </div>
                                             </div>
                                             <div class="row mt-5">
@@ -366,7 +366,7 @@
                                     </div>
                                 </div>
                             </form>
-                        </div>                            
+                        </div>
                     </div>
                 </div>
             </div>
@@ -462,7 +462,7 @@
     td a:hover {
         opacity: 0.65;
     }
-    
+
     h1, h2, h3 {
         font-family: 'DrukTextWideBold', sans-serif;
     }
@@ -495,7 +495,7 @@
 
 <script>
     $(document).ready(function() {
-        
+
         $('.delete-button').on('click', function(e) {
             e.preventDefault();
             var itemId = $(this).data('id');
@@ -618,7 +618,7 @@
                     Swal.fire({
                         icon: 'success',
                         title: 'Success!',
-                        text: 'ArtWork created successfully!',
+                        text: 'Updated successfully!',
                         confirmButtonText: 'OK',
                         confirmButtonColor: 'red'
                     }).then((result) => {
@@ -628,13 +628,23 @@
                     });
                 },
                 error: function(xhr) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Something went wrong!',
-                        confirmButtonText: 'OK',
-                        confirmButtonColor: 'grey'
-                    });
+                    if($('.main-file').val() == "") {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Missing field',
+                            text: 'Please upload MainImage',
+                            confirmButtonText: 'OK',
+                            confirmButtonColor: 'grey'
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Something went wrong!',
+                            confirmButtonText: 'OK',
+                            confirmButtonColor: 'grey'
+                        });
+                    }
                 }
             });
         });

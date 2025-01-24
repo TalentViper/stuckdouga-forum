@@ -118,6 +118,17 @@ class ArtWorkController extends Controller
         }
     }
 
+    public function change_visible(Request $request) {
+        
+        $artwork = ArtWork::findOrFail($request->input('id'));
+        
+        if ($artwork) {
+            $artwork->visibility = $request->input('visibility');
+        }
+        $artwork->save();
+        return response()->json(['success' => 'Action changed!']);
+    }
+
     public function like(Request $request, $id)
     {
         $artwork = ArtWork::findOrFail($id);

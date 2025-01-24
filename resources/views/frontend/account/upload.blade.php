@@ -20,7 +20,7 @@
                                     <p>Max file size is 2MB.A thumbnail will be genereated for you if you do not upload one.</p>
                                     <div class="row">
                                         <div class="col-md-6 row">
-                                            <label class="col-sm-4 col-form-label" required >MainImage:</label>
+                                            <label class="col-sm-4 col-form-label" >MainImage:</label>
                                             <div class="col-sm-8">
                                                 <button type="button" id="main-file">Upload File</button>
                                                 <div class="progress mt-2" style="display: none;">
@@ -30,7 +30,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-6 row">
-                                            <label class="col-sm-4 col-form-label" required >Image #4:</label>
+                                            <label class="col-sm-4 col-form-label" >Image #4:</label>
                                             <div class="col-sm-8">
                                                 <button type="button" id="img4">Upload File</button>
                                                 <div class="progress mt-2" style="display: none;">
@@ -42,7 +42,7 @@
                                     </div>
                                     <div class="row mt-3">
                                         <div class="col-md-6 row">
-                                            <label class="col-sm-4 col-form-label" required >Thumbnail:</label>
+                                            <label class="col-sm-4 col-form-label" >Thumbnail:</label>
                                             <div class="col-sm-8">
                                                 <button type="button" id="thumbnail">Upload File</button>
                                                 <div class="progress mt-2" style="display: none;">
@@ -52,7 +52,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-6 row">
-                                            <label class="col-sm-4 col-form-label" required >Image #5:</label>
+                                            <label class="col-sm-4 col-form-label" >Image #5:</label>
                                             <div class="col-sm-8">
                                                 <button type="button" id="img5">Upload File</button>
                                                 <div class="progress mt-2" style="display: none;">
@@ -64,7 +64,7 @@
                                     </div>
                                     <div class="row mt-3">
                                         <div class="col-md-6 row">
-                                            <label class="col-sm-4 col-form-label" required >Image #2:</label>
+                                            <label class="col-sm-4 col-form-label" >Image #2:</label>
                                             <div class="col-sm-8">
                                                 <button type="button" id="img2">Upload File</button>
                                                 <div class="progress mt-2" style="display: none;">
@@ -74,7 +74,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-6 row">
-                                            <label class="col-sm-4 col-form-label" required >Image #6:</label>
+                                            <label class="col-sm-4 col-form-label" >Image #6:</label>
                                             <div class="col-sm-8">
                                                 <button type="button" id="img6">Upload File</button>
                                                 <div class="progress mt-2" style="display: none;">
@@ -86,7 +86,7 @@
                                     </div>
                                     <div class="row mt-3">
                                         <div class="col-md-6 row">
-                                            <label class="col-sm-4 col-form-label" required >Image #3:</label>
+                                            <label class="col-sm-4 col-form-label" >Image #3:</label>
                                             <div class="col-sm-8">
                                                 <button type="button" id="img3">Upload File</button>
                                                 <div class="progress mt-2" style="display: none;">
@@ -96,7 +96,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-6 row">
-                                            <label class="col-sm-4 col-form-label" required >Image #7:</label>
+                                            <label class="col-sm-4 col-form-label" >Image #7:</label>
                                             <div class="col-sm-8">
                                                 <button type="button" id="img7">Upload File</button>
                                                 <div class="progress mt-2" style="display: none;">
@@ -112,9 +112,9 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="row">
-                                                <label for="title" class="col-sm-4 col-form-label" required >ArtWork Title:</label>
+                                                <label for="title" class="col-sm-4 col-form-label" >ArtWork Title:</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" class="form-control" id="title" name="title" placeholder=""  required>
+                                                    <input type="text" class="form-control" id="title" name="title" placeholder="" required >
                                                 </div>
                                             </div>
                                             <p class="text-start">Description:</p>
@@ -122,7 +122,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="row">
-                                                <label for="type" class="col-sm-4 col-form-label" required >Image Type:</label>
+                                                <label for="type" class="col-sm-4 col-form-label" >Image Type:</label>
                                                 <div class="col-sm-8">
                                                 <select name="type" class="form-control">
                                                     <option value="">-- Select Item Type -- </option>
@@ -145,7 +145,7 @@
                                                 </div>
                                             </div>
                                             <div class="row mt-3">
-                                                <label for="type" class="col-sm-4 col-form-label" required >Section:</label>
+                                                <label for="type" class="col-sm-4 col-form-label" >Section:</label>
                                                 <div class="col-sm-8">
                                                 <select name="section" class="form-control">
                                                     <option value="">-- Select Section -- </option>
@@ -154,7 +154,7 @@
                                                 </div>
                                             </div>
                                             <div class="row mt-3">
-                                                <label for="type" class="col-sm-4 col-form-label" required >Info Position:</label>
+                                                <label for="type" class="col-sm-4 col-form-label" >Info Position:</label>
                                                 <div class="col-sm-8">
                                                     <select name="info" class="form-control">
                                                         <option value="0">Side</option>
@@ -164,7 +164,7 @@
                                                 </div>
                                             </div>
                                             <div class="row mt-3">
-                                                <label for="type" class="col-sm-4 col-form-label" required >Visibility:</label>
+                                                <label for="type" class="col-sm-4 col-form-label" >Visibility:</label>
                                                 <div class="col-sm-8">
                                                 <select name="visibility" class="form-control">
                                                     <option value="0">Visible to Public</option>
@@ -182,25 +182,25 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="row">
-                                                <label for="layers" class="col-sm-4 col-form-label" required >Layers:</label>
+                                                <label for="layers" class="col-sm-4 col-form-label" >Layers:</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" class="form-control" id="layers" name="layers" placeholder="" value=1  required >
+                                                    <input type="text" class="form-control" id="layers" name="layers" placeholder="" value=1  >
                                                 </div>
                                             </div>
                                             <div class="row mt-3">
-                                                <label for="sketch" class="col-sm-4 col-form-label" required >Sketches:</label>
+                                                <label for="sketch" class="col-sm-4 col-form-label" >Sketches:</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" class="form-control" id="sketch" name="sketch" placeholder=""  value=0 required>
+                                                    <input type="text" class="form-control" id="sketch" name="sketch" placeholder=""  value=0>
                                                 </div>
                                             </div>
                                             <div class="row mt-3">
-                                                <label for="snb" class="col-sm-4 col-form-label" required >Sequence Nb:</label>
+                                                <label for="snb" class="col-sm-4 col-form-label" >Sequence Nb:</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" class="form-control" id="snb" name="snb" placeholder=""  required>
+                                                    <input type="text" class="form-control" id="snb" name="snb" placeholder="" >
                                                 </div>
                                             </div>
                                             <div class="row mt-3">
-                                                <label for="condition" class="col-sm-4 col-form-label" required >Condition:</label>
+                                                <label for="condition" class="col-sm-4 col-form-label" >Condition:</label>
                                                 <div class="col-sm-8">
                                                 <select name="condition" class="form-control">
                                                     <option value="1">Excellent</option>
@@ -211,7 +211,7 @@
                                                 </div>
                                             </div>
                                             <div class="row mt-3">
-                                                <label for="oversize" class="col-sm-4 col-form-label" required >Oversize:</label>
+                                                <label for="oversize" class="col-sm-4 col-form-label" >Oversize:</label>
                                                 <div class="col-sm-8">
                                                 <select name="oversize" class="form-control">
                                                     <option value="0">No</option>
@@ -223,7 +223,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="row">
-                                                <label for="source" class="col-sm-4 col-form-label" required >Source:</label>
+                                                <label for="source" class="col-sm-4 col-form-label" >Source:</label>
                                                 <div class="col-sm-8">
                                                 <select name="source" class="form-control">
                                                     <option value="1">TV</option>
@@ -239,7 +239,7 @@
                                                 </div>
                                             </div>
                                             <div class="row mt-3">
-                                                <label for="background" class="col-sm-4 col-form-label" required >Background:</label>
+                                                <label for="background" class="col-sm-4 col-form-label" >Background:</label>
                                                 <div class="col-sm-8">
                                                 <select name="background" class="form-control">
                                                     <option value="0">None</option>
@@ -252,7 +252,7 @@
                                                 </div>
                                             </div>
                                             <div class="row mt-3">
-                                                <label for="stype" class="col-sm-4 col-form-label" required >Sequence Type:</label>
+                                                <label for="stype" class="col-sm-4 col-form-label" >Sequence Type:</label>
                                                 <div class="col-sm-8">
                                                 <select name="stype" class="form-control">
                                                         <option value="1">Normal Production</option>
@@ -297,21 +297,21 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="row mt-4">
-                                                <label for="players" class="col-sm-4 col-form-label" required >Layers:</label>
+                                                <label for="players" class="col-sm-4 col-form-label" >Layers:</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" class="form-control" id="players" name="players" placeholder=""  required>
+                                                    <input type="text" class="form-control" id="players" name="players" placeholder="" >
                                                 </div>
                                             </div>
                                             <div class="row mt-3">
-                                                <label for="psketch" class="col-sm-4 col-form-label" required >Sketches:</label>
+                                                <label for="psketch" class="col-sm-4 col-form-label" >Sketches:</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" class="form-control" id="psketch" name="psketch" placeholder=""  required>
+                                                    <input type="text" class="form-control" id="psketch" name="psketch" placeholder="" >
                                                 </div>
                                             </div>
                                             <div class="row mt-3">
-                                                <label for="psnb" class="col-sm-4 col-form-label" required >Sequence Nb:</label>
+                                                <label for="psnb" class="col-sm-4 col-form-label" >Sequence Nb:</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" class="form-control" id="psnb" name="psnb" placeholder=""  required>
+                                                    <input type="text" class="form-control" id="psnb" name="psnb" placeholder="" >
                                                 </div>
                                             </div>
                                             <div class="row mt-5">
@@ -345,14 +345,16 @@
                                                     <td>{{ $item->title }}</td>
                                                     <td>{{ $item->type }}</td>
                                                     <td>
-                                                        <img src="{{ static_asset('uploads') . '/' . $item->img_main }}" width="100px"/>
+                                                        @if($item->img_main)
+                                                            <img src="{{ static_asset('uploads') . '/' . $item->img_main }}" width="100px"/>                                                      
+                                                        @endif
                                                     </td>
                                                     <td> {{ $item->updated_at }}</td>
                                                     <td>
                                                         <div class="row">
                                                             <div class="col-md-4">
                                                                 <div class="form-check form-switch">
-                                                                    <input class="form-check-input" type="checkbox" id="visibleSwitch{{ $item->id }}" {{ $item->visible ? 'checked' : '' }}>
+                                                                    <input class="form-check-input visibleSwitch" type="checkbox" data-id="{{ $item->id }}" {{ $item->visibility ? 'checked' : '' }}>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">
@@ -608,6 +610,52 @@
                     });
                 },
                 error: function(xhr) {
+                    if($('.main-file').val() == "") {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Missing field',
+                            text: 'Please upload MainImage',
+                            confirmButtonText: 'OK',
+                            confirmButtonColor: 'grey'
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Something went wrong!',
+                            confirmButtonText: 'OK',
+                            confirmButtonColor: 'grey'
+                        });
+                    }
+                }
+            });
+        });
+
+        $(".visibleSwitch").on("change", function(event) {
+            var val = $(this).is(":checked");
+            var id = $(this).data('id');
+            var datra = new FormData()
+            datra.append('id', id);
+            datra.append('visibility', val ? 1 : 0);
+            $.ajax({
+                url: '{{ route('artwork.change_visible') }}',
+                method: "POST",
+                data: datra,
+                processData: false,
+                contentType: false,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(response) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success!',
+                        text: 'Action changed!',
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: 'red'
+                    })
+                },
+                error: function(xhr) {
                     Swal.fire({
                         icon: 'error',
                         title: 'Oops...',
@@ -616,7 +664,7 @@
                         confirmButtonColor: 'grey'
                     });
                 }
-            });
-        });
+            })
+        })
     });
 </script>
