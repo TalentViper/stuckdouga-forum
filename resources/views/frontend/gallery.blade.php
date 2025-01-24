@@ -49,18 +49,22 @@
                             </div>
                         </div>
                         <div class="row buttons">
-                            <button type="button">Previous Gallery</button>
-                            <button type="button">Go Back</button>
-                            <button type="button">Next Gallery</button>
+                            @if($prevGalleryId)
+                                <a href="{{ route('gallery', $prevGalleryId) }}" style="width: unset;"><button type="button">Previous Gallery</button></a>
+                            @endif
+                            <a href="{{ route('gallery.back') }}" style="width: unset;"><button type="button">Go Back</button></a>
+                            @if($nextGalleryId)
+                                <a href="{{ route('gallery', $nextGalleryId) }}" style="width: unset;"><button type="button">Next Gallery</button></a>
+                            @endif
                         </div>
                         <div class="row action-buttons">
                             <div class="view-buttons col-md-2">
-                                <a href="#">
+                                <!-- <a href="#">
                                     <i class="bi bi-phone-landscape"></i>
                                 </a>
                                 <a href="#">
                                     <i class="bi bi-grid-3x3-gap-fill"></i>
-                                </a>
+                                </a> -->
                             </div>
                             <ul class="pagination col-md-7 justify-content-center" role="menubar" aria-label="Pagination">
                                 {{ $search->appends(Request::except('page'))->links('pagination::bootstrap-4') }}

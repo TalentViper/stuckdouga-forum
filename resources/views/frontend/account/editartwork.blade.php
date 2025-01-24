@@ -169,21 +169,21 @@
                                                 <label for="type" class="col-sm-4 col-form-label" >Image Type:</label>
                                                 <div class="col-sm-8">
                                                 <select name="type" class="form-control"  value="{{$artwork->type}}">
-                                                    <option value="">-- Select Item Type -- </option>
-                                                    <option value="Background">Background</option>
-                                                    <option value="Cel">Cel</option>
-                                                    <option value="Comic Cover">Comic Cover</option>
-                                                    <option value="Comic Page">Comic Page</option>
-                                                    <option value="Douga">Douga</option>
-                                                    <option value="Fan Art">Fan Art</option>
-                                                    <option value="Genga">Genga</option>
-                                                    <option value="Layout">Layout</option>
-                                                    <option value="Original Sketch">Original Sketch</option>
-                                                    <option value="Other">Other</option>
-                                                    <option value="Photocopy">Photocopy</option>
-                                                    <option value="Post-Production Cel">Post-Production Cel</option>
-                                                    <option value="Reproduction Cel">Reproduction Cel</option>
-                                                    <option value="Settei/Model Shee">Settei/Model Sheet</option>
+                                                    <option value="" {{$artwork->type == "" ? "selected" : ""}}>-- Select Item Type -- </option>
+                                                    <option value="Background" {{$artwork->type == "Background" ? "selected" : ""}}>Background</option>
+                                                    <option value="Cel" {{$artwork->type == "Cel" ? "selected" : ""}}>Cel</option>
+                                                    <option value="Comic Cover" {{$artwork->type == "Comic Cover" ? "selected" : ""}}>Comic Cover</option>
+                                                    <option value="Comic Page" {{$artwork->type == "Comic Page" ? "selected" : ""}}>Comic Page</option>
+                                                    <option value="Douga" {{$artwork->type == "Douga" ? "selected" : ""}}>Douga</option>
+                                                    <option value="Fan Art" {{$artwork->type == "Fan Art" ? "selected" : ""}}>Fan Art</option>
+                                                    <option value="Genga" {{$artwork->type == "Genga" ? "selected" : ""}}>Genga</option>
+                                                    <option value="Layout" {{$artwork->type == "Layout" ? "selected" : ""}}>Layout</option>
+                                                    <option value="Original Sketch" {{$artwork->type == "Original Sketch" ? "selected" : ""}}>Original Sketch</option>
+                                                    <option value="Other" {{$artwork->type == "Other" ? "selected" : ""}}>Other</option>
+                                                    <option value="Photocopy" {{$artwork->type == "Photocopy" ? "selected" : ""}}>Photocopy</option>
+                                                    <option value="Post-Production Cel" {{$artwork->type == "Post-Production Cel" ? "selected" : ""}}>Post-Production Cel</option>
+                                                    <option value="Reproduction Cel" {{$artwork->type == "Reproduction Cel" ? "selected" : ""}}>Reproduction Cel</option>
+                                                    <option value="Settei/Model Shee" {{$artwork->type == "Settei/Model Shee" ? "selected" : ""}}>Settei/Model Sheet</option>
 
                                                 </select>
                                                 </div>
@@ -191,9 +191,9 @@
                                             <div class="row mt-3">
                                                 <label for="type" class="col-sm-4 col-form-label" >Section:</label>
                                                 <div class="col-sm-8">
-                                                <select name="section" class="form-control">
-                                                    <option value="">-- Select Section -- </option>
-                                                    <option value="0">[ Create New Section ]</option>
+                                                <select name="section" class="form-control" value="{{$artwork->section}}">
+                                                    <option value="" {{$artwork->section == "" ? "selected" : ""}}>-- Select Section -- </option>
+                                                    <option value="0" {{$artwork->section == "0" ? "selected" : ""}}>[ Create New Section ]</option>
                                                 </select>
                                                 </div>
                                             </div>
@@ -201,8 +201,8 @@
                                                 <label for="type" class="col-sm-4 col-form-label" >Info Position:</label>
                                                 <div class="col-sm-8">
                                                     <select name="info" class="form-control"  value="{{$artwork->info}}">
-                                                        <option value="0">Side</option>
-                                                        <option value="1">Bottom</option>
+                                                        <option value="0" {{$artwork->info == "0" ? "selected" : ""}}>Side</option>
+                                                        <option value="1" {{$artwork->info == "1" ? "selected" : ""}}>Bottom</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -210,9 +210,9 @@
                                                 <label for="type" class="col-sm-4 col-form-label" >Visibility:</label>
                                                 <div class="col-sm-8">
                                                 <select name="visibility" class="form-control"  value="{{$artwork->visibility}}">
-                                                    <option value="0">Visible to Public</option>
-                                                    <option value="1">Requires Gallery Password</option>
-                                                    <option value="2">Hidden from Public</option>
+                                                    <option value="0" {{$artwork->visibility == "0" ? "selected" : ""}}>Visible to Public</option>
+                                                    <option value="1" {{$artwork->visibility == "1" ? "selected" : ""}}>Requires Gallery Password</option>
+                                                    <option value="2" {{$artwork->visibility == "2" ? "selected" : ""}}>Hidden from Public</option>
 
                                                 </select>
                                                 </div>
@@ -246,10 +246,10 @@
                                                 <label for="condition" class="col-sm-4 col-form-label" >Condition:</label>
                                                 <div class="col-sm-8">
                                                 <select name="condition" class="form-control" value="{{$artwork->condition}}">
-                                                    <option value="1">Excellent</option>
-                                                    <option value="2">Good</option>
-                                                    <option value="3">Fair</option>
-                                                    <option value="4">Poor</option>
+                                                    <option value="1" {{$artwork->condition == "1" ? "selected" : ""}}>Excellent</option>
+                                                    <option value="2" {{$artwork->condition == "2" ? "selected" : ""}}>Good</option>
+                                                    <option value="3" {{$artwork->condition == "3" ? "selected" : ""}}>Fair</option>
+                                                    <option value="4" {{$artwork->condition == "4" ? "selected" : ""}}>Poor</option>
                                                 </select>
                                                 </div>
                                             </div>
@@ -257,8 +257,8 @@
                                                 <label for="oversize" class="col-sm-4 col-form-label" >Oversize:</label>
                                                 <div class="col-sm-8">
                                                 <select name="oversize" class="form-control" value="{{$artwork->oversize}}">
-                                                    <option value="0">No</option>
-                                                    <option value="1">Yes</option>
+                                                    <option value="0" {{$artwork->oversize == "0" ? "selected": ""}}>No</option>
+                                                    <option value="1" {{$artwork->oversize == "1" ? "selected": ""}}>Yes</option>
 
                                                 </select>
                                                 </div>
@@ -269,14 +269,14 @@
                                                 <label for="source" class="col-sm-4 col-form-label" >Source:</label>
                                                 <div class="col-sm-8">
                                                 <select name="source" class="form-control" value="{{$artwork->source}}">
-                                                    <option value="1">TV</option>
-                                                    <option value="2">OVA</option>
-                                                    <option value="3">Movie</option>
-                                                    <option value="4">Hanken</option>
-                                                    <option value="5">Manga/Comic</option>
-                                                    <option value="6">Game</option>
-                                                    <option value="7">Other</option>
-                                                    <option value="8">Unknown</option>
+                                                    <option value="1" {{$artwork->source == "1" ? "selected": ""}}>TV</option>
+                                                    <option value="2" {{$artwork->source == "2" ? "selected": ""}}>OVA</option>
+                                                    <option value="3" {{$artwork->source == "3" ? "selected": ""}}>Movie</option>
+                                                    <option value="4" {{$artwork->source == "4" ? "selected": ""}}>Hanken</option>
+                                                    <option value="5" {{$artwork->source == "5" ? "selected": ""}}>Manga/Comic</option>
+                                                    <option value="6" {{$artwork->source == "6" ? "selected": ""}}>Game</option>
+                                                    <option value="7" {{$artwork->source == "7" ? "selected": ""}}>Other</option>
+                                                    <option value="8" {{$artwork->source == "8" ? "selected": ""}}>Unknown</option>
 
                                                 </select>
                                                 </div>
@@ -285,11 +285,11 @@
                                                 <label for="background" class="col-sm-4 col-form-label" >Background:</label>
                                                 <div class="col-sm-8">
                                                 <select name="background" class="form-control" value="{{$artwork->background}}">
-                                                    <option value="0">None</option>
-                                                    <option value="1">Original Matching</option>
-                                                    <option value="2">Original Unmatching</option>
-                                                    <option value="3">Copy Matching</option>
-                                                    <option value="4">Copy Unmatching</option>
+                                                    <option value="0" {{$artwork->background == "0" ? "selected" : ""}}>None</option>
+                                                    <option value="1" {{$artwork->background == "1" ? "selected" : ""}}>Original Matching</option>
+                                                    <option value="2" {{$artwork->background == "2" ? "selected" : ""}}>Original Unmatching</option>
+                                                    <option value="3" {{$artwork->background == "3" ? "selected" : ""}}>Copy Matching</option>
+                                                    <option value="4" {{$artwork->background == "4" ? "selected" : ""}}>Copy Unmatching</option>
 
                                                 </select>
                                                 </div>
@@ -298,10 +298,10 @@
                                                 <label for="stype" class="col-sm-4 col-form-label" >Sequence Type:</label>
                                                 <div class="col-sm-8">
                                                 <select name="stype" class="form-control" value="{{$artwork->stype}}">
-                                                        <option value="1">Normal Production</option>
-                                                        <option value="2">Opening Credit</option>
-                                                        <option value="3">Eyecatch</option>
-                                                        <option value="4">Ending Credit</option>
+                                                        <option value="1" {{$artwork->stype == "1" ? "selected": ""}}>Normal Production</option>
+                                                        <option value="2" {{$artwork->stype == "2" ? "selected": ""}}>Opening Credit</option>
+                                                        <option value="3" {{$artwork->stype == "3" ? "selected": ""}}>Eyecatch</option>
+                                                        <option value="4" {{$artwork->stype == "4" ? "selected": ""}}>Ending Credit</option>
 
                                                     </select>
                                                 </div>
@@ -310,13 +310,13 @@
                                                 <div class="col-md-6 row">
                                                     <label class="form-check-label col-sm-8" for="key">Key Arwork:</label>
                                                     <div class="col-sm-4">
-                                                        <input class="form-check-input" type="checkbox" id="key" name="keyart" value="{{$artwork->keyart}}">
+                                                        <input class="form-check-input" type="checkbox" id="key" name="keyart" value="{{$artwork->keyart}}" {{$artwork->keyart == "on" ? "checked" : ""}}>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 row">
                                                     <label class="form-check-label col-sm-8" for="book">Book Arwork:</label>
                                                     <div class="col-sm-4">
-                                                        <input class="form-check-input" type="checkbox" id="book" name="bookart" value="{{$artwork->bookart}}">
+                                                        <input class="form-check-input" type="checkbox" id="book" name="bookart" value="{{$artwork->bookart}}" {{$artwork->bookart == "on" ? "checked" : ""}}>
                                                     </div>
                                                 </div>
                                             </div>
@@ -324,7 +324,7 @@
                                                 <div class="col-md-6 row">
                                                     <label class="form-check-label col-sm-8" for="end">End Arwork:</label>
                                                     <div class="col-sm-4">
-                                                        <input class="form-check-input" type="checkbox" id="end" name="endart" value="{{$artwork->endart}}">
+                                                        <input class="form-check-input" type="checkbox" id="end" name="endart" value="{{$artwork->endart}}" {{$artwork->endart == "on" ? "checked" : ""}}>
                                                     </div>
                                                 </div>
                                             </div>

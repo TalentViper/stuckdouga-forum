@@ -1466,3 +1466,7 @@ h6 {font-size:14px;font-weight:400;color:#fff;padding:5px;}
 .justify-center {
   justify-content: center;
 }
+
+.pointer {
+  cursor: pointer;
+}

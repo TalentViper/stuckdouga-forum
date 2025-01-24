@@ -46,11 +46,37 @@ class HomeController extends Controller
     }
     public function artwork($id)
     {
+        // Store the referrer URL in the session
+        if (session()->has('mainPageUrlForArtwork') === false && request()->route()->named('artwork')) {
+            session(['mainPageUrlForArtwork' => url()->previous()]);
+        }
+
         $artwork = ArtWork::with('gallery')->findOrFail($id);
         $artwork->views++;
         $artwork->save();
-        return view('frontend.artwork', compact('artwork'));
+
+        $sources = array(
+            '1' => 'TV',
+            '2' => 'OVA',
+            '3' => 'Movie',
+            '4' => 'Hanken',
+            '5' => 'Manga/Comic',
+            '6' => 'Game',
+            '7' => 'Other',
+            '8' => 'Unknown',
+        );
+
+        // Get the next gallery ID
+        $nextArtwork = ArtWork::where('id', '>', $id)->orderBy('id', 'asc')->first();
+        $nextArtworkId = $nextArtwork ? $nextArtwork->id : null;
+
+        // Get the previous gallery ID
+        $prevArtwork = ArtWork::where('id', '<', $id)->orderBy('id', 'desc')->first();
+        $prevArtworkId = $prevArtwork ? $prevArtwork->id : null;
+
+        return view('frontend.artwork', compact('artwork', 'nextArtworkId', 'prevArtworkId', 'sources'));
     }
+
     public function contact()
     {
         //

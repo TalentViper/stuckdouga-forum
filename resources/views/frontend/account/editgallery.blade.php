@@ -289,7 +289,7 @@
                     Swal.fire({
                         icon: 'success',
                         title: 'Success!',
-                        text: 'Gallery created successfully!',
+                        text: 'Gallery updated successfully!',
                         confirmButtonText: 'OK',
                         confirmButtonColor: 'red',
                     }).then((result) => {

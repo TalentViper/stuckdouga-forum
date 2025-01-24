@@ -24,42 +24,42 @@
                             <h5>Browse by Name</h5>
                         </div>
                         <div class="tag-page-browsername mt10">
-                            <a href="#">A</a>
-                            <a href="#">B</a>
-                            <a href="#">C</a>
-                            <a href="#">D</a>
-                            <a href="#">E</a>
-                            <a href="#">F</a>
+                            <a href="{{ route('latest', 'A') }}">A</a>
+                            <a href="{{ route('latest', 'B') }}">B</a>
+                            <a href="{{ route('latest', 'C') }}">C</a>
+                            <a href="{{ route('latest', 'D') }}">D</a>
+                            <a href="{{ route('latest', 'E') }}">E</a>
+                            <a href="{{ route('latest', 'F') }}">F</a>
                         </div>
                         <div class="tag-page-browsername">
-                            <a href="#">G</a>
-                            <a href="#">H</a>
-                            <a href="#">I</a>
-                            <a href="#">J</a>
-                            <a href="#">K</a>
-                            <a href="#">L</a>
+                            <a href="{{ route('latest', 'G') }}">G</a>
+                            <a href="{{ route('latest', 'H') }}">H</a>
+                            <a href="{{ route('latest', 'I') }}">I</a>
+                            <a href="{{ route('latest', 'J') }}">J</a>
+                            <a href="{{ route('latest', 'K') }}">K</a>
+                            <a href="{{ route('latest', 'L') }}">L</a>
                         </div>
                         <div class="tag-page-browsername">
-                            <a href="#">M</a>
-                            <a href="#">N</a>
-                            <a href="#">O</a>
-                            <a href="#">P</a>
-                            <a href="#">Q</a>
-                            <a href="#">R</a>
+                            <a href="{{ route('latest', 'M') }}">M</a>
+                            <a href="{{ route('latest', 'N') }}">N</a>
+                            <a href="{{ route('latest', 'O') }}">O</a>
+                            <a href="{{ route('latest', 'P') }}">P</a>
+                            <a href="{{ route('latest', 'Q') }}">Q</a>
+                            <a href="{{ route('latest', 'R') }}">R</a>
                         </div>
                         <div class="tag-page-browsername">
-                            <a href="#">S</a>
-                            <a href="#">T</a>
-                            <a href="#">U</a>
-                            <a href="#">V</a>
-                            <a href="#">W</a>
-                            <a href="#">X</a>
+                            <a href="{{ route('latest', 'S') }}">S</a>
+                            <a href="{{ route('latest', 'T') }}">T</a>
+                            <a href="{{ route('latest', 'U') }}">U</a>
+                            <a href="{{ route('latest', 'V') }}">V</a>
+                            <a href="{{ route('latest', 'W') }}">W</a>
+                            <a href="{{ route('latest', 'X') }}">X</a>
                         </div>
                         <div class="tag-page-browsername">
-                            <a href="#">Y</a>
-                            <a href="#">Z</a>
-                            <a href="#">#</a>
-                            <a href="#">?</a>
+                            <a href="{{ route('latest', 'Y') }}">Y</a>
+                            <a href="{{ route('latest', 'Z') }}">Z</a>
+                            <a href="{{ route('latest', '#') }}">#</a>
+                            <a href="{{ route('latest', '?') }}">?</a>
                         </div> 
                     </div>
                     <div class="col-md-10 center primary">
