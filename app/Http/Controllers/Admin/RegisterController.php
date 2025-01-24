@@ -26,9 +26,10 @@ class RegisterController extends Controller
             'full_name' => 'required',
             'password' => 'required',
             'confirm_password' => 'required|same:password',
+            'username' => 'required|unique:users',
         ]);
 
-        $userData = $request->only(['email', 'full_name',  'location',  'password']);
+        $userData = $request->only(['email', 'full_name',  'location',  'password', 'username']);
         $userData['password'] = Hash::make($request->input('password'));
         $user = User::create($userData);
 

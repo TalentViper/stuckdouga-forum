@@ -30,15 +30,15 @@
                                     </div>
                                     <div class="mb-3 row">
                                         <label for="thumbnail" class="col-sm-2 col-form-label" name="thumbnail" required >Thumbnail:</label>
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-5">
                                             <button type="button" class="upload" id="thumbnail">Upload File</button>
                                             <div class="progress mt-2" style="display: none;">
                                                 <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
-                                            <p style="color:#999">(200 <i class="bi bi-plus-lg"></i> 200px)</p>
+                                            <p style="color:#999">(200px <i class="bi bi-plus-lg"></i> 200px)</p>
                                         </div>
                                         <input type="text" class="form-control gallery-url" name="url" placeholder="" hidden>
-                                        <label class="col-sm-1"></label>
+                                        
                                         <label for="series" class="col-sm-1 col-form-label" required >Series:</label>
                                         <div class="col-sm-4">
                                             <input type="text" class="form-control" id="series" name="series" placeholder=""  required>
@@ -264,6 +264,7 @@
         $("#thumbnail").on('click', function() {
             var input = document.createElement('input');
             input.type = 'file';
+            input.accept = 'image/png, image/gif, image/jpeg, image/bmp';
             input.onchange = function(event) {
                 var file = event.target.files[0];
                 var formData = new FormData();

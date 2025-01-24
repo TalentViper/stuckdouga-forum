@@ -60,7 +60,7 @@
                                                 <td>{{ $link->name }}</td>
                                                 <td>{{ $link->desc }}</td>
                                                 <td>
-                                                    <a href="#">
+                                                    <a href="{{ route('link.edit', $link->id) }}">
                                                         <i class="bi bi-pencil-square"></i>
                                                     </a>
                                                     <a href="#" class="remove-button" data-id="{{ $link->id }}">

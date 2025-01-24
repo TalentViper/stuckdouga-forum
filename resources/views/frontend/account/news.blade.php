@@ -86,7 +86,7 @@ $(function($){
                                                 <td>{{ \Carbon\Carbon::parse($new->created_at)->format('d-m-Y') }}</td>
                                                 <td>@stripBBCode($new->content)</td>
                                                 <td>
-                                                    <a href="#" class="edit-button">
+                                                    <a href="{{ route('news.update', $new->id) }}" class="edit-button">
                                                         <i class="bi bi-pencil-square"></i>
                                                     </a>
                                                     <a href="#" class="remove-button"  data-id="{{ $new->id }}">
@@ -289,16 +289,16 @@ $(function($){
         }
 
         // Edit button click event
-        $(".edit-button").on('click', function(e) {
-            e.preventDefault();
-            var newsId = $(this).closest('tr').data('id');
-            var newsContent = $(this).closest('tr').find('td').eq(1).text();
+        // $(".edit-button").on('click', function(e) {
+        //     e.preventDefault();
+        //     var newsId = $(this).closest('tr').data('id');
+        //     var newsContent = $(this).closest('tr').find('td').eq(1).text();
 
-            // Populate the form with the news content
-            $("#editor").val(newsContent);
-            $("#newsForm").attr('action', '{{ route('newsupdates.update', ':id') }}'.replace(':id', newsId));
-            $("#newsForm").append('<input type="hidden" name="_method" value="PUT">');
-        });
+        //     // Populate the form with the news content
+        //     $("#editor").val(newsContent);
+        //     $("#newsForm").attr('action', '{{ route('newsupdates.update', ':id') }}'.replace(':id', newsId));
+        //     $("#newsForm").append('<input type="hidden" name="_method" value="PUT">');
+        // });
 
         // Remove button click event
         $(".remove-button").on('click', function(e) {

@@ -90,6 +90,8 @@ Route::prefix('beta')->group(function () {
         return redirect('/beta');
     })->middleware(['auth', 'signed'])->name('verification.verify');
 
+    Route::get('/threads', [ThreadController::class, 'index'])->name('threads.index');
+    Route::get('/threads/{thread}', [ThreadController::class, 'show'])->name('threads.show');
 
     Route::group(['middleware' => 'auth'], function () {
         Route::get('logout', [LoginController::class, 'logout'])->name('logout');
@@ -98,18 +100,24 @@ Route::prefix('beta')->group(function () {
             Route::get('/detail', [AccountController::class, 'detail'])->name('detail');
             Route::get('/gallery', [AccountController::class, 'gallery'])->name('accountgallery');
             Route::get('/link', [AccountController::class, 'link'])->name('link');
+            Route::get('/link/{linkId}', [LinkController::class, 'edit'])->name('link.edit');
+            Route::post('/link/save', [LinkController::class, 'update'])->name('link.update');
+
             Route::get('/message', [AccountController::class, 'message'])->name('accountmessage');
             Route::get('/news', [AccountController::class, 'news'])->name('news');
+            Route::get('/news/{newsId}', [NewsController::class, 'upgradenews'])->name('news.update');
+            Route::post('/news/save', [NewsController::class, 'update'])->name('news.save');
             Route::get('/private', [AccountController::class, 'private'])->name('private');
             Route::get('/profile', [AccountController::class, 'profile'])->name('profile');
             Route::get('/upload/{galleryId}', [AccountController::class, 'upload'])->name('artworkupload');
             Route::get('/wishlist', [AccountController::class, 'wishlist'])->name('wishlist');  
+            Route::get('/wishlist/{wishlistId}', [WishListController::class, 'show'])->name('wishlist.edit');  
+            Route::post('/wishlist/save', [WishListController::class, 'update'])->name('wishlist.update');  
+
         });
         
-        Route::get('/threads', [ThreadController::class, 'index'])->name('threads.index');
         Route::get('/threads/create', [ThreadController::class, 'create'])->name('threads.create');
         Route::post('/threads', [ThreadController::class, 'store'])->name('threads.store');
-        Route::get('/threads/{thread}', [ThreadController::class, 'show'])->name('threads.show');
         Route::post('/threads/{thread}/comments', [CommentController::class, 'store'])->name('comments.store');
         Route::post('/threads/{thread}/like', [ThreadController::class, 'like'])->name('threads.like');
         Route::post('/threads/{thread}/unlike', [ThreadController::class, 'unlike'])->name('threads.unlike');
@@ -133,7 +141,7 @@ Route::prefix('beta')->group(function () {
         Route::post('/artwork/{id}/like', [ArtWorkController::class, 'like'])->name('artwork.like');
         Route::post('/messages/send', [MessageController::class, 'sendMessage'])->name('messages.send');
         Route::get('/messages/receive', [MessageController::class, 'receiveMessages']);
-        Route::get('/account/openMessageForm', [MessageController::class, 'openMessageForm'])->name('openMessageForm');
+        Route::get('/account/openMessageForm/{to_admin?}', [MessageController::class, 'openMessageForm'])->name('openMessageForm');
         Route::post('/follow/{user}', [FollowController::class, 'follow']);
         Route::post('/unfollow/{user}', [FollowController::class, 'unfollow']);
     });
@@ -149,7 +157,7 @@ Route::prefix('beta')->group(function () {
     Route::get('/update/{keyword?}', [GalleryController::class, 'search'])->name('update');
     Route::get('/populartag/{keyword?}', [GalleryController::class, 'search'])->name('populartag');
 });
-
+Route::post('/usersbykey', [UserController::class, 'getUsersBykey'])->name('usersbykey');
 
 // admin route
 Route::prefix('admin')->name('admin.')->group(function () {

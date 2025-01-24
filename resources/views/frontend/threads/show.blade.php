@@ -6,13 +6,17 @@
             <div class="content_box">
                 <div class="container-fluid pt-4">
                     <h1>COMMUNITY</h1>
-                    <p>Your Total Comments: 1 423</p>
-                    <p>Your Total Likes: 10 545</p>
+                    @if (Auth::check())
+                        <p>Your Total Comments: 1 423</p>
+                        <p>Your Total Likes: 10 545</p>
+                    @endif
                     <div class="action-buttons">
-                        <button type="button" class="new-button">News Feed</button>
-                        <button type="button" class="comment-button">Your Comments</button>
-                        <button type="button" class="thread-button">Thread Gallery</button>
-                        <button type="button" class="go-back">Go Back</button>
+                        @if (Auth::check())
+                            <button type="button" class="new-button">News Feed</button>
+                            <button type="button" class="comment-button">Your Comments</button>
+                            <button type="button" class="thread-button">Thread Gallery</button>
+                        @endif
+                        <a href="{{ redirect()->back()->getTargetUrl() }}"><button type="button" class="go-back">Go Back</button></a>
                     </div>
                     <div class="clear"></div>
                     <div class="card mt-3">
@@ -51,7 +55,7 @@
                             <div class="search-group input-group mt-3 mb-3">
                                 <div class="input-group-prepend">
                                 <span class="input-group-text">
-                                    <i class="fa-classic fa-solid fa-magnifying-glass fa-fw"></i>    
+                                    <i class="fa-classic fa-solid fa-magnifying-glass fa-fw"></i>
                                 </span>
                                 </div>
                                 <input type="text" class="form-control" placeholder="Search this thread...">
@@ -72,15 +76,17 @@
                                         <li><a href="#" class="ml-1"><span>Next<i class="fa-classic fa-solid fa-caret-right fa-fw"></i></span></a></li>
                                     </ul>
                                 </div>
+                                @if (Auth::check())
                                 <div class="col-md-6 watch-button">
                                     <button type="button" class="button">Watch Thread</button>
                                 </div>
+                                @endif
                             </div>
                             <div class="card thread-item">
                                 <div class="card-header justify-content-between">
                                     <span>Oct11, 2023 at 11:55PM</span>
                                     <span>Post#691 of 1,906</span>
-                                </div>  
+                                </div>
                                 <div class="card-content">
                                     <div class="avatar-panel justify-content-between">
                                         <div class="img-container">
@@ -115,16 +121,20 @@
                                             <i class="fa-classic fa-solid fa-share-nodes fa-fw"></i>
                                             Share
                                         </a>
+                                        @if (Auth::check())
                                         <a href="">
                                             <i class="fa-classic fa-regular fa-thumbs-up fa-fw"></i>
                                             Like
                                         </a>
+                                        @endif
                                     </div>
                                 </div>
+                                @if (Auth::check())
                                 <div class="card-footer justify-content-between gradient-background">
                                     <a href="#">Report</a>
                                     <a href="#">Reply</a>
                                 </div>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -132,7 +142,7 @@
                         <div class="card-header justify-content-between">
                             <span>Oct11, 2023 at 11:55PM</span>
                             <span>Post#691 of 1,906</span>
-                        </div>  
+                        </div>
                         <div class="card-content">
                             <div class="avatar-panel justify-content-between">
                                 <div class="img-container">
@@ -167,23 +177,27 @@
                                     <i class="fa-classic fa-solid fa-share-nodes fa-fw"></i>
                                     Share
                                 </a>
+                                @if (Auth::check())
                                 <a href="">
                                     <i class="fa-classic fa-regular fa-thumbs-up fa-fw"></i>
                                     Like
                                 </a>
+                                @endif
                             </div>
                         </div>
+                        @if (Auth::check())
                         <div class="card-footer justify-content-between gradient-background">
                             <a href="#">Report</a>
                             <a href="#">Reply</a>
                         </div>
+                        @endif
                     </div>
 
                     <div class="card thread-item mt-3">
                         <div class="card-header justify-content-between">
                             <span>Oct11, 2023 at 11:55PM</span>
                             <span>Post#691 of 1,906</span>
-                        </div>  
+                        </div>
                         <div class="card-content">
                             <div class="avatar-panel justify-content-between">
                                 <div class="img-container">
@@ -218,16 +232,20 @@
                                     <i class="fa-classic fa-solid fa-share-nodes fa-fw"></i>
                                     Share
                                 </a>
+                                @if (Auth::check())
                                 <a href="">
                                     <i class="fa-classic fa-regular fa-thumbs-up fa-fw"></i>
                                     Like
                                 </a>
+                                @endif
                             </div>
                         </div>
+                        @if (Auth::check())
                         <div class="card-footer justify-content-between gradient-background">
                             <a href="#">Report</a>
                             <a href="#">Reply</a>
                         </div>
+                        @endif
                     </div>
 
                     <div class="card mt-3">
@@ -249,13 +267,13 @@
                                     </ul>
                                 </div>
                             </div>
-
+                            @if (Auth::check())
                             <form  action="{{ route('comments.store', $thread) }}" method="POST" class="mb-2">
                                 @csrf
                                 <textarea name="body" id="editor"></textarea>
                                 <button type="submit">Post Comment</button>
                             </form>
-
+                            @endif
                             <nav aria-label="breadcrumb">
                                 <ul class="breadcrumb">
                                     <li><a href="#">Home</a></li>
@@ -268,7 +286,7 @@
                     </div>
                 </div>
             </div>
-        </div>  
+        </div>
     </div>
     <!-- <h1>{{ $thread->title }}</h1>
     <p>{{ $thread->body }}</p>
@@ -280,15 +298,17 @@
             <li>
                 {{ $comment->body }}
                 <p>Likes: {{ $comment->likes_count }}</p>
+                @if (auth()->check())
                 <form method="POST" action="{{ $comment->isLikedBy(auth()->user()) ? route('comments.unlike', $comment) : route('comments.like', $comment) }}">
                     @csrf
                     <button type="submit">{{ $comment->isLikedBy(auth()->user()) ? 'Unlike' : 'Like' }}</button>
                 </form>
+                @endif
             </li>
         @endforeach
-    </ul>
+    </ul> -->
 
-    <h3>Add a Comment</h3>
+    <!-- <h3>Add a Comment</h3>
     <form method="POST" action="{{ route('comments.store', $thread) }}">
         @csrf
         <textarea name="body" placeholder="Add your comment"></textarea>
@@ -327,7 +347,7 @@
         .threads-show-page .clear {
             clear: both;
         }
- 
+
         .threads-show-page .card {
             border: none !important;
             border-radius: 0px;
@@ -594,7 +614,7 @@
             width: 100%!important;
             height: 250px!important;
         }
-        
+
         form {
             padding: 16px;
         }

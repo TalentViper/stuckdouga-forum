@@ -38,17 +38,18 @@ class MessageController extends Controller
     public function sendMessage(Request $request)
     {
         $request->validate([
-            'receiver_id' => 'required|exists:users,email',
+            'username' => 'required|exists:users,username',
             'content' => 'required|string',
+            'attach_file_path' => 'nullable|string',
         ]);
 
-        $user = User::where('email', $request->receiver_id)->first();
+        $user = User::where('username', $request->username)->first();
         $message = Message::create([
             'sender_id' => Auth::id(),
             'receiver_id' => $user->id,
             'content' => $request->content,
+            'attach_file_path' => $request->attach_file_path
         ]);
-        
 
         return redirect()->route('accountmessage');
     }
@@ -60,7 +61,10 @@ class MessageController extends Controller
         return response()->json(['messages' => $messages], 200);
     }
 
-    public function openMessageForm() {
-        return view('frontend.account.send');        
+    public function openMessageForm(Request $request, $to_admin = null) {
+        // echo "<pre>"; print_r($to_admin); exit;
+        return view('frontend.account.send')->with([
+            'to_admin' => $to_admin
+        ]);
     }
 }

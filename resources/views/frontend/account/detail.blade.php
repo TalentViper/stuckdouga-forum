@@ -50,6 +50,15 @@
                                             </div>
                                         </div>
                                         <div class="row mt-3">
+                                            <label for="gender" class="col-sm-3 col-form-label"  required >Gender:</label>
+                                            <div class="col-sm-9">
+                                                <select class="form-control" id="gender" name="gender" value="{{$user->gender}}" required>
+                                                    <option value="male" {{$user->gender == "male" ? "selected" : ""}}>male</option>
+                                                    <option value="female" {{$user->gender == "female" ? "selected" : ""}}>female</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
                                             <label for="address" class="col-sm-3 col-form-label"  required >Address:</label>
                                             <div class="col-sm-9">
                                                 <input type="text" class="form-control" id="address" name="address" value="{{$user->address}}" required>
@@ -84,7 +93,7 @@
                                         <div class="row">
                                             <label for="username" class="col-sm-3 col-form-label"  required >Username:</label>
                                             <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="username" name="username" value="{{$user->username}}"  required>
+                                                <input type="text" disabled readonly class="form-control" id="username" name="username" value="{{$user->username}}"  required>
                                             </div>
                                         </div>
                                         <div class="row mt-3 position-relative">
@@ -135,7 +144,7 @@
                                     </form>
                                 </div>
                                 <div class="col-md-6 p-5 contact-buttons">
-                                    <button type="button">Contact Admin Support</button>
+                                    <a href="{{ route('openMessageForm', ['to_admin' => 'admin']) }}"><button type="button">Contact Admin Support</button></a>
                                     <button type="button">Temporary Suspend Account</button>
                                     <button type="button">Request Account Removal</button>
                                 </div>
@@ -392,6 +401,8 @@
                                     text: 'User information updated successfully!',
                                     icon: 'success',
                                     confirmButtonColor: 'red',
+                                }).then(() => {
+                                    window.location.reload();
                                 })
                     } else {
                         Swal.fire({

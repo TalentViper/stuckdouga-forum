@@ -40,9 +40,10 @@
                                         <label for="type" class="col-sm-2 col-form-label" name="type" required >Priority:</label>
                                         <div class="col-sm-4">
                                             <select class="form-control" name="priority">
+                                                <option value="NORMAL">NORMAL</option>
                                                 <option value="LOW">LOW</option>
-                                                <option value="MIDDLE">MIDDLE</option>
                                                 <option value="HIGH">HIGH</option>
+                                                <option value="VERY HIGH">VERY HIGH</option>
                                             </select>
                                         </div>
                                         <label class="col-sm-1"></label>
@@ -80,7 +81,7 @@
                                                     </td>
                                                     <td> {{ $wishlist->priority }}</td>
                                                     <td>
-                                                        <a href="#">
+                                                        <a href="{{ route('wishlist.edit', $wishlist->id) }}">
                                                             <i class="bi bi-pencil-square"></i>
                                                         </a>
                                                         <a href="#" class="delete-button" data-id="{{ $wishlist->id }}">

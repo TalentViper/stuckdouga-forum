@@ -16,7 +16,7 @@
                     <button type="submit" class="button">Resend Verification Email</button>
                 </form>
 
-                <form method="POST" action="{{ route('logout') }}" class="mt-4">
+                <form method="GET" action="{{ route('logout') }}" class="mt-4">
                     @csrf
                     <button type="submit" class="button">Log Out</button>
                 </form>

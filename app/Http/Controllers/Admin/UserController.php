@@ -116,11 +116,15 @@ class UserController extends Controller
         return response()->json(['msg' => 'User has been removed!' ]);
     }
 
-
-
-
-
-
+    public function getUsersBykey(Request $request) {
+        $keyword = $request->input('username');
+        if ($request->input('isMatch') == "1") {
+            $users = User::where('username', $keyword)->get();
+        } else {
+            $users = User::where('username', 'like', '%'.$keyword.'%')->get();
+        }
+        return response()->json($users);
+    }
 
     public function searchCustomer(Request $request)
     {
@@ -201,9 +205,9 @@ class UserController extends Controller
         $user->postcode = $request->postcode;
         $user->city = $request->city;
         $user->country = $request->country;
-        $user->username = $request->username;
+        // $user->username = $request->username;  // username is not allowed to change
         $user->avatar = $request->avatar;
-        // $user->password = $request->password;
+        $user->gender = $request->gender;
         $user->save();
         return response()->json(['msg' => 'Password has been changed.', 'success' => true ]);
         // return redirect()->route('detail');

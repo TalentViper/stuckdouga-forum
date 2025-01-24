@@ -23,7 +23,7 @@
   <script src="https://cdn.jsdelivr.net/npm/sceditor@3/minified/sceditor.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sceditor@3/minified/formats/bbcode.min.js"></script>
   <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11261494157"></script> -->
-
+  <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"/>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -89,17 +89,6 @@
 
 </style>
 
-<script>
-  window.addEventListener('load', function() {
-    // preloader.remove();
-
-    // Add fade-in effect to main content
-    setTimeout(function() {
-      document.querySelector('.main-content').classList.add('show');
-    }, 500);
-  });
-</script>
-
 </head>
 
 <body>
@@ -113,12 +102,13 @@
     @include('frontend.partials.footer')
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bs5-lightbox@1.8.3/dist/index.bundle.min.js"></script>
     <script type="text/javascript" src="{{ static_asset('admin/js/toastr.min.js') }}"></script>
     <script type="text/javascript" src="{{ static_asset('frontend/js/toastr-config.js') }}"></script>
-    
-
-
+    <!-- <script type="text/javascript" src="{{ static_asset('frontend/js/autocomplete.multiselect.js') }}"></script> -->
+    <script type="text/javascript" src="{{ static_asset('frontend/js/custom.js') }}"></script>
     {!! Toastr::message() !!}
 
     <!-- Google tag (gtag.js) -->
@@ -129,6 +119,19 @@
         // gtag('js', new Date());
 
         // gtag('config', 'G-0XEE1YGZ7J');
+
+        window.addEventListener('load', function() {
+          // preloader.remove();
+
+          setTimeout(function() {
+            document.querySelector('.fade-in').classList.add('show');
+            document.querySelector('#footer').classList.add('show');
+          }, 250);
+          // Add fade-in effect to main content
+          setTimeout(function() {
+            document.querySelector('.main-content').classList.add('show');
+          }, 500);
+        });
     </script>
     <!-- Include your custom Toastr configuration -->
     @yield('script')
