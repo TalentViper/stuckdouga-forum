@@ -89,12 +89,13 @@ Route::prefix('beta')->group(function () {
         $request->fulfill();
         return redirect('/beta');
     })->middleware(['auth', 'signed'])->name('verification.verify');
-
+    
     Route::get('/threads', [ThreadController::class, 'index'])->name('threads.index');
     Route::get('/threads/{thread}', [ThreadController::class, 'show'])->name('threads.show');
     Route::post('/contact/send', [HomeController::class, 'contact_store'])->name('contact.send');
-
+    
     Route::group(['middleware' => 'auth'], function () {
+        Route::get('/threads/create', [ThreadController::class, 'create'])->name('threads.create');
         Route::get('logout', [LoginController::class, 'logout'])->name('logout');
         Route::get('/account', [HomeController::class, 'account'])->name('account');
         Route::prefix('account')->group(function () {
@@ -118,7 +119,6 @@ Route::prefix('beta')->group(function () {
 
         });
         
-        Route::get('/threads/create', [ThreadController::class, 'create'])->name('threads.create');
         Route::post('/threads', [ThreadController::class, 'store'])->name('threads.store');
         Route::post('/threads/{thread}/comments', [CommentController::class, 'store'])->name('comments.store');
         Route::post('/threads/{thread}/like', [ThreadController::class, 'like'])->name('threads.like');

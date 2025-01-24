@@ -1,7 +1,9 @@
 <div class="col-md-2 sider">
     <div class="side_title"><h5>{{ auth()->user()->full_name }}</h5></div>
     <div class="tag-page-gallery mb30">
-        <img src="{{ auth()->user()->avatar ? auth()->user()->avatar : ( auth()->user()->gender == 'female' ? static_asset('images/img/female_default.jpg') : static_asset('images/img/male_default.jpg') ) }}" alt="" width="200">
+        <div class="text-center">
+            <img src="{{ auth()->user()->avatar ? auth()->user()->avatar : ( auth()->user()->gender == 'female' ? static_asset('images/img/female_default.jpg') : static_asset('images/img/male_default.jpg') ) }}" alt="" width="200">
+        </div>
         <div class="menu" style="padding: 0;">
             <a class="mt-10 {{ Request::routeIs('account') ? 'active' : '' }}" href="{{ route('account') }}">My Account</a>
             <a class="{{ Request::routeIs('accountmessage') ? 'active' : '' }}" href="{{ route('accountmessage') }}">Messages</a>

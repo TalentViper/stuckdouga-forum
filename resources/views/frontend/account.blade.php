@@ -5,7 +5,7 @@
 
     <div id="content" class="page-account">
         <div class="content_box pt-4">
-            <div class="container-fluit">
+            <div class="container-fluit p-5 pt-4">
                 <div class="row">
                     @include('frontend.partials.sidebar1')
                     <div class="col-md-10 center primary">

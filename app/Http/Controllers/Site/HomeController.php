@@ -74,8 +74,7 @@ class HomeController extends Controller
         $contact->save();
 
         try {
-            // Mail::to("info@eliteproviders.uk")->send(new ContactMail($contact));
-            Mail::to($request->email)->send(new ContactMail($contact));
+            Mail::to("info@eliteproviders.uk")->send(new ContactMail($contact));
         } catch (\Throwable $th) {
             //throw $th;
         }

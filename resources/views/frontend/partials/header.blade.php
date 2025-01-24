@@ -1,24 +1,25 @@
 <!-- ======= Header ======= -->
 <header id="header" >
     <div id="header_box" class="fade-in">
-
-        <a href="{{route('home')}}" class="hover"><img src="{{ static_asset('images/img/stuckdouga_logo.jpg') }}" alt="Stuck Douga" /></a>
-
-        <div class="navigation ">
-            <ul>
-                <li class="header-search">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#e30512" class="bi bi-search search-ic hover" viewBox="0 0 16 16" onclick="toggleSearchPopup()">
-                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
-                    </svg>
-                </li>
-                <li><a href="{{ route('latest') }}" class="hover">Galleries</a></li>
-                <li><a href="{{route('about')}}" class="hover">About</a></li>
-                <li><a href="{{route('threads.index')}}" class="hover">Community</a></li>
-                <li><a href="{{route('resource')}}" class="hover">Resources</a></li>
-                <li><a href="{{route('contact')}}" class="hover">Contact Us</a></li>
-                <li><button class="my_but" onclick="window.location.href='{{ route('latest') }}'">Start Gallery</button></li>
-                <li><button class="my_but" onclick="window.location.href='{{ route('account') }}'">Account</button></li>
-            </ul>
+        <div class="flex items-end justify-center">
+            <a href="{{route('home')}}" class="hover"><img src="{{ static_asset('images/img/stuckdouga_logo.jpg') }}" alt="Stuck Douga" /></a>
+    
+            <div class="navigation ">
+                <ul>
+                    <li class="header-search">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#e30512" class="bi bi-search search-ic hover" viewBox="0 0 16 16" onclick="toggleSearchPopup()">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                        </svg>
+                    </li>
+                    <li><a href="{{ route('latest') }}" class="hover">Galleries</a></li>
+                    <li><a href="{{route('about')}}" class="hover">About</a></li>
+                    <li><a href="{{route('resource')}}" class="hover">Resources</a></li>
+                    <li><a href="{{route('threads.index')}}" class="hover">Community</a></li>
+                    <li><a href="{{route('contact')}}" class="hover">Contact Us</a></li>
+                    <li><button class="my_but" onclick="window.location.href='{{ route('accountgallery') }}'">Start Gallery</button></li>
+                    <li><button class="my_but" onclick="window.location.href='{{ route('account') }}'">Account</button></li>
+                </ul>
+            </div>
         </div>
 
     </div>

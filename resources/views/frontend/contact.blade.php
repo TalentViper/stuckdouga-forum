@@ -48,7 +48,9 @@
                                         <textarea class="form-control" id="inputMessage" rows="10" required name="message"></textarea>
                                     </div>
                                 </div>
-                                    <div class="g-recaptcha" style="float: right; margin-top: 10px; margin-bottom: 10px;" data-sitekey="6LfSSHsqAAAAAEtMgEsVpK5iKyATQVohI3WKX0cb"></div>
+                                    <!-- <form action="?" method="POST"> -->
+                                        <div class="g-recaptcha" style="float: right; margin-top: 10px; margin-bottom: 10px;" data-sitekey="6LfSSHsqAAAAAEtMgEsVpK5iKyATQVohI3WKX0cb"></div>
+                                    <!-- </form> -->
                                     <br />
                                 <div class="clear"></div>
                                 <button type="submit">Send Message</button>
