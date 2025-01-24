@@ -19,11 +19,11 @@
                                     <div class="mb-3 row form-group">
                                         <label for="description" class="col-sm-2 col-form-label"  required >Description:</label>
                                         <div class="col-sm-7">
-                                            <textarea class="form-control" id="description" rows="10" name="description">{{ $wishitem->description }}</textarea>
+                                            <textarea class="form-control" id="description" rows="10" name="description" required>{{ $wishitem->description }}</textarea>
                                         </div>
                                     </div>
                                     <div class="mb-3 row">
-                                        <label for="thumbnail" class="col-sm-2 col-form-label" name="thumbnail" required >Upload File:</label>
+                                        <label for="thumbnail" class="col-sm-2 col-form-label" name="thumbnail" >Upload File:</label>
                                         <div class="col-sm-4">
                                             <button type="button" class="upload" id="thumbnail">Upload File</button>
                                             <div class="progress mt-2" style="display: none;">
@@ -32,15 +32,15 @@
                                             <input type="text" class="form-control wish-url" name="url" placeholder="" hidden value="{{ $wishitem->url }}">
                                         </div>
                                         <label class="col-sm-1"></label>
-                                        <label for="series" class="col-sm-1 col-form-label" required >Series:</label>
+                                        <label for="series" class="col-sm-1 col-form-label" >Series:</label>
                                         <div class="col-sm-4">
-                                            <input type="text" class="form-control" id="series" name="series" placeholder=""  required value="{{ $wishitem->series }}">
+                                            <input type="text" class="form-control" id="series" name="series" placeholder="" value="{{ $wishitem->series }}">
                                         </div>
                                     </div>
                                     <div class="mb-3 row">
                                         <label for="type" class="col-sm-2 col-form-label" name="type" required >Priority:</label>
                                         <div class="col-sm-4">
-                                            <select class="form-control" name="priority" value="{{ $wishitem->priority }}">
+                                            <select class="form-control" name="priority" value="{{ $wishitem->priority }}" required>
                                                 <option value="NORMAL">NORMAL</option>
                                                 <option value="LOW">LOW</option>
                                                 <option value="HIGH">HIGH</option>
@@ -48,9 +48,9 @@
                                             </select>
                                         </div>
                                         <label class="col-sm-1"></label>
-                                        <label for="tag" class="col-sm-1 col-form-label" required >Other Series:</label>
+                                        <label for="tag" class="col-sm-1 col-form-label" >Other Series:</label>
                                         <div class="col-sm-4">
-                                            <input type="text" class="form-control" id="tag" name="oseries" placeholder=""  required value="{{ $wishitem->oseries }}">
+                                            <input type="text" class="form-control" id="tag" name="oseries" placeholder="" value="{{ $wishitem->oseries }}">
                                         </div>
                                     </div>
                                     <div class="mb-3">

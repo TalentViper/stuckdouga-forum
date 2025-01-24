@@ -1,33 +1,35 @@
 <div class="col-md-2 sider">
     <div class="side_title"><h5>{{ auth()->user()->full_name }}</h5></div>
     <div class="tag-page-gallery mb30">
-        <img src="{{ static_asset('images/img/art_thumb.jpg') }}" alt="">
-        <div class="menu">
-            <a class="mt-10" href="{{ route('account') }}">My Account</a>
-            <a class="" href="{{ route('accountmessage') }}">Messages</a>
-            <a class="" href="{{ route('detail') }}">Personal Details</a>
+        <div class="text-center">
+            <img src="{{ auth()->user()->avatar ? auth()->user()->avatar : ( auth()->user()->gender == 'female' ? static_asset('images/img/female_default.jpg') : static_asset('images/img/male_default.jpg') ) }}" alt="" width="200">
+        </div>
+        <div class="menu" style="padding: 0;">
+            <a class="mt-10 {{ Request::routeIs('account') ? 'active' : '' }}" href="{{ route('account') }}">My Account</a>
+            <a class="{{ Request::routeIs('accountmessage') ? 'active' : '' }}" href="{{ route('accountmessage') }}">Messages</a>
+            <a class="{{ Request::routeIs('detail') ? 'active' : '' }}" href="{{ route('detail') }}">Personal Details</a>
             <a class="" href="#">Sections:</a>
             <ul>
                 <li>
-                    <a href="{{ route('profile') }}">Profile Info</a>
+                    <a class="{{ Request::routeIs('profile') ? 'active' : '' }}" href="{{ route('profile') }}">Profile Info</a>
                 </li>
                 <li>
-                    <a href="{{ route('accountgallery') }}">Galleries</a>
+                    <a class="{{ Request::routeIs('accountgallery') ? 'active' : '' }}" href="{{ route('accountgallery') }}">Galleries</a>
                 </li>
                 <li>
-                    <a href="{{ route('news') }}">News & Updates</a>
+                    <a class="{{ Request::routeIs('news') ? 'active' : '' }}" href="{{ route('news') }}">News & Updates</a>
                 </li>
                 <li>
-                    <a href="{{ route('private') }}">Private Area</a>
+                    <a class="{{ Request::routeIs('private') ? 'active' : '' }}" href="{{ route('private') }}">Private Area</a>
                 </li>
                 <li>
-                    <a href="{{ route('link') }}">Links</a>
+                    <a class="{{ Request::routeIs('link') ? 'active' : '' }}" href="{{ route('link') }}">Links</a>
                 </li>
                 <li>
-                    <a href="{{ route('wishlist') }}">Wishlist</a>
+                    <a class="{{ Request::routeIs('wishlist') ? 'active' : '' }}" href="{{ route('wishlist') }}">Wishlist</a>
                 </li>
             </ul>
-            <a class="" href="{{ route('coming') }}">Your Topics</a>
+            <a class="{{ Request::routeIs('coming') ? 'active' : '' }}" href="{{ route('coming') }}">Your Topics</a>
             <a class="" href="{{ route('coming') }}">Reactions</a>
             <a class="" href="{{ route('coming') }}">Following</a>
             <a class="" href="{{ route('coming') }}">Followers</a>

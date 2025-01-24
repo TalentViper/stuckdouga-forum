@@ -12,6 +12,7 @@ use App\Models\Tag;
 use App\Models\Gallery;
 use App\Models\ArtWork;
 use App\Models\Thread;
+use App\Models\Contact;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\MyMail;
 
@@ -55,6 +56,32 @@ class HomeController extends Controller
         //
         return view('frontend.contact');
     }
+
+    public function contact_store(Request $request)
+    {
+        
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+        ]);
+
+        $contact = new Contact();
+        $contact->name = $request->name;
+        $contact->email = $request->email;
+        $contact->location = $request->location;
+        $contact->subject = $request->subject;
+        $contact->message = $request->message;
+        $contact->save();
+
+        try {
+            Mail::to("info@eliteproviders.uk")->send(new ContactMail($contact));
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+
+        return response()->json(['success' => 'ArtWork updated successfully!']);
+    }
+
     public function tags()
     {
         //

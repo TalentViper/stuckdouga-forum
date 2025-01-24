@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\WishList;
 use Illuminate\Support\Facades\Hash;
+use Brian2694\Toastr\Facades\Toastr;
 
 class WishListController extends Controller
 {
@@ -36,7 +37,7 @@ class WishListController extends Controller
         $wishlist->oseries = $request->oseries;
         $wishlist->user_id = Auth::id();
         $wishlist->save();
-
+        Toastr::success(__('Saved successfuly!'));
         return redirect()->route('wishlist');
     }
 
@@ -51,7 +52,7 @@ class WishListController extends Controller
         $wishlist->oseries = $request->oseries;
         $wishlist->user_id = Auth::id();
         $wishlist->save();
-
+        Toastr::success(__('Updated successfuly!'));
         return redirect()->route('wishlist');
     }
 

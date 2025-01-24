@@ -1,6 +1,8 @@
 $(function () {
     
     $("#receiver_id").autocomplete({
+        authFocus: true,
+        minLength: 1,
         source: function (request, response) {
             $.ajax({
                 url: "/usersbykey",
@@ -12,7 +14,6 @@ $(function () {
                 cache: true,
                 success: function (data) {
                     const temp = data.map((item) => item.username);
-                    console.log(temp);
                     response(temp);
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
@@ -31,7 +32,7 @@ $(function () {
                 "border": "1px solid #ccc",
                 "z-index": "1000"
             });
-        }
+        },
     });
 
     // $("#user_name").on('keyup', function (e) {

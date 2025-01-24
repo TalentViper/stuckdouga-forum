@@ -84,7 +84,7 @@
                                     <div class="col">
                                         <div class="d-flex p-2">
                                             <div class="flex-shrink-0">
-                                                <img src="{{ static_asset('uploads') . '/' . $gallery->gallery_url }}" class="img-fluid rounded-start member-title" alt="..." data-id="{{ $gallery->user->id }}">
+                                                <img src="{{ static_asset('uploads') . '/' . $gallery->gallery_url }}" class="img-fluid rounded-start member-title" alt="..." style="width: 139px; height: 139px;" data-id="{{ $gallery->user->id }}">
                                             </div>
                                             <div class="flex-grow-1 ms-3">
                                                 <h5 class="gallery-title text-left"  data-id="{{ $gallery->id }}">{{ $gallery->gallery_name }}</h5>
@@ -140,7 +140,8 @@ $(document).ready(function() {
 
         $(".gallery-content .item .member-title").on('click', function() {
             var userId = $(this).data('id');
-            window.location.href = '{{ route("member", ["id" => "PLACEHOLDER"]) }}'.replace('PLACEHOLDER', userId);
+            var galleryId = $(this).closest('.item').data('id');
+            window.location.href = '{{ route("gallery", ["id" => "PLACEHOLDER"]) }}'.replace('PLACEHOLDER', galleryId);
         });
 
         $(".gallery-content .item .gallery-title").on('click', function() {

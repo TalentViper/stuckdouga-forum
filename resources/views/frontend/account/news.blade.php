@@ -21,35 +21,7 @@ $(function($){
                     <div class="col-md-10 center primary p-4">
                         <h2>NEWS & UPDATES  <button id="toggleButton" class="toggle-button flex-end">+</button></h2>
                         <div id="uploadSection" style="display: none;">
-                            <form class="pt-4">
-                                @csrf
-                                <div class="mb-3 row">
-                                    <div class="col-md-6">
-                                        <div class="mb-3 row form-group">
-                                            <label for="password" class="col-sm-5 col-form-label" required >Set Password:</label>
-                                            <div class="col-sm-7">
-                                                <input type="password" class="form-control" id="password"  data-indicator="strengthLevel" name="password" placeholder="" value="{{ old('password') }}" required>
-                                            </div>
-                                        </div>
-                                        <div class="mb-3 row form-group">
-                                            <label for="confirmpassword" class="col-sm-5 col-form-label" required >Confirm Password:</label>
-                                            <div class="col-sm-7">
-                                                <input type="password" class="form-control" id="confirmpassword" name="confirmpassword" placeholder=""  required>
-                                                <div id="strengthLevel" class="password_strength pass_state01"></div>
-                                            </div>
-                                        </div>
-                                        <div class="mb-3 row form-group">
-                                            <div class="col-md-12">
-                                                <span id="passwordError" style="color: red;"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 d-flex justify-content-center align-items-center" style="height: 108px">
-                                        <button type="button" class="change" id="changePasswordBtn">Change Password</button>
-                                    </div>
-
-                                </div>
-                            </form>
+                            
                             <form id="newsForm" action="{{ route('newsupdates.store') }}"  method="POST">
                                 @csrf
                                 <h5 class="mt-5 mb-5">ADD NEW ITEM TO NEWS:</h5>

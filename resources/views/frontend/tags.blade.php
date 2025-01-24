@@ -65,7 +65,7 @@
                         <h2>ALL TAGS</h2>
                         <div class="row p-30">
                             @foreach($search as $tag)
-                                <a href="#" class="col-md-3 col-sm-6 col-xs-12 gallery-item">
+                                <a href="#" class="col-md-3 col-sm-6 col-xs-12 gallery-item tag-item">
                                     {{ $tag->name }}
                                 </a>
                             @endforeach

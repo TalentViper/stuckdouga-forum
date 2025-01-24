@@ -88,7 +88,7 @@
                         </div>
                         <div class="gallery-content grid">
                             @foreach($search as $gallery)
-                                <div class="gallery-item">
+                                <div class="gallery-item" data-id="{{ $gallery->id }}">
                                     <img src="{{ static_asset('uploads') . '/' . $gallery->gallery_url }}" alt="{{ $gallery->gallery_name }}">
                                     <div class="name" data-id="{{ $gallery->id }}">{{ $gallery->gallery_name }}</div>
                                     <div class="sub" data-id="{{ $gallery->user->id }}">{{ $gallery->user->full_name }}</div>
@@ -124,6 +124,8 @@
         });
 
         $(".gallery-content .gallery-item img").on('click', function(){
+            var galleryId = $(this).parent().data('id');
+            window.location.href = '{{ route("gallery", ["id" => "PLACEHOLDER"]) }}'.replace('PLACEHOLDER', galleryId);
         });
 
         $(".gallery-content .gallery-item .name").on('click', function(){
@@ -132,8 +134,8 @@
         });
 
         $(".gallery-content .gallery-item .sub").on('click', function(){
-            var userId = $(this).data('id');
-            window.location.href = '{{ route("member", ["id" => "PLACEHOLDER"]) }}'.replace('PLACEHOLDER', userId);
+            var galleryId = $(this).parent().data('id');
+            window.location.href = '{{ route("gallery", ["id" => "PLACEHOLDER"]) }}'.replace('PLACEHOLDER', galleryId);
         });
 
         var width = $(".gallery-content").width();

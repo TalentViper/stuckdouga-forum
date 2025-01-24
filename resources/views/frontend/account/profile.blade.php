@@ -20,8 +20,8 @@
                                         Main Banner:
                                     </div>
                                     <div class="col-md-4">
-                                        <img src="{{ $banner == NULL ? static_asset('images/img/member_bg1.jpg') : static_asset('uploads/' . $banner) }}" width="300px" alt="" class="banner-img">
-                                        <p style="color:#999">(1200 <i class="bi bi-plus-lg"></i> 400px)</p>
+                                        <!-- <img src="{{ $banner == NULL ? static_asset('images/img/member_bg1.jpg') : static_asset('uploads/' . $banner) }}" width="300px" alt="" class="banner-img"> -->
+                                        <!-- <p style="color:#999">(1200 <i class="bi bi-plus-lg"></i> 400px)</p> -->
                                     </div>
                                     <div class="col-md-4">
                                         <button type="button" id="banner">Upload File</button>
@@ -442,7 +442,8 @@
             
         })
 
-        chooselayout('{{$layout}}');
+        chooselayout('full');
+        // chooselayout('{{$layout}}');
     });
 
     // window.addEventListener('load', function() {
