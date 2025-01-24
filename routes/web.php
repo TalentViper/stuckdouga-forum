@@ -154,6 +154,7 @@ Route::prefix('beta')->group(function () {
     Route::get('/artwork/{id}', [HomeController::class, 'artwork'])->name('artwork');
     Route::get('/tags', [HomeController::class, 'tags'])->name('tags');
     Route::get('/gallery/{id}', [GalleryController::class, 'gallery'])->name('gallery');
+    Route::get('/go/back', [GalleryController::class, 'goBack'])->name('gallery.back');
     Route::get('/latest/{keyword?}', [GalleryController::class, 'search'])->name('latest');
     Route::get('/popular/{keyword?}', [GalleryController::class, 'search'])->name('popular');
     Route::get('/update/{keyword?}', [GalleryController::class, 'search'])->name('update');

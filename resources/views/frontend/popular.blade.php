@@ -24,43 +24,43 @@
                             <h5>Browse by Name</h5>
                         </div>
                         <div class="tag-page-browsername mt10">
-                            <a href="#">A</a>
-                            <a href="#">B</a>
-                            <a href="#">C</a>
-                            <a href="#">D</a>
-                            <a href="#">E</a>
-                            <a href="#">F</a>
+                            <a href="{{ route('popular', 'A') }}">A</a>
+                            <a href="{{ route('popular', 'B') }}">B</a>
+                            <a href="{{ route('popular', 'C') }}">C</a>
+                            <a href="{{ route('popular', 'D') }}">D</a>
+                            <a href="{{ route('popular', 'E') }}">E</a>
+                            <a href="{{ route('popular', 'F') }}">F</a>
                         </div>
                         <div class="tag-page-browsername">
-                            <a href="#">G</a>
-                            <a href="#">H</a>
-                            <a href="#">I</a>
-                            <a href="#">J</a>
-                            <a href="#">K</a>
-                            <a href="#">L</a>
+                            <a href="{{ route('popular', 'G') }}">G</a>
+                            <a href="{{ route('popular', 'H') }}">H</a>
+                            <a href="{{ route('popular', 'I') }}">I</a>
+                            <a href="{{ route('popular', 'J') }}">J</a>
+                            <a href="{{ route('popular', 'K') }}">K</a>
+                            <a href="{{ route('popular', 'L') }}">L</a>
                         </div>
                         <div class="tag-page-browsername">
-                            <a href="#">M</a>
-                            <a href="#">N</a>
-                            <a href="#">O</a>
-                            <a href="#">P</a>
-                            <a href="#">Q</a>
-                            <a href="#">R</a>
+                            <a href="{{ route('popular', 'M') }}">M</a>
+                            <a href="{{ route('popular', 'N') }}">N</a>
+                            <a href="{{ route('popular', 'O') }}">O</a>
+                            <a href="{{ route('popular', 'P') }}">P</a>
+                            <a href="{{ route('popular', 'Q') }}">Q</a>
+                            <a href="{{ route('popular', 'R') }}">R</a>
                         </div>
                         <div class="tag-page-browsername">
-                            <a href="#">S</a>
-                            <a href="#">T</a>
-                            <a href="#">U</a>
-                            <a href="#">V</a>
-                            <a href="#">W</a>
-                            <a href="#">X</a>
+                            <a href="{{ route('popular', 'S') }}">S</a>
+                            <a href="{{ route('popular', 'T') }}">T</a>
+                            <a href="{{ route('popular', 'U') }}">U</a>
+                            <a href="{{ route('popular', 'V') }}">V</a>
+                            <a href="{{ route('popular', 'W') }}">W</a>
+                            <a href="{{ route('popular', 'X') }}">X</a>
                         </div>
                         <div class="tag-page-browsername">
-                            <a href="#">Y</a>
-                            <a href="#">Z</a>
-                            <a href="#">#</a>
-                            <a href="#">?</a>
-                        </div>
+                            <a href="{{ route('popular', 'Y') }}">Y</a>
+                            <a href="{{ route('popular', 'Z') }}">Z</a>
+                            <a href="{{ route('popular', '#') }}">#</a>
+                            <a href="{{ route('popular', '?') }}">?</a>
+                        </div> 
                     </div>
                     <div class="col-md-10 center primary">
                         <h2>POPULAR GALLERIES</h2>
@@ -119,7 +119,7 @@
                 console.log("???");
                 e.preventDefault();
                 var keyword = $(this).val();
-                window.location.href = '{{ route("latest") }}/' + keyword;
+                window.location.href = '{{ route("popular") }}/' + keyword;
             }
         });
 

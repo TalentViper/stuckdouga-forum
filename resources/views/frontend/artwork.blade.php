@@ -28,15 +28,12 @@
                     </div>
                     <div class="side_title"><h5>ArtWork Info:</h5></div>
                         <div class="info">
-                            <h6>Krenky</h6>
-                            <h6>Source: OVA</h6>
-                            <h6>Layers: 1</h6>
-                            <h6>No sketches available</h6>
-                            <h6>Cel Numbers: A10</h6>
-                            <h6>Standard size</h6>
+                            <!-- <h6>Krenky</h6> -->
+                            <h6>Source: {{ $sources[$artwork->source] }}</h6>
+                            <h6>Layers: {{ $artwork->layers }}</h6>
+                            <h6>sketches: {{ $artwork->sketch }}</h6>
+                            <h6>Type: {{ $artwork->type }}</h6>
                             <br/>
-                            <h6>No Background</h6>
-                            <h6>31/10/2024 at 5:57pm</h6>
                         </div>
                     </div>
                     <div class="col-md-10 center primary detail-info">
@@ -57,25 +54,31 @@
                             </div>
                         </div>
                         <div class="row buttons">
-                            <button type="button">Previous ArtWork</button>
+                            @if($prevArtworkId)
+                                <a href="{{ route('artwork', $prevArtworkId) }}" style="width: unset;"><button type="button">Previous ArtWork</button></a>
+                            @endif
                             <button type="button" id="goBackToGalleryButton">Go Back to Gallery</button>
-                            <button type="button">Next ArtWork</button>
+                            @if($nextArtworkId)
+                                <a href="{{ route('artwork', $nextArtworkId) }}" style="width: unset;">
+                                    <button type="button">Next ArtWork</button>
+                                </a>
+                            @endif
                         </div>
                         <div class="row favorite-buttons p-2">
-                            <a href="#">
+                            <!-- <a href="#" class="pointer">
                                 <i class="bi bi-hand-thumbs-up"></i>
-                            </a>
-                            <a id="like-button">
+                            </a> -->
+                            <a id="like-button" class="pointer">
                                 <i class="bi bi-heart{{ $artwork->isLikedByUser() ? '-fill' : '' }}"></i>
                             </a>
-                            <a href="#">
+                            <a href="#" class="pointer">
                                 <i class="bi bi-share"></i>
                             </a>
-                            <a href="">
+                            <a class="pointer">
                                 <i class="bi bi-exclamation-triangle"></i>
                             </a>
                         </div>
-                        <a href="{{ static_asset('images/img/art_big.jpg') }}" data-lightbox="artwork" data-title="Unknown ArtWork #1" class="light-detail" data-fancybox="gallery">
+                        <a href="{{ static_asset('images/img/art_big.jpg') }}" data-lightbox="artwork" data-title="Unknown ArtWork #1" class="light-detail mt-2" data-fancybox="gallery">
                             <img src="{{ static_asset('images/img/art_big.jpg') }}" alt="">
                         </a>
                         <div class="row attaches p-4">
