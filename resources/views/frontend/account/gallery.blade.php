@@ -87,7 +87,9 @@
                                                     <td>{{ $gallery->gallery_name }}</td>
                                                     <td>{{ $gallery->series }}</td>
                                                     <td>
-                                                        <img src="{{ static_asset('uploads') . '/' . $gallery->gallery_url }}" alt="{{ $gallery->gallery_url }}" width="100px"/>
+                                                        @if($gallery->gallery_url)
+                                                            <img src="{{ static_asset('uploads') . '/' . $gallery->gallery_url }}" alt="{{ $gallery->gallery_url }}" width="100px"/>
+                                                        @endif
                                                     </td>
                                                     <td> {{ $gallery->type }}</td>
                                                     <td>
@@ -331,14 +333,25 @@
                     });
                 },
                 error: function(xhr) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Something went wrong!',
-                        cancelButtonColor: 'grey',
-                        confirmButtonColor: 'grey',
-                        confirmButtonText: 'OK'
-                    });
+                    if($(".gallery-url").val() == ""){
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Missing field',
+                            text: 'Please upload a thumbnail!',
+                            cancelButtonColor: 'grey',
+                            confirmButtonColor: 'grey',
+                            confirmButtonText: 'OK'
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Something went wrong!',
+                            cancelButtonColor: 'grey',
+                            confirmButtonColor: 'grey',
+                            confirmButtonText: 'OK'
+                        });
+                    }
                 }
             });
         });

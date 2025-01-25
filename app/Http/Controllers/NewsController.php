@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\News;
 use Illuminate\Support\Facades\Hash;
+use Brian2694\Toastr\Facades\Toastr;
 
 class NewsController extends Controller
 {
@@ -41,7 +42,7 @@ class NewsController extends Controller
         $news->content = $request->content;
         $news->user_id = Auth::id();
         $news->save();
-
+        Toastr::success(__('Added news successfully!'));
         return redirect()->route('news');
     }
 
@@ -70,6 +71,7 @@ class NewsController extends Controller
         $news->content = $request->content;
         $news->save();
 
+        Toastr::success(__('Updated news successfully!'));
         return redirect()->route('news');
     }
 

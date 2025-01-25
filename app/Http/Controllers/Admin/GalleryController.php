@@ -11,6 +11,7 @@ use App\Models\ServiceOption;
 use App\Models\Setting;
 use App\Models\Tag;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 
 class GalleryController extends Controller
@@ -83,6 +84,8 @@ class GalleryController extends Controller
 
     public function search(Request $request, $keyword = null)
     {
+        session()->forget('mainPageUrl');
+
         $routeName = $request->route()->getName();
         $query = Gallery::with(['user', 'artworks' => function($q) {
             $q->orderBy('created_at', 'desc')->take(5);
@@ -114,7 +117,7 @@ class GalleryController extends Controller
             $query = Tag::query()->orderBy('updated_at', 'desc');
 
             if ($keyword) {
-                $query->where('name', 'like', '%' . $keyword . '%');
+                $query->where('name', 'like', $keyword . '%');
             }
 
             $search = $query->paginate(25);
@@ -124,15 +127,55 @@ class GalleryController extends Controller
         }
     }
 
+    public function galleryByUser(Request $request, $id, $galleryId) {
+        $user = User::find($id);
+        $query = Gallery::with(['user', 'artworks' => function($q) {
+            $q->orderBy('created_at', 'desc')->take(5);
+        }])->orderBy('updated_at', 'desc');
+        $query->where('user_id', $id);
+        $search = $query->paginate(25);
+        return view('frontend.gallery.galleryview')->with([
+            'gallery' => $search,
+            'galleryId' => $galleryId,
+            'user' => $user,
+        ]);
+    }
+
     public function gallery($id)
     {
-        $query = ArtWork::query()->where('gallery_id', $id)->orderBy('updated_at', 'desc');
+        // Store the referrer URL in the session
+        if (session()->has('mainPageUrl') === false && request()->route()->named('gallery')) {
+            session(['mainPageUrl' => url()->previous()]);
+        }
         $gallery = Gallery::where("id", $id)->first();
         $gallery->views++;
         $gallery->save();
+
+        // Get the next gallery ID
+        $nextGallery = Gallery::where('id', '>', $id)->orderBy('id', 'asc')->first();
+        $nextGalleryId = $nextGallery ? $nextGallery->id : null;
+
+        // Get the previous gallery ID
+        $prevGallery = Gallery::where('id', '<', $id)->orderBy('id', 'desc')->first();
+        $prevGalleryId = $prevGallery ? $prevGallery->id : null;
+
+        $query = ArtWork::query()->where('gallery_id', $id)->orderBy('updated_at', 'desc');
         $search = $query->paginate(25);
 
-        return view('frontend.gallery', compact('search', 'gallery'));
+        return view('frontend.gallery', compact('search', 'gallery', 'nextGalleryId', 'prevGalleryId'));
+    }
+
+    public function goBack()
+    {
+        // Get the stored URL from the session
+        $mainPageUrl = session('mainPageUrl', url()->previous());
+
+        // Clear the session
+        session()->forget('mainPageUrl');
+
+        if (!$mainPageUrl) $mainPageUrl = redirect()->back()->getTargetUrl(); 
+        // Redirect to the stored URL
+        return redirect($mainPageUrl);
     }
 
     public function like(Request $request, $id)
@@ -150,5 +193,24 @@ class GalleryController extends Controller
         $gallery->save();
 
         return response()->json(['success' => true, 'likes' => $gallery->likes]);
+    }
+
+    public function profile(Request $request, $id, $galleryId)
+    {
+        $user = User::find($id);
+        return view('frontend.gallery.profileview')->with([
+            'banner' => $user->my_banner,
+            'side' => $user->my_side,
+            'layout' => $user->layout,
+            'content' => $user->my_content,
+            'user' => $user,
+            'galleryId' => $galleryId
+        ]);
+    }
+
+    public function private(Request $request, $id, $galleryId)
+    {
+        $user = User::find($id);
+        return view('frontend.gallery.privateview', compact('user', 'galleryId'));
     }
 }

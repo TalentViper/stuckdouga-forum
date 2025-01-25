@@ -18,11 +18,11 @@
                                     <div class="mb-3 row form-group">
                                         <label for="description" class="col-sm-2 col-form-label"  required >Description:</label>
                                         <div class="col-sm-7">
-                                            <textarea class="form-control" id="description" rows="10" name="description"></textarea>
+                                            <textarea class="form-control" id="description" rows="10" name="description" required></textarea>
                                         </div>
                                     </div>
                                     <div class="mb-3 row">
-                                        <label for="thumbnail" class="col-sm-2 col-form-label" name="thumbnail" required >Upload File:</label>
+                                        <label for="thumbnail" class="col-sm-2 col-form-label" name="thumbnail" >Upload File:</label>
                                         <div class="col-sm-4">
                                             <button type="button" class="upload" id="thumbnail">Upload File</button>
                                             <div class="progress mt-2" style="display: none;">
@@ -31,15 +31,15 @@
                                             <input type="text" class="form-control wish-url" name="url" placeholder="" hidden>
                                         </div>
                                         <label class="col-sm-1"></label>
-                                        <label for="series" class="col-sm-1 col-form-label" required >Series:</label>
+                                        <label for="series" class="col-sm-1 col-form-label" >Series:</label>
                                         <div class="col-sm-4">
-                                            <input type="text" class="form-control" id="series" name="series" placeholder=""  required>
+                                            <input type="text" class="form-control" id="series" name="series" placeholder="" >
                                         </div>
                                     </div>
                                     <div class="mb-3 row">
                                         <label for="type" class="col-sm-2 col-form-label" name="type" required >Priority:</label>
                                         <div class="col-sm-4">
-                                            <select class="form-control" name="priority">
+                                            <select class="form-control" name="priority" required>
                                                 <option value="NORMAL">NORMAL</option>
                                                 <option value="LOW">LOW</option>
                                                 <option value="HIGH">HIGH</option>
@@ -47,9 +47,9 @@
                                             </select>
                                         </div>
                                         <label class="col-sm-1"></label>
-                                        <label for="tag" class="col-sm-1 col-form-label" required >Other Series:</label>
+                                        <label for="tag" class="col-sm-1 col-form-label" >Other Series:</label>
                                         <div class="col-sm-4">
-                                            <input type="text" class="form-control" id="tag" name="oseries" placeholder=""  required>
+                                            <input type="text" class="form-control" id="tag" name="oseries" placeholder="">
                                         </div>
                                     </div>
                                     <div class="mb-3">
@@ -77,7 +77,9 @@
                                                 <tr>
                                                     <td>{{ $wishlist->description }}</td>
                                                     <td>
-                                                        <img src="{{ static_asset('uploads') . '/' . $wishlist->url }}" alt="{{ $wishlist->url }}" width="100px"/>
+                                                        @if($wishlist->url)
+                                                            <img src="{{ static_asset('uploads') . '/' . $wishlist->url }}" alt="{{ $wishlist->url }}" width="100px"/>                                                    
+                                                        @endif
                                                     </td>
                                                     <td> {{ $wishlist->priority }}</td>
                                                     <td>

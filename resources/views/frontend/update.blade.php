@@ -24,43 +24,43 @@
                             <h5>Browse by Name</h5>
                         </div>
                         <div class="tag-page-browsername mt10">
-                            <a href="#">A</a>
-                            <a href="#">B</a>
-                            <a href="#">C</a>
-                            <a href="#">D</a>
-                            <a href="#">E</a>
-                            <a href="#">F</a>
+                            <a href="{{ route('update', 'A') }}">A</a>
+                            <a href="{{ route('update', 'B') }}">B</a>
+                            <a href="{{ route('update', 'C') }}">C</a>
+                            <a href="{{ route('update', 'D') }}">D</a>
+                            <a href="{{ route('update', 'E') }}">E</a>
+                            <a href="{{ route('update', 'F') }}">F</a>
                         </div>
                         <div class="tag-page-browsername">
-                            <a href="#">G</a>
-                            <a href="#">H</a>
-                            <a href="#">I</a>
-                            <a href="#">J</a>
-                            <a href="#">K</a>
-                            <a href="#">L</a>
+                            <a href="{{ route('update', 'G') }}">G</a>
+                            <a href="{{ route('update', 'H') }}">H</a>
+                            <a href="{{ route('update', 'I') }}">I</a>
+                            <a href="{{ route('update', 'J') }}">J</a>
+                            <a href="{{ route('update', 'K') }}">K</a>
+                            <a href="{{ route('update', 'L') }}">L</a>
                         </div>
                         <div class="tag-page-browsername">
-                            <a href="#">M</a>
-                            <a href="#">N</a>
-                            <a href="#">O</a>
-                            <a href="#">P</a>
-                            <a href="#">Q</a>
-                            <a href="#">R</a>
+                            <a href="{{ route('update', 'M') }}">M</a>
+                            <a href="{{ route('update', 'N') }}">N</a>
+                            <a href="{{ route('update', 'O') }}">O</a>
+                            <a href="{{ route('update', 'P') }}">P</a>
+                            <a href="{{ route('update', 'Q') }}">Q</a>
+                            <a href="{{ route('update', 'R') }}">R</a>
                         </div>
                         <div class="tag-page-browsername">
-                            <a href="#">S</a>
-                            <a href="#">T</a>
-                            <a href="#">U</a>
-                            <a href="#">V</a>
-                            <a href="#">W</a>
-                            <a href="#">X</a>
+                            <a href="{{ route('update', 'S') }}">S</a>
+                            <a href="{{ route('update', 'T') }}">T</a>
+                            <a href="{{ route('update', 'U') }}">U</a>
+                            <a href="{{ route('update', 'V') }}">V</a>
+                            <a href="{{ route('update', 'W') }}">W</a>
+                            <a href="{{ route('update', 'X') }}">X</a>
                         </div>
                         <div class="tag-page-browsername">
-                            <a href="#">Y</a>
-                            <a href="#">Z</a>
-                            <a href="#">#</a>
-                            <a href="#">?</a>
-                        </div>
+                            <a href="{{ route('update', 'Y') }}">Y</a>
+                            <a href="{{ route('update', 'Z') }}">Z</a>
+                            <a href="{{ route('update', '#') }}">#</a>
+                            <a href="{{ route('update', '?') }}">?</a>
+                        </div> 
                     </div>
                     <div class="col-md-10 primary">
                         <h2 class="center">UPDATED GALLERIES</h2>
@@ -84,7 +84,7 @@
                                     <div class="col">
                                         <div class="d-flex p-2">
                                             <div class="flex-shrink-0">
-                                                <img src="{{ static_asset('uploads') . '/' . $gallery->gallery_url }}" class="img-fluid rounded-start member-title" alt="..." data-id="{{ $gallery->user->id }}">
+                                                <img src="{{ static_asset('uploads') . '/' . $gallery->gallery_url }}" class="img-fluid rounded-start member-title" alt="..." style="width: 139px; height: 139px;" data-id="{{ $gallery->user->id }}">
                                             </div>
                                             <div class="flex-grow-1 ms-3">
                                                 <h5 class="gallery-title text-left"  data-id="{{ $gallery->id }}">{{ $gallery->gallery_name }}</h5>
@@ -140,7 +140,8 @@ $(document).ready(function() {
 
         $(".gallery-content .item .member-title").on('click', function() {
             var userId = $(this).data('id');
-            window.location.href = '{{ route("member", ["id" => "PLACEHOLDER"]) }}'.replace('PLACEHOLDER', userId);
+            var galleryId = $(this).closest('.item').data('id');
+            window.location.href = '{{ route("gallery", ["id" => "PLACEHOLDER"]) }}'.replace('PLACEHOLDER', galleryId);
         });
 
         $(".gallery-content .item .gallery-title").on('click', function() {

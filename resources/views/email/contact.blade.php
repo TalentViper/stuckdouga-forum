@@ -55,8 +55,15 @@
             -ms-interpolation-mode:bicubic;
         }
         p {
-            margin-top: 0;
-            margin-bottom: 2rem;
+            margin-top: 1.2rem;
+            margin-bottom: 1.2rem;
+        }
+        .my-2 {
+            padding-top: 1.2rem;
+            padding-bottom: 1.2rem;
+        }
+        .text-center {
+            text-align: center;
         }
     </style>
 
@@ -67,21 +74,26 @@
         <tr>
             <td style="padding: 40px 0;">
                 <table style="width:100%;max-width:620px;margin:0 auto;background-color:#ffffff;">
+                    <th>
+                        <tr>
+                            <td class="header text-center my-2">
+                                <a href="{{ route('home') }}" style="display: inline-block;">
+                                    <img src="{{ static_asset('images/img/stuckdouga_logo.jpg') }}" style="width: 190px; height: 47px;" class="logo" alt="stuckdouga Logo">
+
+                                </a>
+                            </td>
+                        </tr>
+                    </th>
                     <tr>
                         <td style="padding: 50px 30px;">
-                            <h3>This is a new message sent from website:</h3>
+                            <h3>A new contact message:</h3>
                             <br>
-                            <p><span style="font-weight:bold;">Name:</span> <?=$mailData['html']['name']?></p>
-                            <p><span style="font-weight:bold;">Email:</span> <?=$mailData['html']['email']?></p>
-                            <p><span style="font-weight:bold;">Tel:</span> <?=$mailData['html']['tel']?></p>
-                            <p><span style="font-weight:bold;">Subject:</span> <?=$mailData['html']['subject']?></p>
-                            <p><span style="font-weight:bold;">Message:</span></p>
-                            <p><?=$mailData['html']['message']?></p>
-                            <p>Best Regards<br>-<br>Elite Providers Team<br><a href="{{route('home')}}" style="color:#249316;font-weight:bold;">www.elitegardeners.uk</a></p>
-                            <p>T: 020 3084 1986<br>E: info@eliteproviders.uk</p>
-                            <a href="{{route('home')}}">
-                                <img src="{{ static_asset('images/elite/logo.jpg')}}" style="width: 200px;" alt="Logo">
-                            </a>
+                            <p ><span style="font-weight:bold;">Name:</span> <?php echo $mailData['name']?></p>
+                            <p><span style="font-weight:bold;">From:</span> <?php echo $mailData['email']?></p>
+                            <p><span style="font-weight:bold;">Location:</span> <?php echo $mailData['location']?></p>
+                            <p><span style="font-weight:bold;">Subject:</span> <?php echo $mailData['subject']?></p>
+                            <pre><span style="font-weight:bold;">Message:</span> <?php echo $mailData['message']?></pre>
+
                         </td>
                     </tr>
                 </table>

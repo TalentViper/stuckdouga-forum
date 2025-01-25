@@ -89,13 +89,16 @@ Route::prefix('beta')->group(function () {
         $request->fulfill();
         return redirect('/beta');
     })->middleware(['auth', 'signed'])->name('verification.verify');
-
+    
     Route::get('/threads', [ThreadController::class, 'index'])->name('threads.index');
     Route::get('/threads/{thread}', [ThreadController::class, 'show'])->name('threads.show');
-
+    Route::post('/contact/send', [HomeController::class, 'contact_store'])->name('contact.send');
+    
     Route::group(['middleware' => 'auth'], function () {
+        Route::get('/threads/create', [ThreadController::class, 'create'])->name('threads.create');
         Route::get('logout', [LoginController::class, 'logout'])->name('logout');
         Route::get('/account', [HomeController::class, 'account'])->name('account');
+        
         Route::prefix('account')->group(function () {
             Route::get('/detail', [AccountController::class, 'detail'])->name('detail');
             Route::get('/gallery', [AccountController::class, 'gallery'])->name('accountgallery');
@@ -110,13 +113,15 @@ Route::prefix('beta')->group(function () {
             Route::get('/private', [AccountController::class, 'private'])->name('private');
             Route::get('/profile', [AccountController::class, 'profile'])->name('profile');
             Route::get('/upload/{galleryId}', [AccountController::class, 'upload'])->name('artworkupload');
+            Route::post('/artwork/changestate', [ArtWorkController::class, 'change_visible'])->name('artwork.change_visible');
             Route::get('/wishlist', [AccountController::class, 'wishlist'])->name('wishlist');  
             Route::get('/wishlist/{wishlistId}', [WishListController::class, 'show'])->name('wishlist.edit');  
             Route::post('/wishlist/save', [WishListController::class, 'update'])->name('wishlist.update');  
-
+            
+            Route::post('/user/avatar', [AccountController::class, 'avatar'])->name('avatar.upload');
+            Route::post('/user/remove/avatar', [AccountController::class, 'removeAvatar'])->name('avatar.remove');
         });
         
-        Route::get('/threads/create', [ThreadController::class, 'create'])->name('threads.create');
         Route::post('/threads', [ThreadController::class, 'store'])->name('threads.store');
         Route::post('/threads/{thread}/comments', [CommentController::class, 'store'])->name('comments.store');
         Route::post('/threads/{thread}/like', [ThreadController::class, 'like'])->name('threads.like');
@@ -152,6 +157,11 @@ Route::prefix('beta')->group(function () {
     Route::get('/artwork/{id}', [HomeController::class, 'artwork'])->name('artwork');
     Route::get('/tags', [HomeController::class, 'tags'])->name('tags');
     Route::get('/gallery/{id}', [GalleryController::class, 'gallery'])->name('gallery');
+    Route::get('/user/{id}/{galleryId}/profile', [GalleryController::class, 'profile'])->name('user.profile');
+    Route::get('/user/{id}/{galleryId}/private', [GalleryController::class, 'private'])->name('user.private');
+    Route::get('/user/{id}/{galleryId}/gallery', [GalleryController::class, 'galleryByUser'])->name('user.gallery');
+
+    Route::get('/go/back', [GalleryController::class, 'goBack'])->name('gallery.back');
     Route::get('/latest/{keyword?}', [GalleryController::class, 'search'])->name('latest');
     Route::get('/popular/{keyword?}', [GalleryController::class, 'search'])->name('popular');
     Route::get('/update/{keyword?}', [GalleryController::class, 'search'])->name('update');

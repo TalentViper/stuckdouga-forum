@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Link;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Brian2694\Toastr\Facades\Toastr;
 
 class LinkController extends Controller
 {
@@ -32,7 +33,7 @@ class LinkController extends Controller
         $link->desc = $request->desc;
         $link->user_id = Auth::id();
         $link->save();
-        
+        Toastr::success(__('Saved successfuly!'));
         return redirect()->back()->with('success', 'Link created successfully!');
     }
 
@@ -44,6 +45,7 @@ class LinkController extends Controller
         $link->desc = $request->desc;
         $link->save();
 
+        Toastr::success(__('Updated successfuly!'));
         return redirect()->route('link');
     }
 

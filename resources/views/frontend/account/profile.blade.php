@@ -20,8 +20,10 @@
                                         Main Banner:
                                     </div>
                                     <div class="col-md-4">
-                                        <img src="{{ $banner == NULL ? static_asset('images/img/member_bg1.jpg') : static_asset('uploads/' . $banner) }}" width="300px" alt="" class="banner-img">
+                                        @if($banner != NULL)
+                                        <img src="{{ static_asset('uploads/' . $banner) }}" width="300" alt="" class="banner-img">
                                         <p style="color:#999">(1200 <i class="bi bi-plus-lg"></i> 400px)</p>
+                                        @endif
                                     </div>
                                     <div class="col-md-4">
                                         <button type="button" id="banner">Upload File</button>
@@ -49,7 +51,7 @@
                                 </div>
                                 <input type="file" id="banner-upload" accept="image/*" hidden>
                             </div>
-                            
+
                             <div class="full-width-layout" style="display:none;">
                                 <div class="main-content1">
                                     <textarea name="content" id="editor">{{$content}}</textarea>
@@ -88,7 +90,7 @@
                                     <button type="submit" class="create">Save Updates</button>
                                 </div>
                             </div>
-                            
+
                         </form>
                     </div>
                 </div>
@@ -97,7 +99,7 @@
     </div>
 </main>
 <script>
-    
+
 </script>
 @endsection
 
@@ -169,7 +171,6 @@
     .main-banner .row,
     .choose-layout>.row{
         min-height: 150px;
-        max-height: 200px;
         border-bottom: 1px solid white;
     }
 
@@ -256,7 +257,7 @@
 <script>
     let editor, editor1, editor2;
     $(document).ready(function() {
-        
+
         var textarea = document.getElementById('editor');
         var textarea1 = document.getElementById('editor1');
         var textarea2 = document.getElementById('editor2');
@@ -307,23 +308,6 @@
         editor2.blur(function() {
             syncEditors(editor2);
         });
-
-        var initialContent = '{{$content}}';
-        
-        
-        // function syncEditors() {
-        //     var content = editor.val();
-        //     if (editor1.val() !== content) {
-        //         editor1.val(content);
-        //     }
-        //     if (editor2.val() !== content) {
-        //         editor2.val(content);
-        //     }
-        // }
-
-        // editor.blur(syncEditors);
-        // editor1.blur(syncEditors);
-        // editor2.blur(syncEditors);
 
         const bannerUpload = document.getElementById('banner-upload');
 
@@ -388,6 +372,8 @@
                 xhr.upload.onprogress = function(event) {
                     if (event.lengthComputable) {
                         var percentComplete = (event.loaded / event.total) * 100;
+                        console.log("percent => ", percentComplete)
+
                         document.querySelector('.progress').style.display = 'block';
                         document.querySelector('.progress-bar').style.width = percentComplete + '%';
                         document.querySelector('.progress-bar').setAttribute('aria-valuenow', percentComplete);
@@ -439,21 +425,11 @@
 
         $(".sidebar").on('click', function() {
             $("#banner-upload").trigger('click');
-            
+
         })
 
+        // chooselayout('full');
         chooselayout('{{$layout}}');
     });
 
-    // window.addEventListener('load', function() {
-    //     setTimeout(() => {
-    //         editor.val('{{$content}}');
-    //         editor1.val('{{$content}}');
-    //         editor2.val('{{$content}}');            
-    //     }, 100);
-
-    //     // console.log()
-    // })
 </script>
-
-

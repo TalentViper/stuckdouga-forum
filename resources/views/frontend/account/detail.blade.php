@@ -97,7 +97,7 @@
                                             </div>
                                         </div>
                                         <div class="row mt-3 position-relative">
-                                            <img src="{{ $user->avatar == NULL ? ($user->gender == 'male' ? static_asset('images/img/male_default.jpg') : static_asset('images/img/female_default.jpg')) : static_asset('uploads') . '/' . $user->avatar }}" alt="" width="200px" class="avatar-img">
+                                            <img src="{{ $user->avatar == NULL ? ($user->gender == 'female' ? static_asset('images/img/female_default.jpg') : static_asset('images/img/male_default.jpg')) : static_asset('uploads') . '/' . $user->avatar }}" alt="" width="300" class="avatar-img" style="width: 300px; height: 300px; margin: auto">
                                             <button type="button" class="remove-profile" id="removeThumbnail"><span aria-hidden="true">&times;</span></button>
                                         </div>
                                         <div class="row mt-3">
@@ -289,7 +289,7 @@
                 formData.append('thumbnail', file);
 
                 var xhr = new XMLHttpRequest();
-                xhr.open('POST', '{{ route('uploadItems') }}', true);
+                xhr.open('POST', '{{ route('avatar.upload') }}', true);
                 xhr.setRequestHeader('X-CSRF-TOKEN', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
 
                 // Handle progress events
@@ -324,6 +324,15 @@
         });
 
         $("#removeThumbnail").on('click', function() {
+            $.ajax({
+                url: "{{route('avatar.remove')}}",
+                type: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                }
+            }).then(res => {
+                console.log(res)
+            })
             $(".avatar-url").val('');
             var defaultImage = '{{ $user->gender == 'male' ? static_asset('images/img/male_default.jpg') : static_asset('images/img/female_default.jpg') }}';
             $(".avatar-img").attr("src", defaultImage);

@@ -229,8 +229,14 @@ class UserController extends Controller
 
     public function updatePrivateContent(Request $request) {
         $user = User::find(Auth::id());
-        $user->private_content = $request->content;
-        $user->save();
-        return redirect()->route('private');        
+        if ($user->private_password != null) {
+            $user->private_content = $request->content;
+            $user->save();
+            Toastr::success(__('Your content updated successfuly!'));
+            return redirect()->route('private');   
+        } else {
+            Toastr::error(__('Please set your private password.'));
+            return back()->withInput();
+        }
     }
 }

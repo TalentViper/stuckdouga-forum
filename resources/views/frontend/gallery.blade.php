@@ -10,22 +10,31 @@
                 <div class="row">
                     <div class="col-md-2 sider">
                         <div class="side_title">
-                            <h5>Dragon</h5>
+                            <h5>{{ $gallery->user->full_name }}</h5>
                         </div>
                         <div class="tag-page-gallery mb30">
-                            <img src="{{ static_asset('images/img/art_thumb1.jpg') }}" alt="">
-                            <a class="mt-10" href="#">View Profile</a>
-                            <a class="" href="#">Send Message</a>
-                            <a class="" href="#">All Galleries</a>
-                            <a class="" href="#">User Topics</a>
-                            <a class="" href="#">Private Area</a>
+                            <img src="{{ $gallery->user->avatar ? static_asset('uploads/' . $gallery->user->avatar) : ( $gallery->user->gender == 'female' ? static_asset('images/img/female_default.jpg') : static_asset('images/img/male_default.jpg') ) }}" alt="" width="200">
+                            <!-- <img src="{{ static_asset('images/img/art_thumb1.jpg') }}" alt=""> -->
+                            <a class="mt-10" href="{{ route('user.profile', ['id' => $gallery->user->id, 'galleryId' => $gallery->id]) }}">View Profile</a>
+                            <a class="" href="{{ route('openMessageForm', $gallery->user->username) }}">Send Message</a>
+                            <a 
+                                class="{{ Request::routeIs('user.gallery') ? 'active' : '' }}" 
+                                href="{{ route('user.gallery', ['id' => $gallery->user->id, 'galleryId' => $gallery->id]) }}"
+                            >
+                                All Galleries
+                            </a>
+                            <!-- <a class="" href="#">User Topics</a> -->
+                            <a 
+                                class="{{ Request::routeIs('user.private') ? 'active' : '' }}" 
+                                href="{{ route('user.private', ['id' => $gallery->user->id, 'galleryId' => $gallery->id]) }}"
+                            >
+                                Private Area
+                            </a>
                         </div>
                     </div>
                     <div class="col-md-10 center primary detail-info">
-                        <h3>Gardiens of God</h3>
-                        <p class="desc">
-                            {{$gallery->description}}
-                        </p>
+                        <h3>{{$gallery->gallery_name}}</h3>
+                        <p class="desc">{{$gallery->description}}</p>
                         <div class="row upload-info">
                             <div class="col">
                                 <div>Created</div>
@@ -49,18 +58,22 @@
                             </div>
                         </div>
                         <div class="row buttons">
-                            <button type="button">Previous Gallery</button>
-                            <button type="button">Go Back</button>
-                            <button type="button">Next Gallery</button>
+                            @if($prevGalleryId)
+                                <a href="{{ route('gallery', $prevGalleryId) }}" style="width: unset;"><button type="button">Previous Gallery</button></a>
+                            @endif
+                            <a href="{{ route('gallery.back') }}" style="width: unset;"><button type="button">Go Back</button></a>
+                            @if($nextGalleryId)
+                                <a href="{{ route('gallery', $nextGalleryId) }}" style="width: unset;"><button type="button">Next Gallery</button></a>
+                            @endif
                         </div>
                         <div class="row action-buttons">
                             <div class="view-buttons col-md-2">
-                                <a href="#">
+                                <!-- <a href="#">
                                     <i class="bi bi-phone-landscape"></i>
                                 </a>
                                 <a href="#">
                                     <i class="bi bi-grid-3x3-gap-fill"></i>
-                                </a>
+                                </a> -->
                             </div>
                             <ul class="pagination col-md-7 justify-content-center" role="menubar" aria-label="Pagination">
                                 {{ $search->appends(Request::except('page'))->links('pagination::bootstrap-4') }}
@@ -69,15 +82,15 @@
                                 <a id="like-button">
                                     <i class="bi bi-heart{{ $gallery->isLikedByUser() ? '-fill' : '' }}"></i>
                                 </a>
-                                <a href="#">
+                                <!-- <a href="#">
                                     <i class="bi bi-share"></i>
                                 </a>
                                 <a href="">
                                     <i class="bi bi-exclamation-triangle"></i>
-                                </a>
+                                </a> -->
                             </div>
                         </div>
-                        <div class="gallery-content">
+                        <div class="gallery-content min-h-45">
                             <div class="row">
                                 @foreach($search as $artwork)
                                     <div class="gallery-item col-md-3" data-id="{{$artwork->id}}">
@@ -151,5 +164,10 @@
     .gallery-content .gallery-item img {
         /* width: 185px!important;
         height: 185px!important; */
+    }
+
+    .detail-info .desc {
+        white-space: pre-wrap;
+        word-wrap: break-word;
     }
 </style>

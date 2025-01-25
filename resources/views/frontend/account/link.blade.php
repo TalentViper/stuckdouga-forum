@@ -24,7 +24,7 @@
                                     <div class="mb-3 row form-group">
                                         <label for="url" class="col-sm-2 col-form-label" required>URL:</label>
                                         <div class="col-sm-4">
-                                            <input type="text" class="form-control" id="url" name="url" placeholder="" required>
+                                            <input type="text" class="form-control" id="url" name="url" placeholder="https://example.com" required>
                                         </div>
                                     </div>
                                     <div class="mb-3 row form-group">
@@ -57,7 +57,7 @@
                                     @else
                                         @foreach($links as $link)
                                             <tr data-id="{{ $link->id }}">
-                                                <td>{{ $link->name }}</td>
+                                                <td><a style="color: #2c3cff; text-decoration: underline; font-size: unset;" href="{{ $link->url }}">{{ $link->name }}</a></td>
                                                 <td>{{ $link->desc }}</td>
                                                 <td>
                                                     <a href="{{ route('link.edit', $link->id) }}">

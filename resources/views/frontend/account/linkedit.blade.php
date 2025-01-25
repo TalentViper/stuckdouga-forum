@@ -25,7 +25,7 @@
                                     <div class="mb-3 row form-group">
                                         <label for="url" class="col-sm-2 col-form-label" required>URL:</label>
                                         <div class="col-sm-4">
-                                            <input type="text" class="form-control" id="url" name="url" placeholder="" required value="{{ $link->url }}">
+                                            <input type="text" class="form-control" id="url" name="url" placeholder="https://example.com" required value="{{ $link->url }}">
                                         </div>
                                     </div>
                                     <div class="mb-3 row form-group">

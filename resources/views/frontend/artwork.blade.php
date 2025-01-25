@@ -14,29 +14,37 @@
             <div class="container-fluit pt-4">
                 <div class="row">
                     <div class="col-md-2 sider">
-                    <div class="side_title"><h5>Dragon</h5></div>
+                    <div class="side_title"><h5>{{ $artwork->gallery->user->full_name }}</h5></div>
                     <div class="tag-page-gallery mb30">
-                        <img src="{{ static_asset('images/img/art_thumb1.jpg') }}" alt="">
-                        <a class="mt-10" href="#">View Profile</a>
-                        <a class="" href="#">Send Message</a>
-                        <a class="" href="#">Follow</a>
-                        <a class="" href="#">Galleries</a>
-                        <a class="" href="#">News & Updates</a>
-                        <a class="" href="#">Private Area</a>
-                        <a class="" href="#">Links</a>
-                        <a class="" href="#">Wishlist</a>
+                        <img src="{{ $artwork->gallery->user->avatar ? static_asset('uploads/' . $artwork->gallery->user->avatar) : ( $artwork->gallery->user->gender == 'female' ? static_asset('images/img/female_default.jpg') : static_asset('images/img/male_default.jpg') ) }}" alt="" width="200">
+                        <a 
+                            class="mt-10 {{ Request::routeIs('user.profile') ? 'active' : '' }}" 
+                            href="{{ route('user.profile', ['id' => $artwork->gallery->user->id, 'galleryId' => $artwork->gallery->id]) }}"
+                        >
+                            View Profile
+                        </a>
+                        <a class="" href="{{ route('openMessageForm', $artwork->gallery->user->username) }}">Send Message</a>
+                        <a 
+                            class="{{ Request::routeIs('user.gallery') ? 'active' : '' }}" 
+                            href="{{ route('user.gallery', ['id' => $artwork->gallery->user->id, 'galleryId' => $artwork->gallery->id]) }}"
+                        >
+                            All Galleries
+                        </a>
+                        <a 
+                            class="{{ Request::routeIs('user.private') ? 'active' : '' }}" 
+                            href="{{ route('user.private', ['id' => $artwork->gallery->user->id, 'galleryId' => $artwork->gallery->id]) }}"
+                        >
+                            Private Area
+                        </a>
                     </div>
                     <div class="side_title"><h5>ArtWork Info:</h5></div>
                         <div class="info">
-                            <h6>Krenky</h6>
-                            <h6>Source: OVA</h6>
-                            <h6>Layers: 1</h6>
-                            <h6>No sketches available</h6>
-                            <h6>Cel Numbers: A10</h6>
-                            <h6>Standard size</h6>
+                            <!-- <h6>Krenky</h6> -->
+                            <h6>Source: {{ $sources[$artwork->source] }}</h6>
+                            <h6>Layers: {{ $artwork->layers }}</h6>
+                            <h6>sketches: {{ $artwork->sketch }}</h6>
+                            <h6>Type: {{ $artwork->type }}</h6>
                             <br/>
-                            <h6>No Background</h6>
-                            <h6>31/10/2024 at 5:57pm</h6>
                         </div>
                     </div>
                     <div class="col-md-10 center primary detail-info">
@@ -57,55 +65,84 @@
                             </div>
                         </div>
                         <div class="row buttons">
-                            <button type="button">Previous ArtWork</button>
-                            <button type="button" id="goBackToGalleryButton">Go Back to Gallery</button>
-                            <button type="button">Next ArtWork</button>
+                            @if($prevArtworkId)
+                                <a href="{{ route('artwork', $prevArtworkId) }}" style="width: unset;"><button type="button">Previous ArtWork</button></a>
+                            @endif
+                            <button type="button" id="goBackToGalleryButton">Go Back</button>
+                            @if($nextArtworkId)
+                                <a href="{{ route('artwork', $nextArtworkId) }}" style="width: unset;">
+                                    <button type="button">Next ArtWork</button>
+                                </a>
+                            @endif
                         </div>
                         <div class="row favorite-buttons p-2">
-                            <a href="#">
+                            <!-- <a href="#" class="pointer">
                                 <i class="bi bi-hand-thumbs-up"></i>
-                            </a>
-                            <a id="like-button">
+                            </a> -->
+                            <a id="like-button" class="pointer">
                                 <i class="bi bi-heart{{ $artwork->isLikedByUser() ? '-fill' : '' }}"></i>
                             </a>
-                            <a href="#">
+                            <!-- <a href="#" class="pointer">
                                 <i class="bi bi-share"></i>
                             </a>
-                            <a href="">
+                            <a class="pointer">
                                 <i class="bi bi-exclamation-triangle"></i>
-                            </a>
+                            </a> -->
                         </div>
-                        <a href="{{ static_asset('images/img/art_big.jpg') }}" data-lightbox="artwork" data-title="Unknown ArtWork #1" class="light-detail" data-fancybox="gallery">
-                            <img src="{{ static_asset('images/img/art_big.jpg') }}" alt="">
-                        </a>
+                        @if($artwork->img_main)
+                            <a href="{{ static_asset('uploads/' . $artwork->img_main) }}" data-lightbox="artwork" data-title="Unknown ArtWork #1" class="light-detail mt-2" data-fancybox="gallery">
+                                <img src="{{ static_asset('uploads/' . $artwork->img_main) }}" alt="">
+                            </a>
+                        @endif
                         <div class="row attaches p-4">
                             <div class="col-md-6">
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <a href="{{ static_asset('images/img/t7.jpg') }}" data-lightbox="artwork" data-title="Image 1" data-fancybox="gallery">
-                                            <img src="{{ static_asset('images/img/t7.jpg') }}" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <a href="{{ static_asset('images/img/t7.jpg') }}" data-lightbox="artwork" data-title="Image 2" data-fancybox="gallery">
-                                            <img src="{{ static_asset('images/img/t7.jpg') }}" alt="">
-                                        </a>
-                                    </div>
+                                    @if($artwork->img2)
+                                        <div class="col-md-6">
+                                            <a href="{{ static_asset('uploads/'. $artwork->img2) }}" data-lightbox="artwork" data-title="Image 1" data-fancybox="gallery">
+                                                <img src="{{ static_asset('uploads/'. $artwork->img2) }}" alt="">
+                                            </a>
+                                        </div>
+                                    @endif
+                                    @if($artwork->img3)
+                                        <div class="col-md-6">
+                                            <a href="{{ static_asset('uploads/'. $artwork->img3) }}" data-lightbox="artwork" data-title="Image 2" data-fancybox="gallery">
+                                                <img src="{{ static_asset('uploads/'. $artwork->img3) }}" alt="">
+                                            </a>
+                                        </div>
+                                    @endif
+                                    @if($artwork->img4)
                                     <div class="col-md-6 mt-4">
-                                        <a href="{{ static_asset('images/img/t7.jpg') }}" data-lightbox="artwork" data-title="Image 3" data-fancybox="gallery">
-                                            <img src="{{ static_asset('images/img/t7.jpg') }}" alt="">
+                                        <a href="{{ static_asset('uploads/'. $artwork->img4) }}" data-lightbox="artwork" data-title="Image 3" data-fancybox="gallery">
+                                            <img src="{{ static_asset('uploads/'. $artwork->img4) }}" alt="">
                                         </a>
                                     </div>
-                                    <div class="col-md-6 mt-4">
-                                        <a href="{{ static_asset('images/img/t7.jpg') }}" data-lightbox="artwork" data-title="Image 4" data-fancybox="gallery">
-                                            <img src="{{ static_asset('images/img/t7.jpg') }}" alt="">
-                                        </a>
-                                    </div>
+                                    @endif
+                                    @if($artwork->img5)
+                                        <div class="col-md-6 mt-4">
+                                            <a href="{{ static_asset('uploads/'. $artwork->img5) }}" data-lightbox="artwork" data-title="Image 4" data-fancybox="gallery">
+                                                <img src="{{ static_asset('uploads/'. $artwork->img5) }}" alt="">
+                                            </a>
+                                        </div>
+                                    @endif
+                                    @if($artwork->img6)
+                                        <div class="col-md-6 mt-4">
+                                            <a href="{{ static_asset('uploads/'. $artwork->img6) }}" data-lightbox="artwork" data-title="Image 5" data-fancybox="gallery">
+                                                <img src="{{ static_asset('uploads/'. $artwork->img6) }}" alt="">
+                                            </a>
+                                        </div>
+                                    @endif
+                                    @if($artwork->img7)
+                                        <div class="col-md-6 mt-4">
+                                            <a href="{{ static_asset('uploads/'. $artwork->img7) }}" data-lightbox="artwork" data-title="Image 6" data-fancybox="gallery">
+                                                <img src="{{ static_asset('uploads/'. $artwork->img7) }}" alt="">
+                                            </a>
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
-                            <div class="col-md-6 explanation">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.
+                            <div class="col-md-6">
+                                <div class="explanation">{{ $artwork->desc }}</div>
                             </div>
                         </div>
                     </div>
@@ -120,6 +157,7 @@
 <style>
     .attaches img {
         width: 100%;
+        height: -webkit-fill-available;
     }
 
     .attaches img:hover {
@@ -128,6 +166,10 @@
 
     .explanation {
         word-break: break-all;
+        white-space: pre-wrap;
+        white-space: -moz-pre-wrap;
+        word-wrap: "break-word";
+        text-align: left;
     }
 
     .favorite-buttons a {
