@@ -397,7 +397,7 @@ h6 {font-size:14px;font-weight:400;color:#fff;padding:5px;}
 .gallery-item {
   color: white!important;
   text-decoration: none!important;
-  line-height: 30px;
+  line-height: 25px;
   text-align: left;
   padding-left: 10px;
   padding-right: 10px;
@@ -1469,4 +1469,20 @@ h6 {font-size:14px;font-weight:400;color:#fff;padding:5px;}
 
 .pointer {
   cursor: pointer;
+}
+
+.min-h-45 {
+  min-height: 45vh;
+}
+
+.min-h-50 {
+  min-height: 50vh;
+}
+
+.min-h-55 {
+  min-height: 55vh;
+}
+
+.min-h-60 {
+  min-height: 60vh;
 }

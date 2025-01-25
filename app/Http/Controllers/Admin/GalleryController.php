@@ -11,6 +11,7 @@ use App\Models\ServiceOption;
 use App\Models\Setting;
 use App\Models\Tag;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 
 class GalleryController extends Controller
@@ -126,6 +127,20 @@ class GalleryController extends Controller
         }
     }
 
+    public function galleryByUser(Request $request, $id, $galleryId) {
+        $user = User::find($id);
+        $query = Gallery::with(['user', 'artworks' => function($q) {
+            $q->orderBy('created_at', 'desc')->take(5);
+        }])->orderBy('updated_at', 'desc');
+        $query->where('user_id', $id);
+        $search = $query->paginate(25);
+        return view('frontend.gallery.galleryview')->with([
+            'gallery' => $search,
+            'galleryId' => $galleryId,
+            'user' => $user,
+        ]);
+    }
+
     public function gallery($id)
     {
         // Store the referrer URL in the session
@@ -178,5 +193,24 @@ class GalleryController extends Controller
         $gallery->save();
 
         return response()->json(['success' => true, 'likes' => $gallery->likes]);
+    }
+
+    public function profile(Request $request, $id, $galleryId)
+    {
+        $user = User::find($id);
+        return view('frontend.gallery.profileview')->with([
+            'banner' => $user->my_banner,
+            'side' => $user->my_side,
+            'layout' => $user->layout,
+            'content' => $user->my_content,
+            'user' => $user,
+            'galleryId' => $galleryId
+        ]);
+    }
+
+    public function private(Request $request, $id, $galleryId)
+    {
+        $user = User::find($id);
+        return view('frontend.gallery.privateview', compact('user', 'galleryId'));
     }
 }
