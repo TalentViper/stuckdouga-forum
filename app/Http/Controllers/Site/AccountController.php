@@ -365,10 +365,68 @@ class AccountController extends Controller
 
             // You can save the path to the database if needed
             // Example: Gallery::create(['thumbnail' => $path]);
+            if ($request->has('user')) {
+                $user = User::find(Auth::id());
+                
+                if ($request->input("user") == "main-banner") 
+                    $user->my_banner = $imageName;
+                else if($request->input("user") == "sidebar-banner") 
+                    $user->my_side = $imageName;
+                $user->save();
+            }
 
             return response()->json(['message' => 'File uploaded successfully', 'path' => $imageName], 200);
         }
 
         return response()->json(['message' => 'File upload failed'], 400);
+    }
+
+    public function avatar(Request $request)
+    {
+        \Log::info('CSRF Token:', ['token' => $request->header('X-CSRF-TOKEN')]);
+        // Validate the request
+        
+        $request->validate([
+            'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        // Handle the file upload
+        if ($request->hasFile('thumbnail')) {
+            $image = $request->file('thumbnail');
+
+            // Define the path to save the image
+            $destinationPath = public_path('uploads');
+
+            // Ensure the uploads directory exists
+            if (!File::exists($destinationPath)) {
+                File::makeDirectory($destinationPath, 0755, true);
+            }
+
+            // Generate a unique name for the image
+            $imageName = Auth::id(). "-". time() . '.' . $image->getClientOriginalExtension();
+
+            // Move the image to the uploads directory
+            $image->move($destinationPath, $imageName);
+
+            // Generate the full path to the uploaded image
+            $imagePath = asset('uploads/' . $imageName);
+
+            $user = User::find(Auth::id());
+            $user->avatar = $imageName;
+            $user->save();
+
+            return response()->json(['message' => 'File uploaded successfully', 'path' => $imageName], 200);
+        }
+
+        return response()->json(['message' => 'File upload failed'], 400);
+    }
+
+    public function removeAvatar(Request $request)
+    {
+        $user = User::find(Auth::id());
+        $user->avatar = null;
+        $user->save();
+
+        return response()->json(['message' => 'Avatar removed successfully'], 200);
     }
 }

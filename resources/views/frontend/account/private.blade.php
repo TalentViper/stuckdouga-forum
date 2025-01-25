@@ -48,11 +48,11 @@
 
                             </div>
                         </form>
-                        <form action="{{ route('user.updatePrivateContent') }}"  method="POST">
+                        <form action="{{ route('user.updatePrivateContent') }}"  method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <textarea name="content" id="editor" name="content">{{ $user->private_content}}</textarea>
+                                    <textarea name="content" id="editor">{{ $user->private_content}}</textarea>
                                 </div>
                             </div>
                             <div class="mb-3 row mt-3">

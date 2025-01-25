@@ -74,17 +74,17 @@
                                         aria-label="Search galleries" aria-describedby="addon-wrapping">
                                 </div>
                             </div>
-                            <ul class="pagination col-md-5 justify-content-end" role="menubar" aria-label="Pagination">
+                            <ul class="pagination col-md-8 justify-content-end" role="menubar" aria-label="Pagination">
                                 {{ $search->appends(Request::except('page'))->links('pagination::bootstrap-4') }}
                             </ul>
-                            <div class="social-buttons col-md-3 text-end">
+                            <!-- <div class="social-buttons col-md-3 text-end">
                                 <a href="#">
                                     <i class="bi bi-list"></i>
                                 </a>
                                 <a href="">
                                     <i class="bi bi-grid-3x3-gap-fill"></i>
                                 </a>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="gallery-content grid">
                             @foreach($search as $gallery)
@@ -150,7 +150,7 @@
     }
 
     .gallery-content .gallery-item img {
-        width: 185px!important;
-        height: 185px!important;
+        width: 185px !important;
+        height: 185px !important;
     }
 </style>
