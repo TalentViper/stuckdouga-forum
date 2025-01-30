@@ -13,7 +13,7 @@
                 collectors of animation art.
             </div>
 
-            <div class="container-fluit">
+            <div class="container-fluit p-5 pt-4">
 
                 <div class="row">
                     <div class="col-md-2 sider">
