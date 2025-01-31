@@ -155,63 +155,20 @@
                         <h2>UPDATED GALLERIES</h2>
 
                         <div class="row gallery">
-                          
-                            <div class="col-md-3 center">
-                              <img class="hover" src="{{ static_asset('images/img/g1.jpg') }}"/>
-                              <h6>Ben Cels Heaven</h6>
-                              <p class="mini_txt">19 hours ago</p>
-                            </div>
-
-                            <div class="col-md-3 center">
-                              <img class="hover" src="{{ static_asset('images/img/g2.jpg') }}"/>
-                              <h6>Mycollection</h6>
-                              <p class="mini_txt">Yesterday</p>
-                            </div>
-
-                            <div class="col-md-3 center">
-                              <img class="hover" src="{{ static_asset('images/img/g3.jpg') }}"/>
-                              <h6>Reilla's Cels</h6>
-                              <p class="mini_txt">Yesterday</p>
-                            </div>
-
-                            <div class="col-md-3 center">
-                              <img class="hover" src="{{ static_asset('images/img/g4.jpg') }}"/>
-                              <h6>Balto's Animation Gallery</h6>
-                              <p class="mini_txt">Yesterday</p>
-                            </div>
-
-
+                                @foreach($updategly as $gallery)
+                                        <div class="col-md-3 center py-1">
+                                                <a href="{{ route('gallery', ['id' => $gallery->id]) }}" style="text-decoration: none;">
+                                                        <img class="hover home-gallery-item" src="{{ static_asset('uploads/' . $gallery->gallery_url) }}" />
+                                                        <h6 class="my-2">{{ $gallery->gallery_name }}</h6>
+                                                        <p class="mini_txt mb-2">{{ $gallery->updated_at->format('d/m/Y \a\t h:ia') }}</p>
+                                                </a>
+                                        </div>
+                                @endforeach
                         </div>
-
-                         <div class="row gallery">
-                          
-                            <div class="col-md-3 center">
-                              <img class="hover" src="{{ static_asset('images/img/g5.jpg') }}"/>
-                              <h6>DavisCels</h6>
-                              <p class="mini_txt">Jul 05 2044</p>
-                            </div>
-
-                            <div class="col-md-3 center">
-                              <img class="hover" src="{{ static_asset('images/img/g6.jpg') }}"/>
-                              <h6>Urusei Yatsura Lamu'Lum</h6>
-                              <p class="mini_txt">Jul 01 2024</p>
-                            </div>
-
-                            <div class="col-md-3 center">
-                              <img class="hover" src="{{ static_asset('images/img/g7.jpg') }}"/>
-                              <h6>Cyril17240</h6>
-                              <p class="mini_txt">Jun 26 2014</p>
-                            </div>
-
-                            <div class="col-md-3 center">
-                              <img class="hover" src="{{ static_asset('images/img/g8.jpg') }}"/>
-                              <h6>Baab's Anime Cels</h6>
-                              <p class="mini_txt">Jun 26 2024</p>
-                            </div>
-
-                        </div>
-
-                        <button class="row_but druk_f">See More Updated Galleries</button>
+                        
+                        <a href="{{ route('update') }}">
+                                <button class="row_but font-system">See More Updated Galleries</button>
+                        </a>
 
                         <a href="#"><img class="full_w hover" src="{{ static_asset('images/img/banner1.jpg') }}" alt="Visit Featured Gallery" /></a>
 
@@ -220,65 +177,17 @@
                          <h2 class="pt-4">POPULAR GALLERY TAGS</h2>
 
                         <div class="row gallery tags">
-                          
-                            <div class="col-md-2">
-                              <img class="hover" src="{{ static_asset('images/img/t1.jpg') }}"/>
-                              <h6>Akira</h6>
-                            </div>
-                           <div class="col-md-2">
-                              <img class="hover" src="{{ static_asset('images/img/t2.jpg') }}"/>
-                              <h6>Bubblegum Crisis</h6>
-                            </div>
-                            <div class="col-md-2">
-                              <img class="hover" src="{{ static_asset('images/img/t3.jpg') }}"/>
-                              <h6>Icer</h6>
-                            </div>
-                            <div class="col-md-2">
-                              <img class="hover" src="{{ static_asset('images/img/t4.jpg') }}"/>
-                              <h6>Disney</h6>
-                            </div>
-                            <div class="col-md-2">
-                              <img class="hover" src="{{ static_asset('images/img/t5.jpg') }}"/>
-                              <h6>GTO</h6>
-                            </div>
-                            <div class="col-md-2">
-                              <img class="hover" src="{{ static_asset('images/img/t6.jpg') }}"/>
-                              <h6>Gunbuster</h6>
-                            </div>
-
+                                @foreach($poptags as $tag)
+                                        <div class="col-md-2">
+                                                <img class="hover" src="{{ static_asset('uploads/' . $tag->img) }}"/>
+                                                <h6 class="mt-1 mb-3">{{ $tag->name }}</h6>
+                                        </div>
+                                @endforeach
                         </div>
-
-                        <div class="row gallery tags">
-                          
-                              <div class="col-md-2">
-                              <img class="hover" src="{{ static_asset('images/img/t7.jpg') }}"/>
-                              <h6>Card Captor Sakura</h6>
-                            </div>
-                           <div class="col-md-2">
-                              <img class="hover" src="{{ static_asset('images/img/t8.jpg') }}"/>
-                              <h6>Hunter X Hunter</h6>
-                            </div>
-                            <div class="col-md-2">
-                              <img class="hover" src="{{ static_asset('images/img/t9.jpg') }}"/>
-                              <h6>Ah! My Goddness</h6>
-                            </div>
-                            <div class="col-md-2">
-                              <img class="hover" src="{{ static_asset('images/img/t10.jpg') }}"/>
-                              <h6>Inuyasha</h6>
-                            </div>
-                            <div class="col-md-2">
-                              <img class="hover" src="{{ static_asset('images/img/t11.jpg') }}"/>
-                              <h6>Bleach</h6>
-                            </div>
-                            <div class="col-md-2">
-                              <img class="hover" src="{{ static_asset('images/img/t12.jpg') }}"/>
-                              <h6>Dangaioh</h6>
-                            </div>
-
-                        </div>
-
-                        <button class="row_but druk_f">See More Gallery Tags</button>
-
+                        
+                        <a href="{{ route('populartag') }}">
+                                <button class="row_but font-system">See More Gallery Tags</button>
+                        </a>
                   </div>
                 </div>
 
