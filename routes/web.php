@@ -61,7 +61,6 @@ Route::get('/', [HomeController::class, 'comingsoon'])->name('comingsoon');
 Route::prefix('beta')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
 
-
     Route::get('login', [LoginController::class, 'loginView'])->name('login');
     Route::post('login', [LoginController::class, 'login'])->name('user.login');
     Route::get('register', [RegisterController::class, 'registerView'])->name('register');
@@ -87,7 +86,7 @@ Route::prefix('beta')->group(function () {
 
     Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
         $request->fulfill();
-        return redirect('/beta');
+        return redirect()->route('account');
     })->middleware(['auth', 'signed'])->name('verification.verify');
     
     Route::get('/threads', [ThreadController::class, 'index'])->name('threads.index');

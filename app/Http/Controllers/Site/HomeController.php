@@ -25,8 +25,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        //
-        return view('frontend.index');
+        $query = Gallery::with(['user', 'artworks' => function($q) {
+            $q->orderBy('created_at', 'desc')->take(5);
+        }])->orderBy('updated_at', 'desc');
+        
+        $updategly = $query->take(8)->get();
+
+        $poptags = Tag::query()->orderBy('updated_at', 'desc')->take(12)->get();
+
+        return view('frontend.index', compact('updategly', 'poptags'));
     }
 
     /**
