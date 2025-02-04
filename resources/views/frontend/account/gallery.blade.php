@@ -1,6 +1,7 @@
 @extends('frontend.partials.master')
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <link rel="stylesheet" href="https://icons.getbootstrap.com/assets/font/bootstrap-icons.min.css">
+
 @section('main-content')
 <main id="main" class="main-content">
 
@@ -39,9 +40,9 @@
                                         </div>
                                         <input type="text" class="form-control gallery-url" name="url" placeholder="" hidden>
                                         
-                                        <label for="series" class="col-sm-1 col-form-label" required >Series:</label>
+                                        <label for="series" class="col-sm-1 col-form-label" >Series:</label>
                                         <div class="col-sm-4">
-                                            <input type="text" class="form-control" id="series" name="series" placeholder=""  required>
+                                            <input type="text" class="form-control" id="series" name="series" placeholder="" >
                                         </div>
                                     </div>
                                     <div class="mb-3 row">
@@ -56,7 +57,7 @@
                                         <label class="col-sm-1"></label>
                                         <label for="tags" class="col-sm-1 col-form-label">Tags:</label>
                                         <div class="col-sm-4">
-                                            <input type="text" class="form-control" id="tags" name="tags" placeholder="" required>
+                                            <input type="text" class="form-control" id="tags" name="tags" placeholder="" data-role="tagsinput">
                                         </div>
                                     </div>
                                     <div class="mb-3">
@@ -117,7 +118,6 @@
     </div>
 </main>
 
-@endsection
 <style>
     .page-account-gallery h2 {
         width: 100%;
@@ -204,12 +204,18 @@
     .bi-plus-lg::before {
         transform: rotate(45deg);
     }
+
+    
 </style>
+
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
     $(document).ready(function() {
+
+        $(".form-control #tags").tagsinput('items');
+
         $('.delete-button').on('click', function(e) {
             e.preventDefault();
             var itemId = $(this).data('id');
@@ -357,3 +363,4 @@
         });
     });
 </script>
+@endsection

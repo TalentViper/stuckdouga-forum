@@ -43,9 +43,9 @@
                                         </div>
                                         <input type="text" class="form-control gallery-url" name="url" value="{{$gallery->gallery_url}}" hidden>
                                         <label class="col-sm-1"></label>
-                                        <label for="series" class="col-sm-1 col-form-label" required >Series:</label>
+                                        <label for="series" class="col-sm-1 col-form-label" >Series:</label>
                                         <div class="col-sm-4">
-                                            <input type="text" class="form-control" id="series" name="series" value="{{$gallery->series}}"  required>
+                                            <input type="text" class="form-control" id="series" name="series" value="{{$gallery->series}}" >
                                         </div>
                                     </div>
                                     <div class="mb-3 row">
@@ -60,7 +60,7 @@
                                         <label class="col-sm-1"></label>
                                         <label for="tags" class="col-sm-1 col-form-label">Tags:</label>
                                         <div class="col-sm-4">
-                                            <input type="text" class="form-control" id="tags" name="tags" value="{{$gallery->tags}}" required>
+                                            <input type="text" class="form-control" id="tags" name="tags" value="{{$gallery->tags}}">
                                         </div>
                                     </div>
                                     <div class="mb-3">
@@ -76,7 +76,6 @@
     </div>
 </main>
 
-@endsection
 <style>
     .page-account-gallery h2 {
         width: 100%;
@@ -176,6 +175,9 @@
 
 <script>
     $(document).ready(function() {
+
+        $("#tags").tagsinput('items');
+
         $('.delete-button').on('click', function(e) {
             e.preventDefault();
             var itemId = $(this).data('id');
@@ -312,3 +314,4 @@
         });
     });
 </script>
+@endsection

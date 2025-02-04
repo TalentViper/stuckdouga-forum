@@ -7,6 +7,7 @@ use App\Models\Gallery;
 use App\Models\ArtWorkItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Brian2694\Toastr\Facades\Toastr;
 
 class ArtWorkController extends Controller
 {
@@ -56,7 +57,8 @@ class ArtWorkController extends Controller
         $gallery = Gallery::where('id', $artwork->gallery_id)->first();
         $gallery->artwork_count = $gallery->artwork_count + 1;
         $gallery->save();
-        return response()->json(['success' => 'ArtWork created successfully!']);
+        Toastr::success(__('ArtWork created successfully!'));
+        return redirect()->route('artworkupload', ['galleryId' => $artwork->gallery_id]);
     }
 
     public function update(Request $request, $id)
@@ -64,7 +66,9 @@ class ArtWorkController extends Controller
         $artwork = ArtWork::where('id', $id)->first();
 
         if (!$artwork) {
-            return response()->json(['error' => 'ArtWork not found'], 404);
+            Toastr::error(__('Invalid data, please try again!'));
+            return redirect()->back();
+            
         }
 
         $artwork->img_main = $request->input('mainfile');
@@ -97,8 +101,8 @@ class ArtWorkController extends Controller
         $artwork->img6 = $request->input('img6');
         $artwork->img7 = $request->input('img7');
         $artwork->save();
-        // return redirect()->route('account.index');
-        return response()->json(['success' => 'ArtWork updated successfully!']);
+        Toastr::success(__('ArtWork updated successfully!'));
+        return redirect()->route('artworkupload', ['galleryId' => $artwork->gallery_id]);
     }
 
     public function edit(ArtWork $artwork)

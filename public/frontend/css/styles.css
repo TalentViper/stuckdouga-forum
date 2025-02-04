@@ -1515,3 +1515,56 @@ button.row_but {
 .min-h-60 {
   min-height: 60vh;
 }
+
+.message-box .message-content {
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Number of lines to show */
+  line-clamp: 2; /* Standard property for compatibility */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 3em; /* Adjust based on line height */
+  line-height: 1.5em; /* Adjust based on your font size */
+  font-size: 1.6rem;
+}
+
+.message-box .message-content:hover {
+  text-decoration: underline;
+  color: #fff;
+}
+
+.message-table tr td {
+  vertical-align: middle !important;
+}
+
+.popover-content {
+  color: #000;
+}
+
+#toast-container.toast-bottom-full-width>div, #toast-container.toast-top-full-width>div {
+  width: 100% !important;
+  margin: 0;
+}
+    
+.bootstrap-tagsinput {
+  width: 100%;
+  text-align: left;
+  border-radius: 0 !important;
+  min-height: 38px;
+  padding: 6px 6px !important;
+}
+
+.bootstrap-tagsinput span.tag {
+  background: red;
+  padding: 3px 5px;
+  border-radius: 4px;
+  margin-left: 0;
+  display: inline-block;
+}
+.bootstrap-tagsinput span.tag + span.tag {
+  margin-bottom: 2px;
+}
+
+.bs-gutter-y-1 {
+  --bs-gutter-y: 1rem !important;
+}
