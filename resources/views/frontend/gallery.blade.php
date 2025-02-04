@@ -6,7 +6,7 @@
 <main id="main" class="main-content">
     <div id="content" class="page-gallery-view">
         <div class="content_box">
-            <div class="container-fluit pt-4">
+            <div class="container-fluit pt-4 p-4">
                 <div class="row">
                     <div class="col-md-2 sider">
                         <div class="side_title">
@@ -91,7 +91,7 @@
                             </div>
                         </div>
                         <div class="gallery-content min-h-45">
-                            <div class="row">
+                            <div class="row bs-gutter-y-1">
                                 @foreach($search as $artwork)
                                     <div class="gallery-item col-md-3" data-id="{{$artwork->id}}">
                                         <img src="{{ static_asset('uploads') . '/' . $artwork->img_main }}" alt="">
@@ -169,5 +169,9 @@
     .detail-info .desc {
         white-space: pre-wrap;
         word-wrap: break-word;
+    }
+
+    .page-gallery-view .gallery-item img {
+        height: 100%
     }
 </style>

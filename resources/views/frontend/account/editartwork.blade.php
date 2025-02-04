@@ -601,52 +601,52 @@
             input.click();
         });
 
-        $("#artworkForm").on('submit', function(event) {
-            event.preventDefault();
-            var formData = new FormData(this);
+        // $("#artworkForm").on('submit', function(event) {
+        //     event.preventDefault();
+        //     var formData = new FormData(this);
 
-            $.ajax({
-                url: $(this).attr('action'),
-                method: $(this).attr('method'),
-                data: formData,
-                processData: false,
-                contentType: false,
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                success: function(response) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Success!',
-                        text: 'Updated successfully!',
-                        confirmButtonText: 'OK',
-                        confirmButtonColor: 'red'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            window.location.href = "{{ route('artworkupload', ['galleryId' => $artwork->gallery_id]) }}";
-                        }
-                    });
-                },
-                error: function(xhr) {
-                    if($('.main-file').val() == "") {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Missing field',
-                            text: 'Please upload MainImage',
-                            confirmButtonText: 'OK',
-                            confirmButtonColor: 'grey'
-                        });
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            text: 'Something went wrong!',
-                            confirmButtonText: 'OK',
-                            confirmButtonColor: 'grey'
-                        });
-                    }
-                }
-            });
-        });
+        //     $.ajax({
+        //         url: $(this).attr('action'),
+        //         method: $(this).attr('method'),
+        //         data: formData,
+        //         processData: false,
+        //         contentType: false,
+        //         headers: {
+        //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        //         },
+        //         success: function(response) {
+        //             Swal.fire({
+        //                 icon: 'success',
+        //                 title: 'Success!',
+        //                 text: 'Updated successfully!',
+        //                 confirmButtonText: 'OK',
+        //                 confirmButtonColor: 'red'
+        //             }).then((result) => {
+        //                 if (result.isConfirmed) {
+        //                     window.location.href = "{{ route('artworkupload', ['galleryId' => $artwork->gallery_id]) }}";
+        //                 }
+        //             });
+        //         },
+        //         error: function(xhr) {
+        //             if($('.main-file').val() == "") {
+        //                 Swal.fire({
+        //                     icon: 'error',
+        //                     title: 'Missing field',
+        //                     text: 'Please upload MainImage',
+        //                     confirmButtonText: 'OK',
+        //                     confirmButtonColor: 'grey'
+        //                 });
+        //             } else {
+        //                 Swal.fire({
+        //                     icon: 'error',
+        //                     title: 'Oops...',
+        //                     text: 'Something went wrong!',
+        //                     confirmButtonText: 'OK',
+        //                     confirmButtonColor: 'grey'
+        //                 });
+        //             }
+        //         }
+        //     });
+        // });
     });
 </script>

@@ -96,7 +96,7 @@
                         @endif
                         <div class="row attaches p-4">
                             <div class="col-md-6">
-                                <div class="row">
+                                <div class="row artwork-item-group">
                                     @if($artwork->img2)
                                         <div class="col-md-6">
                                             <a href="{{ static_asset('uploads/'. $artwork->img2) }}" data-lightbox="artwork" data-title="Image 1" data-fancybox="gallery">
@@ -112,28 +112,28 @@
                                         </div>
                                     @endif
                                     @if($artwork->img4)
-                                    <div class="col-md-6 mt-4">
+                                    <div class="col-md-6">
                                         <a href="{{ static_asset('uploads/'. $artwork->img4) }}" data-lightbox="artwork" data-title="Image 3" data-fancybox="gallery">
                                             <img src="{{ static_asset('uploads/'. $artwork->img4) }}" alt="">
                                         </a>
                                     </div>
                                     @endif
                                     @if($artwork->img5)
-                                        <div class="col-md-6 mt-4">
+                                        <div class="col-md-6">
                                             <a href="{{ static_asset('uploads/'. $artwork->img5) }}" data-lightbox="artwork" data-title="Image 4" data-fancybox="gallery">
                                                 <img src="{{ static_asset('uploads/'. $artwork->img5) }}" alt="">
                                             </a>
                                         </div>
                                     @endif
                                     @if($artwork->img6)
-                                        <div class="col-md-6 mt-4">
+                                        <div class="col-md-6">
                                             <a href="{{ static_asset('uploads/'. $artwork->img6) }}" data-lightbox="artwork" data-title="Image 5" data-fancybox="gallery">
                                                 <img src="{{ static_asset('uploads/'. $artwork->img6) }}" alt="">
                                             </a>
                                         </div>
                                     @endif
                                     @if($artwork->img7)
-                                        <div class="col-md-6 mt-4">
+                                        <div class="col-md-6">
                                             <a href="{{ static_asset('uploads/'. $artwork->img7) }}" data-lightbox="artwork" data-title="Image 6" data-fancybox="gallery">
                                                 <img src="{{ static_asset('uploads/'. $artwork->img7) }}" alt="">
                                             </a>
@@ -174,6 +174,10 @@
 
     .favorite-buttons a {
         font-size: 22px;
+    }
+
+    .artwork-item-group {
+        --bs-gutter-y: 1rem !important;
     }
 </style>
 

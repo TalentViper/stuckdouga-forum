@@ -61,7 +61,7 @@
 
                             <div class="left-sidebar-layout">
                                 <div class="sidebar left">
-                                    <img src="{{ $side == NULL ? static_asset('images/img/member.jpg') : static_asset('uploads/' . $side) }}" alt="Banner" />
+                                    <img src="{{ $side == NULL ? static_asset('images/img/sidebar_default.jpg') : static_asset('uploads/' . $side) }}" alt="Banner" />
                                     <p style="color:#999; text-align:left" >(300 <i class="bi bi-plus-lg"></i> 850px)</p>
                                 </div>
                                 <div class="main-content1">
@@ -76,7 +76,7 @@
                                     <!-- Content goes here -->
                                 </div>
                                 <div class="sidebar right">
-                                    <img src="{{ $side == NULL ? static_asset('images/img/member.jpg') : static_asset('uploads/' . $side) }}" alt="Banner" />
+                                    <img src="{{ $side == NULL ? static_asset('images/img/sidebar_default.jpg') : static_asset('uploads/' . $side) }}" alt="Banner" />
                                     <p style="color:#999; text-align:left" >(300 <i class="bi bi-plus-lg"></i> 850px)</p>
                                 </div>
                             </div>

@@ -93,7 +93,7 @@
                                         <div class="row">
                                             <label for="username" class="col-sm-3 col-form-label"  required >Username:</label>
                                             <div class="col-sm-9">
-                                                <input type="text" disabled readonly class="form-control" id="username" name="username" value="{{$user->username}}"  required>
+                                                <input type="text" disabled readonly class="form-control" id="username" name="username" value="{{$user->username}}" >
                                             </div>
                                         </div>
                                         <div class="row mt-3 position-relative">
@@ -323,19 +323,39 @@
             input.click();
         });
 
-        $("#removeThumbnail").on('click', function() {
-            $.ajax({
-                url: "{{route('avatar.remove')}}",
-                type: 'POST',
-                headers: {
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+        $("#gender").on('change', function() {
+            var gender = $(this).val();
+            if ($(".avatar-url").val() == "") {
+                if (gender == 'male') {
+                    $(".avatar-img").attr("src", '{{ static_asset('images/img/male_default.jpg') }}');
+                } else {
+                    $(".avatar-img").attr("src", '{{ static_asset('images/img/female_default.jpg') }}');
                 }
-            }).then(res => {
-                console.log(res)
-            })
-            $(".avatar-url").val('');
-            var defaultImage = '{{ $user->gender == 'male' ? static_asset('images/img/male_default.jpg') : static_asset('images/img/female_default.jpg') }}';
-            $(".avatar-img").attr("src", defaultImage);
+            }
+        })
+
+        $("#removeThumbnail").on('click', function() {
+            if ($(".avatar-url").val() != "") {
+                $.ajax({
+                    url: "{{route('avatar.remove')}}",
+                    type: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                    }
+                }).then(res => {
+                    console.log(res)
+                })
+                $(".avatar-url").val('');
+            }
+
+            var gender = $("#gender").val();
+            if (gender == 'male') {
+                $(".avatar-img").attr("src", '{{ static_asset('images/img/male_default.jpg') }}');
+            } else {
+                $(".avatar-img").attr("src", '{{ static_asset('images/img/female_default.jpg') }}');
+            }
+            // var defaultImage = '{{ $user->gender == 'male' ? static_asset('images/img/male_default.jpg') : static_asset('images/img/female_default.jpg') }}';
+            // $(".avatar-img").attr("src", defaultImage);
         });
 
         $("#changePasswordBtn").on('click', function() {
