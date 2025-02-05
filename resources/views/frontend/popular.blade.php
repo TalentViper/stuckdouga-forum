@@ -91,7 +91,7 @@
                                 <div class="gallery-item" data-id="{{ $gallery->id }}">
                                     <img src="{{ static_asset('uploads') . '/' . $gallery->gallery_url }}" alt="{{ $gallery->gallery_name }}">
                                     <div class="name" data-id="{{ $gallery->id }}">{{ $gallery->gallery_name }}</div>
-                                    <div class="sub" data-id="{{ $gallery->user->id }}">{{ $gallery->user->full_name }}</div>
+                                    <div class="sub user-full-name" data-id="{{ $gallery->user->id }}">{{ $gallery->user->full_name }}</div>
                                     <div class="sub sub-likes">Likes:<span style="font-size:14px;color:white"> {{ $gallery->likes }}</span></div>
                                 </div>
                             @endforeach
@@ -133,9 +133,9 @@
             window.location.href = '{{ route("gallery", ["id" => "PLACEHOLDER"]) }}'.replace('PLACEHOLDER', galleryId);
         });
 
-        $(".gallery-content .gallery-item .sub").on('click', function(){
-            var galleryId = $(this).parent().data('id');
-            window.location.href = '{{ route("gallery", ["id" => "PLACEHOLDER"]) }}'.replace('PLACEHOLDER', galleryId);
+        $(".gallery-content .gallery-item .user-full-name").on('click', function(){
+            var userId = $(this).data('id');
+            window.location.href = '{{ route("member", ["id" => "PLACEHOLDER"]) }}'.replace('PLACEHOLDER', userId);
         });
 
         var width = $(".gallery-content").width();
