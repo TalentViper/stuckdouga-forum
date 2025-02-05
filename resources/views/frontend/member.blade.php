@@ -7,7 +7,7 @@
     <div id="member">
         <a href="{{ route('home') }}" class="hover"><img src="{{ static_asset('images/img/stuckdouga_logo.jpg') }}" alt="Stuck Douga" /></a>
         <div class="buttons">
-            <button type="button">Send Message</button>
+            <button type="button" onclick="window.location.href='{{ route('openMessageForm', ['to_admin' => $user->username]) }}'">Send Message</button>
             <button type="button" onclick="window.location.href='{{ route('account') }}'">My Account</button>
             <button type="button" onclick="window.history.back()" >Go Back</button>
         </div>
@@ -355,7 +355,7 @@
     #news-updates table td {
         background-color: transparent;
         color: #fff;
-        padding-top: 15px;
+        padding-top: 25px;
         vertical-align: middle;
     }
 
