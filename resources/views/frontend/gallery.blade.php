@@ -15,21 +15,8 @@
                         <div class="tag-page-gallery mb30">
                             <img src="{{ $gallery->user->avatar ? static_asset('uploads/' . $gallery->user->avatar) : ( $gallery->user->gender == 'female' ? static_asset('images/img/female_default.jpg') : static_asset('images/img/male_default.jpg') ) }}" alt="" width="200">
                             <!-- <img src="{{ static_asset('images/img/art_thumb1.jpg') }}" alt=""> -->
-                            <a class="mt-10" href="{{ route('user.profile', ['id' => $gallery->user->id, 'galleryId' => $gallery->id]) }}">View Profile</a>
+                            <a class="mt-10" href="{{ route('member', ['id' => $gallery->user->id]) }}">View Profile</a>
                             <a class="" href="{{ route('openMessageForm', $gallery->user->username) }}">Send Message</a>
-                            <a 
-                                class="{{ Request::routeIs('user.gallery') ? 'active' : '' }}" 
-                                href="{{ route('user.gallery', ['id' => $gallery->user->id, 'galleryId' => $gallery->id]) }}"
-                            >
-                                All Galleries
-                            </a>
-                            <!-- <a class="" href="#">User Topics</a> -->
-                            <a 
-                                class="{{ Request::routeIs('user.private') ? 'active' : '' }}" 
-                                href="{{ route('user.private', ['id' => $gallery->user->id, 'galleryId' => $gallery->id]) }}"
-                            >
-                                Private Area
-                            </a>
                         </div>
                     </div>
                     <div class="col-md-10 center primary detail-info">

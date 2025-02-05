@@ -80,29 +80,31 @@
                             </li>
                           </ul>
                         <div id="profile-info" class="tab-content">
-                            <div class="desc">
+                            <div class="desc" style="overflow: hidden;">
                                 <div class="row">
                                     @if($user->layout == "right")
                                         @if(!empty($user->my_side))
-                                            <div class="col-md-3 img">
+                                            <div class="col-md-3 img" style="padding-right: 0;">
                                                 <img src="{{ static_asset('uploads/'. $user->my_side) }}" alt="">
                                             </div>
                                         @endif
                                     @endif
 
-                                    <div class="{{ (($user->layout == 'full') ? 'col-md-12' : 'col-md-9')  }} text">
-                                        @if(!empty($user->my_content))
-                                            <div class="my-content-profile">{{ $user->my_content }}</div>
-                                        @else 
-                                            <h5 style="color: #999;" class="mt-4">
-                                                Upload your content here
-                                            </h5>
-                                        @endif
+                                    <div class="{{ (($user->layout == 'full') ? 'col-md-12' : 'col-md-9')  }} text p-0 bg-cover" style="background-image: url({{ static_asset('uploads/'. $user->my_background) }});" >
+                                        <div class="p-4 mr-2">
+                                            @if(!empty($user->my_content))
+                                                <div class="my-content-profile">{{ $user->my_content }}</div>
+                                            @else 
+                                                <h5 style="color: #999;" class="mt-4">
+                                                    Upload your content here
+                                                </h5>
+                                            @endif
+                                        </div>
                                     </div>
 
                                     @if($user->layout == "left")
                                         @if(!empty($user->my_side))
-                                            <div class="col-md-3 img">
+                                            <div class="col-md-3 img" style="padding-left: 0;">
                                                 <img src="{{ static_asset('uploads/'. $user->my_side) }}" alt="">
                                             </div>
                                         @endif
@@ -336,6 +338,11 @@
         display: none;
         min-height: 350px;
         padding: 16px;
+    }
+
+    .bg-cover {
+        background-repeat: no-repeat;
+        background-size: cover;
     }
 
     .my-content-profile {
