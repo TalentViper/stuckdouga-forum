@@ -19,23 +19,12 @@
                         <img src="{{ $artwork->gallery->user->avatar ? static_asset('uploads/' . $artwork->gallery->user->avatar) : ( $artwork->gallery->user->gender == 'female' ? static_asset('images/img/female_default.jpg') : static_asset('images/img/male_default.jpg') ) }}" alt="" width="200">
                         <a 
                             class="mt-10 {{ Request::routeIs('user.profile') ? 'active' : '' }}" 
-                            href="{{ route('user.profile', ['id' => $artwork->gallery->user->id, 'galleryId' => $artwork->gallery->id]) }}"
+                            href="{{ route('member', ['id' => $artwork->gallery->user->id]) }}"
                         >
                             View Profile
                         </a>
                         <a class="" href="{{ route('openMessageForm', $artwork->gallery->user->username) }}">Send Message</a>
-                        <a 
-                            class="{{ Request::routeIs('user.gallery') ? 'active' : '' }}" 
-                            href="{{ route('user.gallery', ['id' => $artwork->gallery->user->id, 'galleryId' => $artwork->gallery->id]) }}"
-                        >
-                            All Galleries
-                        </a>
-                        <a 
-                            class="{{ Request::routeIs('user.private') ? 'active' : '' }}" 
-                            href="{{ route('user.private', ['id' => $artwork->gallery->user->id, 'galleryId' => $artwork->gallery->id]) }}"
-                        >
-                            Private Area
-                        </a>
+                        
                     </div>
                     <div class="side_title"><h5>ArtWork Info:</h5></div>
                         <div class="info">

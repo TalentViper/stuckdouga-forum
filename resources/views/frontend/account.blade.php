@@ -49,7 +49,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="desc">
+                        <div class="desc bg-cover aspects" style="background-image: url({{ static_asset('uploads/'. $user->my_background) }});">
                             @if(!empty($user->my_content))
                                 <p class="my-content-profile">{{$user->my_content}}</p>
                             @else
@@ -81,5 +81,14 @@
     .my-content-profile {
         white-space: pre-wrap;
         text-align: left;
+    }
+
+    .bg-cover {
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    .aspects {
+        object-fit: cover;
+        aspect-ratio: 2/1;
     }
 </style>
