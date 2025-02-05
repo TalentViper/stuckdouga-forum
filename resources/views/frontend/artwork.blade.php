@@ -40,10 +40,40 @@
                     <div class="side_title"><h5>ArtWork Info:</h5></div>
                         <div class="info">
                             <!-- <h6>Krenky</h6> -->
-                            <h6>Source: {{ $sources[$artwork->source] }}</h6>
-                            <h6>Layers: {{ $artwork->layers }}</h6>
-                            <h6>sketches: {{ $artwork->sketch }}</h6>
-                            <h6>Type: {{ $artwork->type }}</h6>
+                            @if(!empty($artwork->type))
+                                <h6>Type: {{ $artwork->type }}</h6>
+                            @endif
+                            <!-- @if($artwork->section)
+                                <h6>Section: {{ $section[$artwork->section] }}</h6>
+                            @endif -->
+                            <h6>Info Position: {{ $info[$artwork->info] }}</h6>
+                        
+                            <h6>Visibility: {{ $visibility[$artwork->visibility] }}</h6>
+
+                            @if(!empty($artwork->source))
+                                <h6>Source: {{ $sources[$artwork->source] }}</h6>
+                            @endif
+
+                            @if(!empty($artwork->background)) 
+                                <h6>Background: {{ $background[$artwork->background] }}</h6>
+                            @endif
+
+                            @if(!empty($artwork->stype)) 
+                                <h6>Sequence Type: {{ $stype[$artwork->stype] }}</h6>
+                            @endif
+                            @if(!empty($artwork->layers))
+                                <h6>Layers: {{ $artwork->layers }}</h6>
+                            @endif
+                            @if(!empty($artwork->sketch))
+                                <h6>sketches: {{ $artwork->sketch }}</h6>
+                            @endif
+                            @if(!empty($artwork->snb))
+                                <h6>Sequence Nb: {{ $artwork->snb }}</h6>
+                            @endif
+
+                            @if(!empty($artwork->condition))
+                                <h6>Condition: {{ $condition[$artwork->condition] }}</h6>
+                            @endif
                             <br/>
                         </div>
                     </div>

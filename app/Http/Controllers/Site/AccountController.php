@@ -312,7 +312,8 @@ class AccountController extends Controller
             'banner' => $user->my_banner,
             'side' => $user->my_side,
             'layout' => $user->layout,
-            'content' => $user->my_content
+            'content' => $user->my_content,
+            'my_background' => $user->my_background
         ]);;
     }
 

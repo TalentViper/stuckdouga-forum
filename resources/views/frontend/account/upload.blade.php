@@ -10,7 +10,12 @@
                 <div class="row">
                     @include('frontend.partials.sidebar1')
                     <div class="col-md-10 center primary p-4">
-                        <h2>ARTWORKS::{{ strtoupper($title) }} <button id="toggleButton" class="toggle-button flex-end">+</button></h2>  
+                        <h2>ARTWORKS::{{ strtoupper($title) }} 
+                            <button id="toggleButton" class="toggle-button flex-end">+</button>
+                            <a class="flex-end back-to-gallery-btn">
+                                <button type="button" class="go-back-button" onclick="window.history.back()">Back to Galleries</button>
+                            </a>
+                        </h2>  
                         <div id="uploadSection" style="display: none;">
                             <form id="artworkForm" method="POST" action="{{ route('artworks.store') }}" enctype="multipart/form-data">
                                 @csrf
@@ -349,7 +354,7 @@
                                                             <img src="{{ static_asset('uploads') . '/' . $item->img_main }}" width="100px"/>                                                      
                                                         @endif
                                                     </td>
-                                                    <td> {{ $item->updated_at }}</td>
+                                                    <td> {{ $item->updated_at->format('d/m/Y H:m') }}</td>
                                                     <td>
                                                         <div class="row">
                                                             <div class="col-md-4">
@@ -389,6 +394,27 @@
         width: 100%;
         border-bottom: 1px solid white;
         text-align: left;
+    }
+
+    .go-back-button {
+        color: white;
+        background-color: red;
+        padding: 5px 15px;
+        width: 200px;
+        font-size: 15px;
+        font-weight: 300;
+        font-family: tahoma;
+        border-width: 3px;
+        border-top-color: #7d7d7d;
+        border-bottom-color: #5f5f5f;
+        border-left-color: #6f6f6f;
+        border-right-color: #797979;
+    }
+
+    .back-to-gallery-btn {
+        float: right;
+        margin-right: 10px;
+        margin-top: -5px;
     }
 
     .page-account-upload input ,.page-account-upload textarea, .page-account-upload select  {

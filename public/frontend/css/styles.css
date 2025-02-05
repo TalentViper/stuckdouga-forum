@@ -1568,3 +1568,11 @@ button.row_but {
 .bs-gutter-y-1 {
   --bs-gutter-y: 1rem !important;
 }
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.text-right {
+  text-align: right;
+}

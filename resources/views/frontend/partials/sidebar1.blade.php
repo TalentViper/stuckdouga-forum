@@ -8,10 +8,13 @@
             <a class="mt-10 {{ Request::routeIs('account') ? 'active' : '' }}" href="{{ route('account') }}">My Account</a>
             <a class="{{ Request::routeIs('accountmessage') ? 'active' : '' }}" href="{{ route('accountmessage') }}">Messages</a>
             <a class="{{ Request::routeIs('detail') ? 'active' : '' }}" href="{{ route('detail') }}">Personal Details</a>
-            <a class="" href="#">Sections:</a>
+            <a class="" href="#">Profile Sections:</a>
             <ul>
                 <li>
                     <a class="{{ Request::routeIs('profile') ? 'active' : '' }}" href="{{ route('profile') }}">Profile Info</a>
+                </li>
+                <li>
+                    <a class="{{ Request::routeIs('member') ? 'active' : '' }}" href="{{ route('member', ['id' => auth()->user()->id]) }}">View My Profile</a>
                 </li>
                 <li>
                     <a class="{{ Request::routeIs('accountgallery') ? 'active' : '' }}" href="{{ route('accountgallery') }}">Galleries</a>

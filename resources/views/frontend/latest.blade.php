@@ -91,7 +91,7 @@
                                 <div class="gallery-item" data-id="{{$gallery->id}}">
                                     <img src="{{ static_asset('uploads') . '/' . $gallery->gallery_url }}" alt="{{ $gallery->gallery_name }}">
                                     <div class="name">{{ $gallery->gallery_name }}</div>
-                                    <div class="sub" >{{ optional($gallery->user)->full_name }}</div>
+                                    <div class="sub" data-id="{{ optional($gallery->user)->id }}">{{ optional($gallery->user)->full_name }}</div>
                                 </div>
                             @endforeach
                         </div>
@@ -133,8 +133,8 @@
         });
 
         $(".gallery-content .gallery-item .sub").on('click', function(){
-            var galleryId = $(this).parent().data('id');
-            window.location.href = '{{ route("gallery", ["id" => "PLACEHOLDER"]) }}'.replace('PLACEHOLDER', galleryId);
+            var userId = $(this).data('id');
+            window.location.href = '{{ route("member", ["id" => "PLACEHOLDER"]) }}'.replace('PLACEHOLDER', userId);
         });
 
         var width = $(".gallery-content").width();

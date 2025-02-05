@@ -10,8 +10,12 @@
                 <div class="row">
                     @include('frontend.partials.sidebar1')
                     <div class="col-md-10 center primary p-4">
-                        <h2>ARTWORKS::{{ strtoupper($title) }} <button id="toggleButton" class="toggle-button flex-end">+</button></h2>
-                        <div id="uploadSection" style="display: none;">
+                        <h2>ARTWORKS::{{ strtoupper($title) }} 
+                            <a class="flex-end back-to-gallery-btn">
+                                <button type="button" class="go-back-button" onclick="window.history.back()">Back to Galleries</button>
+                            </a>
+                        </h2>
+                        <div id="uploadSection">
                             <form id="artworkForm" method="POST" action="{{ route('artworks.update', $artwork->id) }}" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
@@ -20,8 +24,8 @@
                                     <p>Max file size is 2MB.A thumbnail will be genereated for you if you do not upload one.</p>
                                     <div class="row">
                                         <div class="col-md-6 row">
-                                            <label class="col-sm-4 col-form-label" required >MainImage:</label>
-                                            <div class="col-sm-8 item-box">
+                                            <label class="col-sm-4 col-form-label text-right" required >MainImage:</label>
+                                            <div class="col-sm-6 item-box">
                                                 <img src="{{ static_asset('uploads') . '/' . $artwork->img_main }}" class="edit-image"/>
                                                 <button type="button" id="removeThumbnail"><span aria-hidden="true">&times;</span></button>
                                                 <button type="button" id="main-file" class="upload-button">Upload File</button>
@@ -32,8 +36,8 @@
                                             </div>
                                         </div>
                                         <div class="col-md-6 row">
-                                            <label class="col-sm-4 col-form-label" >Image #4:</label>
-                                            <div class="col-sm-8 item-box">
+                                            <label class="col-sm-4 col-form-label text-right" >Image #4:</label>
+                                            <div class="col-sm-6 item-box">
                                                  @if($artwork->img4)
                                                     <img src="{{ static_asset('uploads') . '/' . $artwork->img4 }}" class="edit-image"/>
                                                 @else
@@ -50,8 +54,8 @@
                                     </div>
                                     <div class="row mt-3">
                                         <div class="col-md-6 row">
-                                            <label class="col-sm-4 col-form-label" >Thumbnail:</label>
-                                            <div class="col-sm-8 item-box">
+                                            <label class="col-sm-4 col-form-label text-right" >Thumbnail:</label>
+                                            <div class="col-sm-6 item-box">
                                                 @if($artwork->thumbnail)
                                                     <img src="{{ static_asset('uploads') . '/' . $artwork->thumbnail }}" class="edit-image"/>
                                                 @else
@@ -66,8 +70,8 @@
                                             </div>
                                         </div>
                                         <div class="col-md-6 row">
-                                            <label class="col-sm-4 col-form-label" required >Image #5:</label>
-                                            <div class="col-sm-8 item-box">
+                                            <label class="col-sm-4 col-form-label text-right" required >Image #5:</label>
+                                            <div class="col-sm-6 item-box">
                                                 @if($artwork->img5)
                                                     <img src="{{ static_asset('uploads') . '/' . $artwork->img5 }}" class="edit-image"/>
                                                 @else
@@ -84,8 +88,8 @@
                                     </div>
                                     <div class="row mt-3">
                                         <div class="col-md-6 row">
-                                            <label class="col-sm-4 col-form-label" required >Image #2:</label>
-                                            <div class="col-sm-8 item-box">
+                                            <label class="col-sm-4 col-form-label text-right" required >Image #2:</label>
+                                            <div class="col-sm-6 item-box">
                                                 @if($artwork->img2)
                                                     <img src="{{ static_asset('uploads') . '/' . $artwork->img2 }}" class="edit-image"/>
                                                 @else
@@ -100,8 +104,8 @@
                                             </div>
                                         </div>
                                         <div class="col-md-6 row">
-                                            <label class="col-sm-4 col-form-label" required >Image #6:</label>
-                                            <div class="col-sm-8 item-box">
+                                            <label class="col-sm-4 col-form-label text-right" required >Image #6:</label>
+                                            <div class="col-sm-6 item-box">
                                                 @if($artwork->img6)
                                                     <img src="{{ static_asset('uploads') . '/' . $artwork->img2 }}" class="edit-image"/>
                                                 @else
@@ -118,8 +122,8 @@
                                     </div>
                                     <div class="row mt-3">
                                         <div class="col-md-6 row">
-                                            <label class="col-sm-4 col-form-label" required >Image #3:</label>
-                                            <div class="col-sm-8 item-box">
+                                            <label class="col-sm-4 col-form-label text-right" required >Image #3:</label>
+                                            <div class="col-sm-6 item-box">
                                                 @if($artwork->img3)
                                                     <img src="{{ static_asset('uploads') . '/' . $artwork->img3 }}" class="edit-image"/>
                                                 @else
@@ -134,8 +138,8 @@
                                             </div>
                                         </div>
                                         <div class="col-md-6 row">
-                                            <label class="col-sm-4 col-form-label" required >Image #7:</label>
-                                            <div class="col-sm-8 item-box">
+                                            <label class="col-sm-4 col-form-label text-right" required >Image #7:</label>
+                                            <div class="col-sm-6 item-box">
                                                 @if($artwork->img7)
                                                     <img src="{{ static_asset('uploads') . '/' . $artwork->img7 }}" class="edit-image"/>
                                                 @else
@@ -382,6 +386,27 @@
         text-align: left;
     }
 
+    .go-back-button {
+        color: white;
+        background-color: red;
+        padding: 5px 15px;
+        width: 200px;
+        font-size: 15px;
+        font-weight: 300;
+        font-family: tahoma;
+        border-width: 3px;
+        border-top-color: #7d7d7d;
+        border-bottom-color: #5f5f5f;
+        border-left-color: #6f6f6f;
+        border-right-color: #797979;
+    }
+
+    .back-to-gallery-btn {
+        float: right;
+        margin-right: 10px;
+        margin-top: -5px;
+    }
+
     .page-account-upload input ,.page-account-upload textarea, .page-account-upload select  {
         border-radius: 0px;
     }
@@ -482,7 +507,7 @@
     .item-box #removeThumbnail {
         position: absolute;
         top: -2px;
-        right: 9px;
+        right: -16px;
         padding: 5px 12px;
         background: white;
         color: black;
@@ -547,8 +572,6 @@
             $("#uploadSection").toggle();
             $(this).text($(this).text() == '+' ? '-' : '+');
         });
-
-        $("#toggleButton").trigger('click');
 
         $(".new-artwork #removeThumbnail").on('click', function() {
             let selector = this;
