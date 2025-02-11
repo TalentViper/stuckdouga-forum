@@ -184,6 +184,7 @@ class UserController extends Controller
             $user->my_side = $request->side;
         $user->layout = $request->layout;
         $user->my_content = $request->content;
+        $user->my_background = $request->my_background;
         $user->save();
         
         $user = User::find(Auth::id());
@@ -191,7 +192,8 @@ class UserController extends Controller
             'banner' => $user->my_banner,
             'side' => $user->my_side,
             'layout' => $user->layout,
-            'content' => $user->my_content
+            'content' => $user->my_content,
+            'my_background' => $user->my_background
         ]);;
     }
 

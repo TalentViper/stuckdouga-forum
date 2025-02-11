@@ -10,7 +10,12 @@
                 <div class="row">
                     @include('frontend.partials.sidebar1')
                     <div class="col-md-10 center primary p-4">
-                        <h2>ARTWORKS::{{ strtoupper($title) }} <button id="toggleButton" class="toggle-button flex-end">+</button></h2>  
+                        <h2>ARTWORKS::{{ strtoupper($title) }} 
+                            <button id="toggleButton" class="toggle-button flex-end">+</button>
+                            <a class="flex-end back-to-gallery-btn">
+                                <button type="button" class="go-back-button" onclick="window.history.back()">Back to Galleries</button>
+                            </a>
+                        </h2>  
                         <div id="uploadSection" style="display: none;">
                             <form id="artworkForm" method="POST" action="{{ route('artworks.store') }}" enctype="multipart/form-data">
                                 @csrf
@@ -349,12 +354,12 @@
                                                             <img src="{{ static_asset('uploads') . '/' . $item->img_main }}" width="100px"/>                                                      
                                                         @endif
                                                     </td>
-                                                    <td> {{ $item->updated_at }}</td>
+                                                    <td> {{ $item->updated_at->format('d/m/Y H:m') }}</td>
                                                     <td>
                                                         <div class="row">
                                                             <div class="col-md-4">
                                                                 <div class="form-check form-switch">
-                                                                    <input class="form-check-input visibleSwitch" type="checkbox" data-id="{{ $item->id }}" {{ $item->visibility ? 'checked' : '' }}>
+                                                                    <input class="form-check-input visibleSwitch pointer" title="hide / show" type="checkbox" data-id="{{ $item->id }}" {{ $item->visibility ? 'checked' : '' }}>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">
@@ -389,6 +394,27 @@
         width: 100%;
         border-bottom: 1px solid white;
         text-align: left;
+    }
+
+    .go-back-button {
+        color: white;
+        background-color: red;
+        padding: 5px 15px;
+        width: 200px;
+        font-size: 15px;
+        font-weight: 300;
+        font-family: tahoma;
+        border-width: 3px;
+        border-top-color: #7d7d7d;
+        border-bottom-color: #5f5f5f;
+        border-left-color: #6f6f6f;
+        border-right-color: #797979;
+    }
+
+    .back-to-gallery-btn {
+        float: right;
+        margin-right: 10px;
+        margin-top: -5px;
     }
 
     .page-account-upload input ,.page-account-upload textarea, .page-account-upload select  {
@@ -583,53 +609,53 @@
             input.click();
         });
 
-        $("#artworkForm").on('submit', function(event) {
-            event.preventDefault();
-            var formData = new FormData(this);
+        // $("#artworkForm").on('submit', function(event) {
+        //     event.preventDefault();
+        //     var formData = new FormData(this);
 
-            $.ajax({
-                url: $(this).attr('action'),
-                method: $(this).attr('method'),
-                data: formData,
-                processData: false,
-                contentType: false,
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                success: function(response) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Success!',
-                        text: 'ArtWork created successfully!',
-                        confirmButtonText: 'OK',
-                        confirmButtonColor: 'red'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            window.location.reload();
-                        }
-                    });
-                },
-                error: function(xhr) {
-                    if($('.main-file').val() == "") {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Missing field',
-                            text: 'Please upload MainImage',
-                            confirmButtonText: 'OK',
-                            confirmButtonColor: 'grey'
-                        });
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            text: 'Something went wrong!',
-                            confirmButtonText: 'OK',
-                            confirmButtonColor: 'grey'
-                        });
-                    }
-                }
-            });
-        });
+        //     $.ajax({
+        //         url: $(this).attr('action'),
+        //         method: $(this).attr('method'),
+        //         data: formData,
+        //         processData: false,
+        //         contentType: false,
+        //         headers: {
+        //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        //         },
+        //         success: function(response) {
+        //             Swal.fire({
+        //                 icon: 'success',
+        //                 title: 'Success!',
+        //                 text: 'ArtWork created successfully!',
+        //                 confirmButtonText: 'OK',
+        //                 confirmButtonColor: 'red'
+        //             }).then((result) => {
+        //                 if (result.isConfirmed) {
+        //                     window.location.reload();
+        //                 }
+        //             });
+        //         },
+        //         error: function(xhr) {
+        //             if($('.main-file').val() == "") {
+        //                 Swal.fire({
+        //                     icon: 'error',
+        //                     title: 'Missing field',
+        //                     text: 'Please upload MainImage',
+        //                     confirmButtonText: 'OK',
+        //                     confirmButtonColor: 'grey'
+        //                 });
+        //             } else {
+        //                 Swal.fire({
+        //                     icon: 'error',
+        //                     title: 'Oops...',
+        //                     text: 'Something went wrong!',
+        //                     confirmButtonText: 'OK',
+        //                     confirmButtonColor: 'grey'
+        //                 });
+        //             }
+        //         }
+        //     });
+        // });
 
         $(".visibleSwitch").on("change", function(event) {
             var val = $(this).is(":checked");

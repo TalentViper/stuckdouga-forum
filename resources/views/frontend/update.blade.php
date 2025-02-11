@@ -140,8 +140,7 @@ $(document).ready(function() {
 
         $(".gallery-content .item .member-title").on('click', function() {
             var userId = $(this).data('id');
-            var galleryId = $(this).closest('.item').data('id');
-            window.location.href = '{{ route("gallery", ["id" => "PLACEHOLDER"]) }}'.replace('PLACEHOLDER', galleryId);
+            window.location.href = '{{ route("member", ["id" => "PLACEHOLDER"]) }}'.replace('PLACEHOLDER', userId);
         });
 
         $(".gallery-content .item .gallery-title").on('click', function() {

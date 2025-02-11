@@ -6,7 +6,7 @@
 <main id="main" class="main-content">
     <div id="content" class="page-gallery-view">
         <div class="content_box">
-            <div class="container-fluit pt-4">
+            <div class="container-fluit pt-4 p-4">
                 <div class="row">
                     <div class="col-md-2 sider">
                         <div class="side_title">
@@ -15,21 +15,8 @@
                         <div class="tag-page-gallery mb30">
                             <img src="{{ $gallery->user->avatar ? static_asset('uploads/' . $gallery->user->avatar) : ( $gallery->user->gender == 'female' ? static_asset('images/img/female_default.jpg') : static_asset('images/img/male_default.jpg') ) }}" alt="" width="200">
                             <!-- <img src="{{ static_asset('images/img/art_thumb1.jpg') }}" alt=""> -->
-                            <a class="mt-10" href="{{ route('user.profile', ['id' => $gallery->user->id, 'galleryId' => $gallery->id]) }}">View Profile</a>
+                            <a class="mt-10" href="{{ route('member', ['id' => $gallery->user->id]) }}">View Profile</a>
                             <a class="" href="{{ route('openMessageForm', $gallery->user->username) }}">Send Message</a>
-                            <a 
-                                class="{{ Request::routeIs('user.gallery') ? 'active' : '' }}" 
-                                href="{{ route('user.gallery', ['id' => $gallery->user->id, 'galleryId' => $gallery->id]) }}"
-                            >
-                                All Galleries
-                            </a>
-                            <!-- <a class="" href="#">User Topics</a> -->
-                            <a 
-                                class="{{ Request::routeIs('user.private') ? 'active' : '' }}" 
-                                href="{{ route('user.private', ['id' => $gallery->user->id, 'galleryId' => $gallery->id]) }}"
-                            >
-                                Private Area
-                            </a>
                         </div>
                     </div>
                     <div class="col-md-10 center primary detail-info">
@@ -91,7 +78,7 @@
                             </div>
                         </div>
                         <div class="gallery-content min-h-45">
-                            <div class="row">
+                            <div class="row bs-gutter-y-1">
                                 @foreach($search as $artwork)
                                     <div class="gallery-item col-md-3" data-id="{{$artwork->id}}">
                                         <img src="{{ static_asset('uploads') . '/' . $artwork->img_main }}" alt="">
@@ -169,5 +156,9 @@
     .detail-info .desc {
         white-space: pre-wrap;
         word-wrap: break-word;
+    }
+
+    .page-gallery-view .gallery-item img {
+        height: 100%
     }
 </style>

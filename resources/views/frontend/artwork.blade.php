@@ -19,31 +19,50 @@
                         <img src="{{ $artwork->gallery->user->avatar ? static_asset('uploads/' . $artwork->gallery->user->avatar) : ( $artwork->gallery->user->gender == 'female' ? static_asset('images/img/female_default.jpg') : static_asset('images/img/male_default.jpg') ) }}" alt="" width="200">
                         <a 
                             class="mt-10 {{ Request::routeIs('user.profile') ? 'active' : '' }}" 
-                            href="{{ route('user.profile', ['id' => $artwork->gallery->user->id, 'galleryId' => $artwork->gallery->id]) }}"
+                            href="{{ route('member', ['id' => $artwork->gallery->user->id]) }}"
                         >
                             View Profile
                         </a>
                         <a class="" href="{{ route('openMessageForm', $artwork->gallery->user->username) }}">Send Message</a>
-                        <a 
-                            class="{{ Request::routeIs('user.gallery') ? 'active' : '' }}" 
-                            href="{{ route('user.gallery', ['id' => $artwork->gallery->user->id, 'galleryId' => $artwork->gallery->id]) }}"
-                        >
-                            All Galleries
-                        </a>
-                        <a 
-                            class="{{ Request::routeIs('user.private') ? 'active' : '' }}" 
-                            href="{{ route('user.private', ['id' => $artwork->gallery->user->id, 'galleryId' => $artwork->gallery->id]) }}"
-                        >
-                            Private Area
-                        </a>
+                        
                     </div>
                     <div class="side_title"><h5>ArtWork Info:</h5></div>
                         <div class="info">
                             <!-- <h6>Krenky</h6> -->
-                            <h6>Source: {{ $sources[$artwork->source] }}</h6>
-                            <h6>Layers: {{ $artwork->layers }}</h6>
-                            <h6>sketches: {{ $artwork->sketch }}</h6>
-                            <h6>Type: {{ $artwork->type }}</h6>
+                            @if(!empty($artwork->type))
+                                <h6>Type: {{ $artwork->type }}</h6>
+                            @endif
+                            <!-- @if($artwork->section)
+                                <h6>Section: {{ $section[$artwork->section] }}</h6>
+                            @endif -->
+                            <h6>Info Position: {{ $info[$artwork->info] }}</h6>
+                        
+                            <h6>Visibility: {{ $visibility[$artwork->visibility] }}</h6>
+
+                            @if(!empty($artwork->source))
+                                <h6>Source: {{ $sources[$artwork->source] }}</h6>
+                            @endif
+
+                            @if(!empty($artwork->background)) 
+                                <h6>Background: {{ $background[$artwork->background] }}</h6>
+                            @endif
+
+                            @if(!empty($artwork->stype)) 
+                                <h6>Sequence Type: {{ $stype[$artwork->stype] }}</h6>
+                            @endif
+                            @if(!empty($artwork->layers))
+                                <h6>Layers: {{ $artwork->layers }}</h6>
+                            @endif
+                            @if(!empty($artwork->sketch))
+                                <h6>sketches: {{ $artwork->sketch }}</h6>
+                            @endif
+                            @if(!empty($artwork->snb))
+                                <h6>Sequence Nb: {{ $artwork->snb }}</h6>
+                            @endif
+
+                            @if(!empty($artwork->condition))
+                                <h6>Condition: {{ $condition[$artwork->condition] }}</h6>
+                            @endif
                             <br/>
                         </div>
                     </div>
@@ -96,7 +115,7 @@
                         @endif
                         <div class="row attaches p-4">
                             <div class="col-md-6">
-                                <div class="row">
+                                <div class="row artwork-item-group">
                                     @if($artwork->img2)
                                         <div class="col-md-6">
                                             <a href="{{ static_asset('uploads/'. $artwork->img2) }}" data-lightbox="artwork" data-title="Image 1" data-fancybox="gallery">
@@ -112,28 +131,28 @@
                                         </div>
                                     @endif
                                     @if($artwork->img4)
-                                    <div class="col-md-6 mt-4">
+                                    <div class="col-md-6">
                                         <a href="{{ static_asset('uploads/'. $artwork->img4) }}" data-lightbox="artwork" data-title="Image 3" data-fancybox="gallery">
                                             <img src="{{ static_asset('uploads/'. $artwork->img4) }}" alt="">
                                         </a>
                                     </div>
                                     @endif
                                     @if($artwork->img5)
-                                        <div class="col-md-6 mt-4">
+                                        <div class="col-md-6">
                                             <a href="{{ static_asset('uploads/'. $artwork->img5) }}" data-lightbox="artwork" data-title="Image 4" data-fancybox="gallery">
                                                 <img src="{{ static_asset('uploads/'. $artwork->img5) }}" alt="">
                                             </a>
                                         </div>
                                     @endif
                                     @if($artwork->img6)
-                                        <div class="col-md-6 mt-4">
+                                        <div class="col-md-6">
                                             <a href="{{ static_asset('uploads/'. $artwork->img6) }}" data-lightbox="artwork" data-title="Image 5" data-fancybox="gallery">
                                                 <img src="{{ static_asset('uploads/'. $artwork->img6) }}" alt="">
                                             </a>
                                         </div>
                                     @endif
                                     @if($artwork->img7)
-                                        <div class="col-md-6 mt-4">
+                                        <div class="col-md-6">
                                             <a href="{{ static_asset('uploads/'. $artwork->img7) }}" data-lightbox="artwork" data-title="Image 6" data-fancybox="gallery">
                                                 <img src="{{ static_asset('uploads/'. $artwork->img7) }}" alt="">
                                             </a>
@@ -174,6 +193,10 @@
 
     .favorite-buttons a {
         font-size: 22px;
+    }
+
+    .artwork-item-group {
+        --bs-gutter-y: 1rem !important;
     }
 </style>
 

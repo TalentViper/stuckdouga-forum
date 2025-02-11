@@ -19,19 +19,42 @@
                                     <div class="col-md-4">
                                         Main Banner:
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-4 banner-img">
                                         @if($banner != NULL)
-                                        <img src="{{ static_asset('uploads/' . $banner) }}" width="300" alt="" class="banner-img">
-                                        <p style="color:#999">(1200 <i class="bi bi-plus-lg"></i> 400px)</p>
+                                            <img src="{{ static_asset('uploads/' . $banner) }}" width="300" alt="">
+                                            <p style="color:#999">(1200 <i class="bi bi-plus-lg"></i> 400px)</p>
                                         @endif
                                     </div>
                                     <div class="col-md-4">
                                         <button type="button" id="banner">Upload File</button>
+                                        <div class="progress mt-2 banner-progress" style="display: none;">
+                                            <div class="progress-bar banner-progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
                                     </div>
                                     <input type="text" class="banner-url" name="banner" hidden>
                                     <input type="text" class="side-url" name="side" hidden>
+                                    <input type="text" class="my-background-url" name="my_background" hidden>
                                     <input type="text" class="layout" name="layout" hidden value='{{ $layout }}'>
                                     <input type="text" class="content" name="content" hidden value='{{ $content }}'>
+                                </div>
+                            </div>
+                            <div class="main-background mt-2">
+                                <div class="row align-items-center" style="min-height: 150px;">
+                                    <div class="col-md-4">
+                                        Main Background:
+                                    </div>
+                                    <div class="col-md-4 main-background-img">
+                                        @if($my_background != NULL)
+                                        <img src="{{ static_asset('uploads/' . $my_background) }}" width="300" alt="">
+                                        <p style="color:#999">(1920 <i class="bi bi-plus-lg"></i> 1080px)</p>
+                                        @endif
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button type="button" id="main-background">Upload File</button>
+                                        <div class="progress mt-2 my-background-progress" style="display: none;">
+                                            <div class="progress-bar my-background-progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="choose-layout mb-5">
@@ -61,7 +84,7 @@
 
                             <div class="left-sidebar-layout">
                                 <div class="sidebar left">
-                                    <img src="{{ $side == NULL ? static_asset('images/img/member.jpg') : static_asset('uploads/' . $side) }}" alt="Banner" />
+                                    <img src="{{ $side == NULL ? static_asset('images/img/sidebar_default.jpg') : static_asset('uploads/' . $side) }}" alt="Banner" />
                                     <p style="color:#999; text-align:left" >(300 <i class="bi bi-plus-lg"></i> 850px)</p>
                                 </div>
                                 <div class="main-content1">
@@ -76,7 +99,7 @@
                                     <!-- Content goes here -->
                                 </div>
                                 <div class="sidebar right">
-                                    <img src="{{ $side == NULL ? static_asset('images/img/member.jpg') : static_asset('uploads/' . $side) }}" alt="Banner" />
+                                    <img src="{{ $side == NULL ? static_asset('images/img/sidebar_default.jpg') : static_asset('uploads/' . $side) }}" alt="Banner" />
                                     <p style="color:#999; text-align:left" >(300 <i class="bi bi-plus-lg"></i> 850px)</p>
                                 </div>
                             </div>
@@ -98,12 +121,26 @@
         </div>
     </div>
 </main>
-<script>
 
-</script>
 @endsection
 
 <style>
+    .progress {
+        height: 20px;
+        background-color: #e9ecef;
+        border-radius: 5px;
+        overflow: hidden;
+        margin-top: 10px;
+    }
+
+    .progress-bar {
+        height: 100%;
+        background-color: #007bff;
+        text-align: center;
+        line-height: 20px;
+        color: white;
+    }
+
     .page-account-profile h1 {
         width: 100%;
         border-bottom: 1px solid white;
@@ -178,6 +215,16 @@
         padding: 5px 40px;
         background: red;
         color: white;
+    }
+
+    .main-background button {
+        padding: 5px 40px;
+        background: red;
+        color: white;
+    }
+
+    .main-background .row {
+        border-bottom: 1px solid #fff;
     }
 
     .main-banner .row, .choose-layout>.row {
@@ -332,10 +379,10 @@
             xhr.upload.onprogress = function(event) {
                 if (event.lengthComputable) {
                     var percentComplete = (event.loaded / event.total) * 100;
-                    document.querySelector('.progress').style.display = 'block';
-                    document.querySelector('.progress-bar').style.width = percentComplete + '%';
-                    document.querySelector('.progress-bar').setAttribute('aria-valuenow', percentComplete);
-                    document.querySelector('.progress-bar').innerText = Math.round(percentComplete) + '%';
+                    // document.querySelector('.progress').style.display = 'block';
+                    // document.querySelector('.progress-bar').style.width = percentComplete + '%';
+                    // document.querySelector('.progress-bar').setAttribute('aria-valuenow', percentComplete);
+                    // document.querySelector('.progress-bar').innerText = Math.round(percentComplete) + '%';
                 }
             };
 
@@ -374,10 +421,10 @@
                         var percentComplete = (event.loaded / event.total) * 100;
                         console.log("percent => ", percentComplete)
 
-                        document.querySelector('.progress').style.display = 'block';
-                        document.querySelector('.progress-bar').style.width = percentComplete + '%';
-                        document.querySelector('.progress-bar').setAttribute('aria-valuenow', percentComplete);
-                        document.querySelector('.progress-bar').innerText = Math.round(percentComplete) + '%';
+                        document.querySelector('.banner-progress').style.display = 'block';
+                        document.querySelector('.banner-progress-bar').style.width = percentComplete + '%';
+                        document.querySelector('.banner-progress-bar').setAttribute('aria-valuenow', percentComplete);
+                        document.querySelector('.banner-progress-bar').innerText = Math.round(percentComplete) + '%';
                     }
                 };
 
@@ -385,7 +432,60 @@
                     if (xhr.status === 200) {
                         var responseData = JSON.parse(xhr.responseText);
                         $(".banner-url").val(responseData.path);
-                        $(".banner-img").attr("src", '{{ static_asset('uploads') }}' + '/' + responseData.path);
+                        $(".banner-img").html(
+                            `<img src="{{ static_asset('uploads') }}/${responseData.path}" width="300" alt="">
+                            <p style="color:#999">(1200 <i class="bi bi-plus-lg"></i> 400px)</p>
+                            `
+                        );
+                        console.log('File uploaded successfully');
+                    } else {
+                        console.error('File upload failed');
+                    }
+                };
+
+                xhr.onerror = function() {
+                    console.error('Request failed');
+                };
+
+                xhr.send(formData);
+            };
+            input.click();
+        })
+
+        $("#main-background").on('click', function() {
+            var input = document.createElement('input');
+            input.type = 'file';
+            input.onchange = function(event) {
+                var file = event.target.files[0];
+                var formData = new FormData();
+                formData.append('thumbnail', file);
+
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', '{{ route('uploadItems') }}', true);
+                xhr.setRequestHeader('X-CSRF-TOKEN', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
+
+                // Handle progress events
+                xhr.upload.onprogress = function(event) {
+                    if (event.lengthComputable) {
+                        var percentComplete = (event.loaded / event.total) * 100;
+                        
+
+                        document.querySelector('.my-background-progress').style.display = 'block';
+                        document.querySelector('.my-background-progress-bar').style.width = percentComplete + '%';
+                        document.querySelector('.my-background-progress-bar').setAttribute('aria-valuenow', percentComplete);
+                        document.querySelector('.my-background-progress-bar').innerText = Math.round(percentComplete) + '%';
+                    }
+                };
+
+                xhr.onload = function() {
+                    if (xhr.status === 200) {
+                        var responseData = JSON.parse(xhr.responseText);
+                        $(".my-background-url").val(responseData.path);
+                        $(".main-background-img").html(
+                            `<img src="{{ static_asset('uploads') }}/${responseData.path}" width="300" alt="" />
+                            <p style="color:#999">(1920 <i class="bi bi-plus-lg"></i> 1080px)</p>
+                            `
+                        )
                         console.log('File uploaded successfully');
                     } else {
                         console.error('File upload failed');

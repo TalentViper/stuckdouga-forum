@@ -10,7 +10,11 @@
                     @include('frontend.partials.sidebar1')
                     <div class="col-md-10 center primary">
                         <h1>MY ACCOUNT</h1>
-                        <img src="{{ static_asset('images/img/banner1.jpg') }}" alt="" class="bg-1">
+                        @if(!empty($user->my_banner))
+                            <img src="{{ static_asset('uploads/'. $user->my_banner) }}" alt="" class="bg-1" style="height: 400px">
+                        @else
+                            <img src="{{ static_asset('images/img/account-banner.jpg') }}" alt="" class="bg-1">
+                        @endif
                         <div class="user-info">
                             <span class="name">{{ $user->full_name }}</span>
                             <span class="location">From:  {{ $user->location }}</span>
@@ -45,16 +49,14 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="desc">
-                            <h2>ABOUT MY WORK</h2>
-                            <p>
-                                <!-- Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.  -->
-                            </p>
-                            <!-- <img src="{{ static_asset('images/img/account_bg1.jpg') }}" alt=""> -->
-                            <h2>MY BIO</h2>
-                            <p>
-                                <!-- Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.  -->
-                            </p>
+                        <div class="desc bg-cover aspects" style="background-image: url({{ static_asset('uploads/'. $user->my_background) }});">
+                            @if(!empty($user->my_content))
+                                <p class="my-content-profile">{{$user->my_content}}</p>
+                            @else
+                                <h5 style="color: #999;" class="mt-4">
+                                    Upload your content here.
+                                </h5>
+                            @endif
                         </div>
     
                     </div>
@@ -75,5 +77,18 @@
 <style>
     h1, h2 {
         font-family: 'DrukTextWideBold', sans-serif;
+    }
+    .my-content-profile {
+        white-space: pre-wrap;
+        text-align: left;
+    }
+
+    .bg-cover {
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    .aspects {
+        object-fit: cover;
+        aspect-ratio: 2/1;
     }
 </style>

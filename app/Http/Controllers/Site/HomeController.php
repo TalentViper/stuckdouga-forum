@@ -13,8 +13,12 @@ use App\Models\Gallery;
 use App\Models\ArtWork;
 use App\Models\Thread;
 use App\Models\Contact;
-use Illuminate\Support\Facades\Mail;
+use App\Models\Link;
+use App\Models\WishList;
+use App\Models\News;
 use App\Mail\MyMail;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Hash;
 
 class HomeController extends Controller
 {
@@ -25,8 +29,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        //
-        return view('frontend.index');
+        $query = Gallery::with(['user', 'artworks' => function($q) {
+            $q->orderBy('created_at', 'desc')->take(5);
+        }])->orderBy('updated_at', 'desc');
+        
+        $updategly = $query->take(8)->get();
+
+        $poptags = Tag::query()->orderBy('updated_at', 'desc')->take(12)->get();
+
+        return view('frontend.index', compact('updategly', 'poptags'));
     }
 
     /**
@@ -65,6 +76,39 @@ class HomeController extends Controller
             '7' => 'Other',
             '8' => 'Unknown',
         );
+        $background = array(
+            '0' => 'None',
+            '1' => 'Original Matching',
+            '2' => 'Original Unmatching',
+            '3' => 'Copy Matching',
+            '4' => 'Copy Unmatching'
+        );
+        $stype = array(
+            '1' => 'Normal Production',
+            '2' => 'Opening Credit',
+            '3' => 'Eyecatch',
+            '4' => 'Ending Credit'
+        );
+
+        $section = array(
+            "" => '',
+            '0' => '[ Create New Section ]',
+        );
+        $info = array(
+            '0' => 'Side',
+            '1' => 'Bottom',
+        );
+        $visibility = array(
+            '0' => 'Visible to Public',
+            '1' => 'Requires Gallery Password',
+            '2' => 'Hidden from Public',
+        );
+        $condition = array(
+            '1' => 'Excellent',
+            '2' => 'Good',
+            '3' => 'Fair',
+            '4' => 'Poor',
+        );
 
         // Get the next gallery ID
         $nextArtwork = ArtWork::where('id', '>', $id)->orderBy('id', 'asc')->first();
@@ -74,7 +118,7 @@ class HomeController extends Controller
         $prevArtwork = ArtWork::where('id', '<', $id)->orderBy('id', 'desc')->first();
         $prevArtworkId = $prevArtwork ? $prevArtwork->id : null;
 
-        return view('frontend.artwork', compact('artwork', 'nextArtworkId', 'prevArtworkId', 'sources'));
+        return view('frontend.artwork', compact('condition', 'visibility', 'info', 'section', 'artwork', 'stype', 'background', 'nextArtworkId', 'prevArtworkId', 'sources'));
     }
 
     public function contact()
@@ -114,15 +158,37 @@ class HomeController extends Controller
         $search = Tag::get();
         return view('frontend.tags', compact('search'));
     }
-    public function member($id)
+    
+    public function member(Request $request, $id)
     {
         $user = User::findOrFail($id);
         $count = Gallery::where('user_id', $user->id)->count();
-        $followingCount = $user->follows()->count();
-        $followerCount = $user->followers()->count();
+        $followingCount = 0;
+        $followerCount = 0;
         $thread = Thread::where('user_id', $user->id)->count();
-        $search = Gallery::where('user_id', $user->id)->paginate(20);
-        return view('frontend.member', compact('user', 'count', 'followingCount', 'followerCount', 'thread', 'search'));
+        $links = Link::where('user_id', $user->id)->get();
+        $whishlists = WishList::where('user_id', $user->id)->get();
+        $news = News::where('user_id', $user->id)->get();
+
+        $query = Gallery::where('user_id', $user->id)->orderBy('updated_at', 'desc');
+
+        if ($request->input('keyword')) {
+            $keyword = $request->input('keyword');
+            $query->where('gallery_name', 'like', '%' . $keyword . '%')
+                ->where('description', 'like', '%' . $keyword . '%');
+        }
+        
+        $search = $query->paginate(24);
+        $user_private = false;
+        if ($request->input('password-input')) {
+            if (Hash::check($request->input('password-input'), $user->private_password)) {
+                return redirect()->back()->with('user_private', $user->private_content);
+            } else {
+                Toastr::error('Password is incorrect');
+                return redirect()->back();
+            }
+        }
+        return view('frontend.member', compact('user', 'count', 'followingCount', 'followerCount', 'thread', 'search', 'links', 'whishlists', 'news'));
     }
     public function latest()
     {
