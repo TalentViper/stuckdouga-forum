@@ -63,21 +63,31 @@
                             <li class="nav-item">
                               <a class="nav-link" aria-current="page" onclick="showTab('profile-info')">Profile Info</a>
                             </li>
-                            <li class="nav-item">
-                              <a class="nav-link" onclick="showTab('news-updates')">News & Updates</a>
-                            </li>
-                            <li class="nav-item">
-                              <a class="nav-link"  onclick="showTab('galleries')">Galleries</a>
-                            </li>
-                            <li class="nav-item">
-                              <a class="nav-link" onclick="showTab('private-areas')">Private Areas</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link"  onclick="showTab('links')">Links</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link"  onclick="showTab('wishlist')">Wishlist</a>
-                            </li>
+                            @if(count($news) > 0)
+                                <li class="nav-item">
+                                    <a class="nav-link" onclick="showTab('news-updates')">News & Updates</a>
+                                </li>
+                            @endif
+                            @if(count($search) > 0)
+                                <li class="nav-item">
+                                    <a class="nav-link"  onclick="showTab('galleries')">Galleries</a>
+                                </li>
+                            @endif
+                            @if(!empty($user->private_content))
+                                <li class="nav-item">
+                                    <a class="nav-link" onclick="showTab('private-areas')">Private Areas</a>
+                                </li>
+                            @endif
+                            @if(count($links) > 0)
+                                <li class="nav-item">
+                                    <a class="nav-link"  onclick="showTab('links')">Links</a>
+                                </li>
+                            @endif
+                            @if(count($whishlists) > 0)
+                                <li class="nav-item">
+                                    <a class="nav-link"  onclick="showTab('wishlist')">Wishlist</a>
+                                </li>
+                            @endif
                           </ul>
                         <div id="profile-info" class="tab-content">
                             <div class="desc" style="overflow: hidden;">

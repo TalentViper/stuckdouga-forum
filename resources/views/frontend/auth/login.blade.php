@@ -54,7 +54,7 @@
             <div class="clear"></div>
             <div class="sign-another">
               <div class="row fxg-buttons">
-                <div class="col">
+                <div class="col social-login-btns">
                   <p>Or Sign in with:</p>
                   <a href="#">
                     <img src="{{ static_asset('images/img/f_button.jpg') }}" alt="">
