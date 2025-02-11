@@ -1576,3 +1576,11 @@ button.row_but {
 .text-right {
   text-align: right;
 }
+
+.social-login-btns a img:hover {
+  opacity: 0.55;
+}
+
+.bg-danger {
+  background-color: red !important;
+}
