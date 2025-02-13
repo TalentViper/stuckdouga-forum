@@ -151,8 +151,12 @@
 
 @section('main-content')
 <main id="main" class="main-content">
+    @if(auth()->user()->my_background)       
+        <div id="content" class="page-account-message-send" style="background-image: url({{ static_asset('uploads/'. auth()->user()->my_background) }}) !important; background-repeat: no-repeat; background-size: 100% 100%;">
+    @else
+        <div id="content" class="page-account-message-send">
+    @endif
 
-    <div id="content" class="page-account-message-send">
         <div class="content_box">
             <div class="container-fluit p-5 pt-4">
                 <div class="row">
