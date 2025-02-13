@@ -100,10 +100,10 @@
                                         @endif
                                     @endif
 
-                                    <div class="{{ (($user->layout == 'full') ? 'col-md-12' : 'col-md-9')  }} text p-0 bg-cover" style="background-image: url({{ static_asset('uploads/'. $user->my_background) }});" >
+                                    <div class="{{ (($user->layout == 'full') ? 'col-md-12' : 'col-md-9') }} text p-0 bg-cover" style="background-image: url({{ static_asset('uploads/'. $user->my_background) }});" >
                                         <div class="p-4 mr-2">
                                             @if(!empty($user->my_content))
-                                                <div class="my-content-profile">{{ $user->my_content }}</div>
+                                                <div class="my-content-profile"> @stripBBCode($user->my_content)</div>
                                             @else 
                                                 <h5 style="color: #999;" class="mt-4">
                                                     Upload your content here
@@ -130,7 +130,7 @@
                                         @foreach($news as $newsItem)
                                             <tr>
                                                 <td class="description" width="90%">
-                                                    {{ $newsItem->content }}
+                                                @stripBBCode($newsItem->content)
                                                 </td>
                                                 <td width="10%" class="text-center">
                                                     {{ \Carbon\Carbon::parse($newsItem->created_at)->format('d/m/Y') }}
@@ -173,7 +173,7 @@
                             </div>
                             <div class="gallery-content grid row">
                                 @foreach($search as $gallery)
-                                    <div class="gallery-item col-md-2" data-id="{{$gallery->id}}">
+                                    <div class="gallery-item col-md-2 cursor-pointer" data-id="{{$gallery->id}}">
                                         <div class="border-4">
                                             <img src="{{ static_asset('uploads') . '/' . $gallery->gallery_url }}" alt="{{ $gallery->gallery_name }}" />
                                         </div>
@@ -251,7 +251,7 @@
                             <h1>Private Area</h1>
                             @if(session()->has('user_private'))
                                 <p>
-                                    {{ session()->get('user_private') }}
+                                @stripBBCode( session()->get('user_private') )
                                 </p>
                             @else
                                 <form class="password-form">
@@ -344,6 +344,14 @@
 </script>
 
 <style>
+
+    ul.tab-buttons li {
+        padding: 0 !important;
+    }
+
+    .page-member .tab-buttons li a {
+        padding: 10px 22px !important;
+    }
     .tab-content {
         display: none;
         min-height: 350px;
@@ -556,18 +564,6 @@
 $(document).ready(function() {
     $(".gallery-content1").hide();
 
-    $(".gallery-content .gallery-item img").on('click', function(){
-        // Handle image click
-    });
-
-    $(".gallery-content .gallery-item .name").on('click', function(){
-        // Handle name click
-    });
-
-    $(".gallery-content .gallery-item .sub").on('click', function(){
-        // Handle sub click
-    });
-
     $(".show-table").on('click', function(){
         $(".gallery-content1").hide();
         $(".bottom-actions").show();
@@ -588,5 +584,10 @@ $(document).ready(function() {
         // Set a default active tab if none is stored
         showTab('profile-info');
     }
+
+    $(".gallery-content .gallery-item").on('click', function() {
+        var galleryId = $(this).data('id');
+        window.location.href = '{{ route("gallery", ["id" => "PLACEHOLDER"]) }}'.replace('PLACEHOLDER', galleryId);
+    });
 });
 </script>

@@ -178,10 +178,9 @@ class UserController extends Controller
 
     public function update(Request $request, $id) {
         $user = User::find(Auth::id());
-        if($request->banner != "")
-            $user->my_banner = $request->banner;
-        if($request->side != "")
-            $user->my_side = $request->side;
+
+        $user->my_side = $request->side;
+        $user->my_banner = $request->banner;
         $user->layout = $request->layout;
         $user->my_content = $request->content;
         $user->my_background = $request->my_background;
@@ -231,13 +230,23 @@ class UserController extends Controller
 
     public function updatePrivateContent(Request $request) {
         $user = User::find(Auth::id());
+        if(isset($request->password)) {
+            if($request->password == $request->confirmpassword) {
+                $user->private_password = Hash::make($request->password);
+                $user->save();
+            } else {
+                Toastr::error(__('Password does not match.'));
+                return back()->withInput();
+            }
+        }
+
         if ($user->private_password != null) {
             $user->private_content = $request->content;
             $user->save();
             Toastr::success(__('Your content updated successfuly!'));
-            return redirect()->route('private');   
+            return redirect()->route('private');
         } else {
-            Toastr::error(__('Please set your private password.'));
+            Toastr::error(__('Please set up your password for your Protected Content.'));
             return back()->withInput();
         }
     }

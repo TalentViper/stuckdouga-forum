@@ -69,12 +69,12 @@
                                 <a id="like-button">
                                     <i class="bi bi-heart{{ $gallery->isLikedByUser() ? '-fill' : '' }}"></i>
                                 </a>
-                                <!-- <a href="#">
+                                <a href="#">
                                     <i class="bi bi-share"></i>
                                 </a>
                                 <a href="">
                                     <i class="bi bi-exclamation-triangle"></i>
-                                </a> -->
+                                </a>
                             </div>
                         </div>
                         <div class="gallery-content min-h-45">

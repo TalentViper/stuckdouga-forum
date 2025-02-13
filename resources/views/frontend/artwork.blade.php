@@ -95,18 +95,18 @@
                             @endif
                         </div>
                         <div class="row favorite-buttons p-2">
-                            <!-- <a href="#" class="pointer">
-                                <i class="bi bi-hand-thumbs-up"></i>
-                            </a> -->
                             <a id="like-button" class="pointer">
                                 <i class="bi bi-heart{{ $artwork->isLikedByUser() ? '-fill' : '' }}"></i>
                             </a>
-                            <!-- <a href="#" class="pointer">
+                            <a href="#" class="pointer">
+                                <i class="bi bi-hand-thumbs-up"></i>
+                            </a>
+                            <a href="#" class="pointer">
                                 <i class="bi bi-share"></i>
                             </a>
                             <a class="pointer">
                                 <i class="bi bi-exclamation-triangle"></i>
-                            </a> -->
+                            </a>
                         </div>
                         @if($artwork->img_main)
                             <a href="{{ static_asset('uploads/' . $artwork->img_main) }}" data-lightbox="artwork" data-title="Unknown ArtWork #1" class="light-detail mt-2" data-fancybox="gallery">
