@@ -87,14 +87,18 @@
                             </div> -->
                         </div>
                         <div class="gallery-content grid">
-                            @foreach($search as $gallery)
-                                <div class="gallery-item" data-id="{{ $gallery->id }}">
-                                    <img src="{{ static_asset('uploads') . '/' . $gallery->gallery_url }}" alt="{{ $gallery->gallery_name }}">
-                                    <div class="name" data-id="{{ $gallery->id }}">{{ $gallery->gallery_name }}</div>
-                                    <div class="sub user-full-name" data-id="{{ $gallery->user->id }}">{{ $gallery->user->full_name }}</div>
-                                    <div class="sub sub-likes">Likes:<span style="font-size:14px;color:white"> {{ $gallery->likes }}</span></div>
-                                </div>
-                            @endforeach
+                            @if(count($search))
+                                @foreach($search as $gallery)
+                                    <div class="gallery-item" data-id="{{ $gallery->id }}">
+                                        <img src="{{ static_asset('uploads') . '/' . $gallery->gallery_url }}" alt="{{ $gallery->gallery_name }}">
+                                        <div class="name" data-id="{{ $gallery->id }}">{{ $gallery->gallery_name }}</div>
+                                        <div class="sub user-full-name" data-id="{{ $gallery->user->id }}">{{ $gallery->user->full_name }}</div>
+                                        <div class="sub sub-likes">Likes:<span style="font-size:14px;color:white"> {{ $gallery->likes }}</span></div>
+                                    </div>
+                                @endforeach
+                            @else 
+                                <p class="text-center mt-8" style="width: 100%;">No galleries found.</p>
+                            @endif
                         </div>
                         <div class="row action-buttons">
                             <ul class="pagination" role="menubar" aria-label="Pagination">
@@ -147,6 +151,10 @@
 <style>
     h2 {
         font-family: 'DrukTextWideBold', sans-serif;
+    }
+
+    .gallery-content {
+        min-height: 500px;
     }
 
     .gallery-content .gallery-item img {

@@ -51,7 +51,7 @@
                         </div>
                         <div class="desc bg-cover aspects" style="background-image: url({{ static_asset('uploads/'. $user->my_background) }});">
                             @if(!empty($user->my_content))
-                                <p class="my-content-profile">{{$user->my_content}}</p>
+                                <div class="my-content-profile">@stripBBCode($user->my_content)</div>
                             @else
                                 <h5 style="color: #999;" class="mt-4">
                                     Upload your content here.

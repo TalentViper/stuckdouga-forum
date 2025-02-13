@@ -79,34 +79,38 @@
                             </ul>
                         </div>
                         <div class="gallery-content grid pt-4">
-                            @foreach($search as $gallery)
-                                <div class="row item" data-id="{{ $gallery->id }}">
-                                    <div class="col">
-                                        <div class="d-flex p-2">
-                                            <div class="flex-shrink-0">
-                                                <img src="{{ static_asset('uploads') . '/' . $gallery->gallery_url }}" class="img-fluid rounded-start member-title" alt="..." style="width: 139px; height: 139px;" data-id="{{ $gallery->user->id }}">
-                                            </div>
-                                            <div class="flex-grow-1 ms-3">
-                                                <h5 class="gallery-title text-left"  data-id="{{ $gallery->id }}">{{ $gallery->gallery_name }}</h5>
-                                                <p class="member-title" data-id="{{ $gallery->user->id }}"><small class="text-body-secondary">by {{ $gallery->user->full_name }}</small></p>
-                                                <p class=""><small class="text-body-secondary">updated: {{ $gallery->updated_at->format('d/m/Y \a\t h:ia') }}</small></p>
-                                                <p class=""><small class="text-body-secondary">artwork: {{ $gallery->artwork_count }} items</small></p>
+                            @if(count($search))
+                                @foreach($search as $gallery)
+                                    <div class="row item" data-id="{{ $gallery->id }}">
+                                        <div class="col">
+                                            <div class="d-flex p-2">
+                                                <div class="flex-shrink-0">
+                                                    <img src="{{ static_asset('uploads') . '/' . $gallery->gallery_url }}" class="img-fluid rounded-start member-title" alt="..." style="width: 139px; height: 139px;" data-id="{{ $gallery->user->id }}">
+                                                </div>
+                                                <div class="flex-grow-1 ms-3">
+                                                    <h5 class="gallery-title text-left"  data-id="{{ $gallery->id }}">{{ $gallery->gallery_name }}</h5>
+                                                    <p class="member-title" data-id="{{ $gallery->user->id }}"><small class="text-body-secondary">by {{ $gallery->user->full_name }}</small></p>
+                                                    <p class=""><small class="text-body-secondary">updated: {{ $gallery->updated_at->format('d/m/Y \a\t h:ia') }}</small></p>
+                                                    <p class=""><small class="text-body-secondary">artwork: {{ $gallery->artwork_count }} items</small></p>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col explore">
-                                        <div>
-                                            @foreach($gallery->artworks as $artwork)
-                                                <img class="artwork" data-id="{{ $artwork->id }}" src="{{ static_asset('uploads') . '/' . $artwork->img_main }}" alt="">
-                                            @endforeach
+                                        <div class="col explore">
+                                            <div>
+                                                @foreach($gallery->artworks as $artwork)
+                                                    <img class="artwork" data-id="{{ $artwork->id }}" src="{{ static_asset('uploads') . '/' . $artwork->img_main }}" alt="">
+                                                @endforeach
 
-                                            @if($gallery->artwork_count > 5)
-                                                <span>Explore</span>
-                                            @endif
+                                                @if($gallery->artwork_count > 5)
+                                                    <span>Explore</span>
+                                                @endif
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            @endforeach
+                                @endforeach
+                            @else 
+                                <p class="text-center mt-8" style="width: 100%;">No galleries found.</p>
+                            @endif
                         </div>
                         <div class="row action-buttons justify-content-center">
                             <ul class="pagination" role="menubar" aria-label="Pagination">
@@ -124,7 +128,7 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
 <script>
-$(document).ready(function() {
+    $(document).ready(function() {
         $('.form-control').on('keypress', function(e) {
             if (e.which == 13) {
                 console.log("???");
@@ -159,7 +163,9 @@ $(document).ready(function() {
     h2 {
         font-family: 'DrukTextWideBold', sans-serif;
     }
-
+    .gallery-content {
+        min-height: 500px;
+    }
     .action-buttons {
         height: 66px;
     }

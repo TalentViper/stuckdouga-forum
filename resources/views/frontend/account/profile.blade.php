@@ -19,9 +19,10 @@
                                     <div class="col-md-4">
                                         Main Banner:
                                     </div>
-                                    <div class="col-md-4 banner-img">
+                                    <div class="col-md-4 banner-img position-relative">
                                         @if($banner != NULL)
                                             <img src="{{ static_asset('uploads/' . $banner) }}" width="300" alt="">
+                                            <button type="button" class="remove-img-btn" id="remote-main-banner-img-btn"><span aria-hidden="true">&times;</span></button>
                                             <p style="color:#999">(1200 <i class="bi bi-plus-lg"></i> 400px)</p>
                                         @endif
                                     </div>
@@ -43,9 +44,10 @@
                                     <div class="col-md-4">
                                         Main Background:
                                     </div>
-                                    <div class="col-md-4 main-background-img">
+                                    <div class="col-md-4 main-background-img position-relative">
                                         @if($my_background != NULL)
                                         <img src="{{ static_asset('uploads/' . $my_background) }}" width="300" alt="">
+                                        <button type="button" class="remove-img-btn" id="remote-main-background-img-btn"><span aria-hidden="true">&times;</span></button>
                                         <p style="color:#999">(1920 <i class="bi bi-plus-lg"></i> 1080px)</p>
                                         @endif
                                     </div>
@@ -75,32 +77,37 @@
                                 <input type="file" id="banner-upload" accept="image/*" hidden>
                             </div>
 
-                            <div class="full-width-layout" style="display:none;">
-                                <div class="main-content1">
-                                    <textarea name="content" id="editor">{{$content}}</textarea>
-                                    <!-- Content goes here -->
+                            
+                            <div class="profile-info-editor-group">
+                                <div class="full-width-layout" style="display:none;">
+                                    <div class="main-content1">
+                                        <textarea name="content" id="editor">{{$content}}</textarea>
+                                        <!-- Content goes here -->
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="left-sidebar-layout">
-                                <div class="sidebar left">
-                                    <img src="{{ $side == NULL ? static_asset('images/img/sidebar_default.jpg') : static_asset('uploads/' . $side) }}" alt="Banner" />
-                                    <p style="color:#999; text-align:left" >(300 <i class="bi bi-plus-lg"></i> 850px)</p>
+                                <div class="left-sidebar-layout">
+                                    <div class="sidebar left position-relative">
+                                        <img src="{{ $side == NULL ? static_asset('images/img/sidebar_default.jpg') : static_asset('uploads/' . $side) }}" alt="Banner" />
+                                        <button type="button" style="right: 0;" class="remove-img-btn remove-sidebar-img-btn" id="remote-sidebar-img-btn"><span aria-hidden="true">&times;</span></button>
+                                        <p style="color:#999; text-align:left" >(300 <i class="bi bi-plus-lg"></i> 850px)</p>
+                                    </div>
+                                    <div class="main-content1">
+                                        <textarea name="content" id="editor1">{{$content}}</textarea>
+                                        <!-- Content goes here -->
+                                    </div>
                                 </div>
-                                <div class="main-content1">
-                                    <textarea name="content" id="editor1">{{$content}}</textarea>
-                                    <!-- Content goes here -->
-                                </div>
-                            </div>
-
-                            <div class="right-sidebar-layout" style="display:none;">
-                                <div class="main-content1">
-                                    <textarea name="content" id="editor2">{{$content}}</textarea>
-                                    <!-- Content goes here -->
-                                </div>
-                                <div class="sidebar right">
-                                    <img src="{{ $side == NULL ? static_asset('images/img/sidebar_default.jpg') : static_asset('uploads/' . $side) }}" alt="Banner" />
-                                    <p style="color:#999; text-align:left" >(300 <i class="bi bi-plus-lg"></i> 850px)</p>
+    
+                                <div class="right-sidebar-layout" style="display:none;">
+                                    <div class="main-content1">
+                                        <textarea name="content" id="editor2">{{$content}}</textarea>
+                                        <!-- Content goes here -->
+                                    </div>
+                                    <div class="sidebar right position-relative">
+                                        <img src="{{ $side == NULL ? static_asset('images/img/sidebar_default.jpg') : static_asset('uploads/' . $side) }}" alt="Banner" />
+                                        <button type="button" style="right: 0;" class="remove-img-btn remove-sidebar-img-btn" id="remote-right-sidebar-img-btn"><span aria-hidden="true">&times;</span></button>
+                                        <p style="color:#999; text-align:left" >(300 <i class="bi bi-plus-lg"></i> 850px)</p>
+                                    </div>
                                 </div>
                             </div>
                             <!-- <div class="row">
@@ -125,6 +132,18 @@
 @endsection
 
 <style>
+    .remove-img-btn {
+        position: absolute;
+        width: 36px;
+        height: 33px;
+        text-align: center;
+        color: grey !important;
+        padding: 2px 8px !important;
+        right: -6px;
+        top: 0px;
+        background: white !important;
+    }
+
     .progress {
         height: 20px;
         background-color: #e9ecef;
@@ -297,7 +316,6 @@
     }
 </style>
 
-
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -312,19 +330,22 @@
         sceditor.create(textarea, {
             format: 'bbcode',
             style: 'https://cdn.jsdelivr.net/npm/sceditor@3/minified/themes/content/default.min.css',
-            emoticonsEnabled: false
+            emoticonsEnabled: false,
+            plugins: 'dragdrop'
         });
 
         sceditor.create(textarea1, {
             format: 'bbcode',
             style: 'https://cdn.jsdelivr.net/npm/sceditor@3/minified/themes/content/default.min.css',
-            emoticonsEnabled: false
+            emoticonsEnabled: false,
+            plugins: 'dragdrop'
         });
 
         sceditor.create(textarea2, {
             format: 'bbcode',
             style: 'https://cdn.jsdelivr.net/npm/sceditor@3/minified/themes/content/default.min.css',
-            emoticonsEnabled: false
+            emoticonsEnabled: false,
+            plugins: 'dragdrop'
         });
 
         editor = sceditor.instance(textarea);
@@ -526,6 +547,24 @@
         $(".sidebar").on('click', function() {
             $("#banner-upload").trigger('click');
 
+        })
+
+        $('#remote-main-banner-img-btn').on('click', function() {
+            $(this).parent('.position-relative').html('');
+            $('.banner-url').val('');
+        })
+
+        $('#remote-main-background-img-btn').on('click', function() {
+            $(this).parent('.position-relative').html('');
+            $('.my-background-url').val('');
+        })
+
+        $('.remove-sidebar-img-btn').on('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            $(this).closest('.profile-info-editor-group').find('.left-sidebar-layout').find('.position-relative').find('img').attr('src', '{{ static_asset('images/img/sidebar_default.jpg') }}');
+            $(this).closest('.profile-info-editor-group').find('.right-sidebar-layout').find('.position-relative').find('img').attr('src', '{{ static_asset('images/img/sidebar_default.jpg') }}');
+            $('.side-url').val('');
         })
 
         // chooselayout('full');

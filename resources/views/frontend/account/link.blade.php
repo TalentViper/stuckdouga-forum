@@ -57,7 +57,7 @@
                                     @else
                                         @foreach($links as $link)
                                             <tr data-id="{{ $link->id }}">
-                                                <td><a style="color:red; text-decoration: underline; font-size: unset;" href="{{ $link->url }}" target="_blank">{{ $link->name }}</a></td>
+                                                <td><a style="color:red; text-decoration: none; font-size: unset;" href="{{ $link->url }}" target="_blank">{{ $link->name }}</a></td>
                                                 <td>{{ $link->desc }}</td>
                                                 <td>
                                                     <a href="{{ route('link.edit', $link->id) }}">

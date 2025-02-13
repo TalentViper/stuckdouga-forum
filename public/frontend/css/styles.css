@@ -1584,3 +1584,7 @@ button.row_but {
 .bg-danger {
   background-color: red !important;
 }
+
+.border-bottom-divider {
+  border-bottom: 1px solid #fff;
+}

@@ -30,7 +30,7 @@ class ArtWorkController extends Controller
         $artwork->type = $request->input('type');
         $artwork->section = $request->input('section');
         $artwork->info = $request->input('info');
-        $artwork->visibility = $request->input('visibility');
+        $artwork->visibility = "1";
         $artwork->layers = $request->input('layers');
         $artwork->sketch = $request->input('sketch');
         $artwork->snb = $request->input('snb');

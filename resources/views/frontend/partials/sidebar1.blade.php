@@ -14,7 +14,7 @@
                     <a class="{{ Request::routeIs('profile') ? 'active' : '' }}" href="{{ route('profile') }}">Profile Info</a>
                 </li>
                 <li>
-                    <a class="{{ Request::routeIs('member') ? 'active' : '' }}" href="{{ route('member', ['id' => auth()->user()->id]) }}">View My Profile</a>
+                    <a class="{{ Request::routeIs('member') ? 'active' : '' }}" href="{{ route('member', ['id' => auth()->user()->id]) }}" target="_blank">View My Profile</a>
                 </li>
                 <li>
                     <a class="{{ Request::routeIs('accountgallery') ? 'active' : '' }}" href="{{ route('accountgallery') }}">Galleries</a>
