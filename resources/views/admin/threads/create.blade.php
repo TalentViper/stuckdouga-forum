@@ -41,7 +41,7 @@
 
         var textarea = document.getElementById('editor');
         sceditor.create(textarea, {
-            format: 'bbcode',
+            format: 'xhtml',
             style: 'https://cdn.jsdelivr.net/npm/sceditor@3/minified/themes/content/default.min.css',
             emoticonsEnabled: false
         });

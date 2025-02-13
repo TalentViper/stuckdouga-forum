@@ -398,7 +398,7 @@
 
     .go-back-button {
         color: white;
-        background-color: red;
+        background-color: #999999;
         padding: 5px 15px;
         width: 200px;
         font-size: 15px;
@@ -426,6 +426,10 @@
         background: red;
         color: white;
         /* float: left; */
+    }
+
+    .submit-artwork {
+        background-color: #999999;
     }
 
     .page-account-upload .create {

@@ -20,6 +20,7 @@
                     @include('frontend.partials.sidebar1')
                     <div class="col-md-10 center primary p-4">
                         <h1>PRIVATE AREA</h1>
+                        @if(!empty($user->private_password))
                         <form class="pt-4">
                             <div class="mb-3 row">
                                 <div class="col-md-6">
@@ -45,14 +46,38 @@
                                 <div class="col-md-6 d-flex justify-content-center align-items-center" style="height: 108px">
                                     <button type="button" class="change" id="changePasswordBtn">Change Password</button>
                                 </div>
-
                             </div>
                         </form>
+                        @endif
                         <form action="{{ route('user.updatePrivateContent') }}"  method="POST" enctype="multipart/form-data">
                             @csrf
+                            @if(empty($user->private_password)) 
+                                <div class="mb-3 mt-4 row border-bottom-divider">
+                                    <div class="col-md-6">
+                                        <div class="mb-3 row form-group">
+                                            <label for="password" class="col-sm-5 col-form-label" required >Set Password:</label>
+                                            <div class="col-sm-7">
+                                                <input type="password" class="form-control" id="password"  data-indicator="strengthLevel" name="password" placeholder="" value="{{ old('password') }}" required>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row form-group">
+                                            <label for="confirmpassword" class="col-sm-5 col-form-label" required >Confirm Password:</label>
+                                            <div class="col-sm-7">
+                                                <input type="password" class="form-control" id="confirmpassword" name="confirmpassword" placeholder="" value="{{ old('confirmpassword') }}" required>
+                                                <div id="strengthLevel" class="password_strength pass_state01"></div>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row form-group">
+                                            <div class="col-md-12">
+                                                <span id="passwordError" style="color: red;"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <textarea name="content" id="editor">{{ $user->private_content}}</textarea>
+                                    <textarea name="content" id="editor">{{ !empty(old('content')) ? old('content') : $user->private_content }}</textarea>
                                 </div>
                             </div>
                             <div class="mb-3 row mt-3">
@@ -67,6 +92,7 @@
         </div>
     </div>
 </main>
+
 <script>
     var textarea = document.getElementById('editor');
     sceditor.create(textarea, {

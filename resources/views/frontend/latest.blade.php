@@ -87,13 +87,17 @@
                             </div> -->
                         </div>
                         <div class="gallery-content grid">
-                            @foreach($search as $gallery)
-                                <div class="gallery-item" data-id="{{$gallery->id}}">
-                                    <img src="{{ static_asset('uploads') . '/' . $gallery->gallery_url }}" alt="{{ $gallery->gallery_name }}">
-                                    <div class="name">{{ $gallery->gallery_name }}</div>
-                                    <div class="sub" data-id="{{ optional($gallery->user)->id }}">{{ optional($gallery->user)->full_name }}</div>
-                                </div>
-                            @endforeach
+                            @if(count($search) > 0)
+                                @foreach($search as $gallery)
+                                    <div class="gallery-item" data-id="{{$gallery->id}}">
+                                        <img src="{{ static_asset('uploads') . '/' . $gallery->gallery_url }}" alt="{{ $gallery->gallery_name }}">
+                                        <div class="name">{{ $gallery->gallery_name }}</div>
+                                        <div class="sub" data-id="{{ optional($gallery->user)->id }}">{{ optional($gallery->user)->full_name }}</div>
+                                    </div>
+                                @endforeach
+                            @else
+                                <p class="text-center mt-8" style="width: 90%;">No galleries found.</p>
+                            @endif
                         </div>
                         <div class="row action-buttons">
                             <ul class="pagination" role="menubar" aria-label="Pagination">
@@ -148,8 +152,12 @@
         font-family: 'DrukTextWideBold', sans-serif;
     }
 
+    .gallery-content {
+        min-height: 500px;
+    }
+
     .gallery-content .gallery-item img {
-        width: 185px!important;
-        height: 185px!important;
+        width: 185px !important;
+        height: 185px !important;
     }
 </style>
