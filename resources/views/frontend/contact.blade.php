@@ -10,7 +10,7 @@
 
     <div id="content" class="contact-page">
         <div class="content_box">
-            <div class="container-fluit pt-4">
+            <div class="container-fluit pt-4 p-5">
                 <div class="row ">
                     @include('frontend.partials.sidebar')
 

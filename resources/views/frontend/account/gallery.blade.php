@@ -276,7 +276,7 @@
         $("#thumbnail").on('click', function() {
             var input = document.createElement('input');
             input.type = 'file';
-            input.accept = 'image/png, image/gif, image/jpeg, image/bmp';
+            input.accept = 'image/png, image/gif, image/jpeg, image/bmp, image/webp, image/avif';
             input.onchange = function(event) {
                 var file = event.target.files[0];
                 var formData = new FormData();
@@ -299,9 +299,20 @@
 
                 xhr.onload = function() {
                     if (xhr.status === 200) {
-                        var responseData = JSON.parse(xhr.responseText);
-                        $(".gallery-url").val(responseData.path);
-                        console.log('File uploaded successfully');
+                        
+                        try {
+                            var responseData = JSON.parse(xhr.responseText);
+                            $(".gallery-url").val(responseData.path);
+                        } catch (error) {
+                            document.querySelector('.progress').style.display = 'none';
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: 'Failed to upload file.',
+                                cancelButtonColor: 'grey',
+                                confirmButtonColor: 'grey',
+                            });
+                        }
                     } else {
                         console.error('File upload failed');
                     }

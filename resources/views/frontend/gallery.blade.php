@@ -10,7 +10,7 @@
         <div id="content" class="page-gallery-view">
     @endif
         <div class="content_box">
-            <div class="container-fluit pt-4 p-4">
+            <div class="container-fluit pt-4 p-5">
                 <div class="row">
                     <div class="col-md-2 sider">
                         <div class="side_title">
@@ -58,7 +58,7 @@
                             @endif
                         </div>
                         <div class="row action-buttons">
-                            <div class="view-buttons col-md-2">
+                            <div class="view-buttons col-md-4">
                                 <!-- <a href="#">
                                     <i class="bi bi-phone-landscape"></i>
                                 </a>
@@ -66,10 +66,7 @@
                                     <i class="bi bi-grid-3x3-gap-fill"></i>
                                 </a> -->
                             </div>
-                            <ul class="pagination col-md-7 justify-content-center" role="menubar" aria-label="Pagination">
-                                {{ $search->appends(Request::except('page'))->links('pagination::bootstrap-4') }}
-                            </ul>
-                            <div class="social-buttons col-md-3">
+                            <div class="social-buttons col-md-4">
                                 <a id="like-button">
                                     <i class="bi bi-heart{{ $gallery->isLikedByUser() ? '-fill' : '' }}"></i>
                                 </a>
@@ -80,12 +77,15 @@
                                     <i class="bi bi-exclamation-triangle"></i>
                                 </a>
                             </div>
+                            <ul class="pagination col-md-4 justify-content-center" role="menubar" aria-label="Pagination">
+                                {{ $search->appends(Request::except('page'))->links('pagination::bootstrap-4') }}
+                            </ul>
                         </div>
                         <div class="gallery-content min-h-45">
                             <div class="row bs-gutter-y-1">
                                 @foreach($search as $artwork)
                                     <div class="gallery-item col-md-3" data-id="{{$artwork->id}}">
-                                        <img src="{{ static_asset('uploads') . '/' . $artwork->img_main }}" alt="">
+                                        <img src="{{ empty($artwork->img_main) ? static_asset('images/img/no_image.jpg') : static_asset('uploads') . '/' . $artwork->img_main }}" alt="">
                                         <div class="name">{{$artwork->title}}</div>
                                     </div>
                                 @endforeach

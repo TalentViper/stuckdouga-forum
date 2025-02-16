@@ -5,7 +5,7 @@
 <main id="main" class="main-content">
     <div id="content" class="page-about">
         <div class="content_box">
-            <div class="container-fluit pt-4">
+            <div class="container-fluit pt-4 p-5">
                 <div class="row">
                     <div class="col-md-12 center primary p-4">
                         <h1 class="mb-4">ABOUT US</h1>

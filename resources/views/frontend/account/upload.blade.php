@@ -30,12 +30,13 @@
                                     <div class="row">
                                         <div class="col-md-6 row">
                                             <label class="col-sm-4 col-form-label" >MainImage:</label>
-                                            <div class="col-sm-8">
-                                                <button type="button" id="main-file">Upload File</button>
+                                            <div class="col-sm-8" style="position: relative;">
+                                                <button type="button" id="main-file" style="position: relative; z-index: 99;">Upload File</button>
                                                 <div class="progress mt-2" style="display: none;">
                                                     <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                                                 </div>
-                                                <input type="text" class="form-control main-file" name="mainfile" placeholder="" hidden>
+                                                <p class="main-image-select-badge" style="margin: 0; color: red; display: none;">* Please select main image.</p>
+                                                <input type="text" class="form-control main-file" name="mainfile" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6 row">
@@ -274,13 +275,13 @@
                                             </div>
                                             <div class="row mt-3">
                                                 <div class="col-md-6 row">
-                                                    <label class="form-check-label col-sm-8" for="key">Key Arwork:</label>
+                                                    <label class="form-check-label col-sm-8" for="key">Key Artwork:</label>
                                                     <div class="col-sm-4">
                                                         <input class="form-check-input" type="checkbox" id="key" name="keyart">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 row">
-                                                    <label class="form-check-label col-sm-8" for="book">Book Arwork:</label>
+                                                    <label class="form-check-label col-sm-8" for="book">Book Artwork:</label>
                                                     <div class="col-sm-4">
                                                         <input class="form-check-input" type="checkbox" id="book" name="bookart">
                                                     </div>
@@ -288,7 +289,7 @@
                                             </div>
                                             <div class="row mt-3">
                                                 <div class="col-md-6 row">
-                                                    <label class="form-check-label col-sm-8" for="end">End Arwork:</label>
+                                                    <label class="form-check-label col-sm-8" for="end">End Artwork:</label>
                                                     <div class="col-sm-4">
                                                         <input class="form-check-input" type="checkbox" id="end" name="endart">
                                                     </div>
@@ -394,6 +395,16 @@
 @endsection
 
 <style>
+    .main-file {
+        width: 1px !important;
+        padding: 0 !important;
+        height: 1px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        z-index: 1;
+        opacity: 0;
+    }
     .page-account-upload h2 {
         width: 100%;
         border-bottom: 1px solid white;
@@ -431,11 +442,7 @@
         color: white;
         /* float: left; */
     }
-
-    .submit-artwork {
-        background-color: #999999;
-    }
-
+    
     .page-account-upload .create {
         float: right;
     }
@@ -511,13 +518,18 @@
     }
 </style>
 
-
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
     $(document).ready(function() {
         
+        $('.main-file').on('focus', function(e) {
+            e.preventDefault();
+            $('.main-image-select-badge').css('display', 'block');
+            $("#main-file").blur();
+        });
+
         $('.delete-button').on('click', function(e) {
             e.preventDefault();
             var itemId = $(this).data('id');
@@ -588,6 +600,8 @@
                 // Handle progress events
                 xhr.upload.onprogress = function(event) {
                     if (event.lengthComputable) {
+                        $('.main-image-select-badge').css('display', 'none');
+
                         var percentComplete = (event.loaded / event.total) * 100;
 
                         $(selector).parent().find('.progress').css('display', 'block');
@@ -599,10 +613,21 @@
 
                 xhr.onload = function() {
                     if (xhr.status === 200) {
-                        var responseData = JSON.parse(xhr.responseText);
-                        console.log($(selector).parent().find('input'));
-                        $(selector).parent().find('input').val(responseData.path);
-                        console.log('File uploaded successfully');
+                        try {
+                            var responseData = JSON.parse(xhr.responseText);
+                            $(selector).parent().find('input').val(responseData.path);
+                            console.log('File uploaded successfully');
+                        } catch (error) {
+                            $(selector).parent().find('.progress').css('display', 'none');
+                            console.log(error);
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: 'Failed to upload file.',
+                                cancelButtonColor: 'grey',
+                                confirmButtonColor: 'grey',
+                            });
+                        }
                     } else {
                         console.error('File upload failed');
                     }

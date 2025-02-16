@@ -316,13 +316,13 @@
                                             </div>
                                             <div class="row mt-3">
                                                 <div class="col-md-6 row">
-                                                    <label class="form-check-label col-sm-8" for="key">Key Arwork:</label>
+                                                    <label class="form-check-label col-sm-8" for="key">Key Artwork:</label>
                                                     <div class="col-sm-4">
                                                         <input class="form-check-input" type="checkbox" id="key" name="keyart" value="{{$artwork->keyart}}" {{$artwork->keyart == "on" ? "checked" : ""}}>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 row">
-                                                    <label class="form-check-label col-sm-8" for="book">Book Arwork:</label>
+                                                    <label class="form-check-label col-sm-8" for="book">Book Artwork:</label>
                                                     <div class="col-sm-4">
                                                         <input class="form-check-input" type="checkbox" id="book" name="bookart" value="{{$artwork->bookart}}" {{$artwork->bookart == "on" ? "checked" : ""}}>
                                                     </div>
@@ -330,7 +330,7 @@
                                             </div>
                                             <div class="row mt-3">
                                                 <div class="col-md-6 row">
-                                                    <label class="form-check-label col-sm-8" for="end">End Arwork:</label>
+                                                    <label class="form-check-label col-sm-8" for="end">End Artwork:</label>
                                                     <div class="col-sm-4">
                                                         <input class="form-check-input" type="checkbox" id="end" name="endart" value="{{$artwork->endart}}" {{$artwork->endart == "on" ? "checked" : ""}}>
                                                     </div>
@@ -420,10 +420,6 @@
         background: red;
         color: white;
         /* float: left; */
-    }
-
-    .submit-artwork {
-        background-color: #999999;
     }
 
     .page-account-upload .create {
@@ -614,10 +610,21 @@
 
                 xhr.onload = function() {
                     if (xhr.status === 200) {
-                        var responseData = JSON.parse(xhr.responseText);
-                        $(selector).parent().find('img').attr("src", '{{ static_asset('uploads') }}' + '/' + responseData.path);
-                        $(selector).parent().find('input').val(responseData.path);
-                        console.log('File uploaded successfully');
+                        try {
+                            var responseData = JSON.parse(xhr.responseText);
+                            $(selector).parent().find('img').attr("src", '{{ static_asset('uploads') }}' + '/' + responseData.path);
+                            $(selector).parent().find('input').val(responseData.path);
+                            console.log('File uploaded successfully');
+                        } catch (error) {
+                            $(selector).parent().find('.progress').css('display', 'none');
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: 'Failed to upload file.',
+                                cancelButtonColor: 'grey',
+                                confirmButtonColor: 'grey',
+                            });
+                        }
                     } else {
                         console.error('File upload failed');
                     }

@@ -61,7 +61,18 @@
                                     @else
                                         @foreach($links as $link)
                                             <tr data-id="{{ $link->id }}">
-                                                <td><a style="color:red; text-decoration: none; font-size: unset;" href="{{ $link->url }}" target="_blank">{{ $link->name }}</a></td>
+                                                <td>
+                                                    @php
+                                                        // Function to ensure URLs are properly formatted with a scheme
+                                                        $ensureHttp = function($url) {
+                                                            return preg_match('~^(?:f|ht)tps?://~i', $url) ? $url : 'http://' . $url;
+                                                        };
+
+                                                        // Format the URL using the helper function
+                                                        $formattedUrl = $ensureHttp($link->url);
+                                                    @endphp
+                                                    <a style="color:red; text-decoration: none; font-size: unset;" href="{{ $formattedUrl }}" target="_blank">{{ $link->name }}</a>
+                                                </td>
                                                 <td>{{ $link->desc }}</td>
                                                 <td>
                                                     <a href="{{ route('link.edit', $link->id) }}">

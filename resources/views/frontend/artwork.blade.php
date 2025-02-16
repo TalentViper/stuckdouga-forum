@@ -14,7 +14,7 @@
         <div id="content" class="page-artwork">
     @endif
         <div class="content_box">
-            <div class="container-fluit pt-4">
+            <div class="container-fluit pt-4 p-5">
                 <div class="row">
                     <div class="col-md-2 sider">
                     <div class="side_title"><h5>{{ $artwork->gallery->user->full_name }}</h5></div>
@@ -31,40 +31,25 @@
                     </div>
                     <div class="side_title"><h5>ArtWork Info:</h5></div>
                         <div class="info">
-                            <!-- <h6>Krenky</h6> -->
-                            @if(!empty($artwork->type))
-                                <h6>Type: {{ $artwork->type }}</h6>
-                            @endif
-                            <!-- @if($artwork->section)
-                                <h6>Section: {{ $section[$artwork->section] }}</h6>
-                            @endif -->
-                            <h6>Info Position: {{ $info[$artwork->info] }}</h6>
-                        
-                            <h6>Visibility: {{ $visibility[$artwork->visibility] }}</h6>
+                            <h6>Type: {{ $artwork->type }}</h6>
+                            <h6>Info Position: {{ empty($artwork->info) ? "" : $info[$artwork->info] }}</h6>
+                            <h6>Visibility: {{ empty($artwork->visibility) ? "" : $visibility[$artwork->visibility] }}</h6>
+                            <h6>Source: {{ empty($artwork->source) ? "" : $sources[$artwork->source] }}</h6>
+                            <h6>Background: {{ empty($artwork->background) ? "" : $background[$artwork->background] }}</h6>
+                            <h6>Sequence Type: {{ empty($artwork->stype) ? "" : $stype[$artwork->stype] }}</h6>
+                            <h6>Layers: {{ $artwork->layers }}</h6>
+                            <h6>Sketches: {{ $artwork->sketch }}</h6>
 
-                            @if(!empty($artwork->source))
-                                <h6>Source: {{ $sources[$artwork->source] }}</h6>
+                            <h6>Sequence Nb: {{ $artwork->snb }}</h6>
+                            <h6>Condition: {{ empty($artwork->condition) ? "" : $condition[$artwork->condition] }}</h6>
+                            @if($artwork->keyart == "on") 
+                                <h6>This is Key Artwork</h6>
                             @endif
-
-                            @if(!empty($artwork->background)) 
-                                <h6>Background: {{ $background[$artwork->background] }}</h6>
+                            @if($artwork->endart == "on")
+                                <h6>This is End Artwork</h6>
                             @endif
-
-                            @if(!empty($artwork->stype)) 
-                                <h6>Sequence Type: {{ $stype[$artwork->stype] }}</h6>
-                            @endif
-                            @if(!empty($artwork->layers))
-                                <h6>Layers: {{ $artwork->layers }}</h6>
-                            @endif
-                            @if(!empty($artwork->sketch))
-                                <h6>sketches: {{ $artwork->sketch }}</h6>
-                            @endif
-                            @if(!empty($artwork->snb))
-                                <h6>Sequence Nb: {{ $artwork->snb }}</h6>
-                            @endif
-
-                            @if(!empty($artwork->condition))
-                                <h6>Condition: {{ $condition[$artwork->condition] }}</h6>
+                            @if($artwork->bookart == "on")
+                                <h6>This is Book Artwork</h6>
                             @endif
                             <br/>
                         </div>
@@ -98,12 +83,12 @@
                             @endif
                         </div>
                         <div class="row favorite-buttons p-2">
-                            <a id="like-button" class="pointer">
-                                <i class="bi bi-heart{{ $artwork->isLikedByUser() ? '-fill' : '' }}"></i>
+                            <a href="#" class="pointer" id="like-button-2">
+                                <i class="bi bi-hand-thumbs-up{{ $artwork->isLikedByUser() ? '-fill' : '' }}"></i>
                             </a>
-                            <!-- <a href="#" class="pointer">
-                                <i class="bi bi-hand-thumbs-up"></i>
-                            </a> -->
+                            <a id="like-button" class="pointer">
+                                <i class="bi bi-heart"></i>
+                            </a>
                             <a href="#" class="pointer">
                                 <i class="bi bi-share"></i>
                             </a>
@@ -202,6 +187,7 @@
         --bs-gutter-y: 1rem !important;
     }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
 $(document).ready(function() {
@@ -218,6 +204,8 @@ $(document).ready(function() {
         var likeIcon = likeButton.find('i');
         var isLiked = likeIcon.hasClass('bi-heart-fill');
 
+        likeIcon.toggleClass('bi-heart bi-heart-fill');
+        return ;
         $.ajax({
             url: '{{ route("artwork.like", ["id" => "PLACEHOLDER"]) }}'.replace('PLACEHOLDER', artworkId),
             method: 'POST',
@@ -242,5 +230,54 @@ $(document).ready(function() {
             }
         });
     });
+
+    $('#like-button-2').on('click', function(e) {
+        var artworkId = {{ $artwork->id }};
+        var likeButton = $(this);
+        var likeIcon = likeButton.find('i');
+        var isLiked = likeIcon.hasClass('bi-hand-thumbs-up-fill');
+
+        $.ajax({
+            url: '{{ route("artwork.like", ["id" => "PLACEHOLDER"]) }}'.replace('PLACEHOLDER', artworkId),
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            data: {
+                is_liked: isLiked
+            },
+            success: function(response) {
+                if (response.success) {
+                    likeIcon.toggleClass('bi-hand-thumbs-up bi-hand-thumbs-up-fill');
+                    $('.like-count').text(response.likes);
+                    if (isLiked) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'UNLIKE',
+                            text: 'You unliked this artwork!',
+                            cancelButtonColor: 'grey',
+                            confirmButtonColor: 'grey',
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'LIKE',
+                            text: 'You liked this artwork!',
+                            cancelButtonColor: 'grey',
+                            confirmButtonColor: 'grey',
+                        });
+                    }
+                }
+            },
+            error: function(xhr) {
+                if(xhr.responseText == '{"message":"Unauthenticated."}') {
+                    alert("You need to log in to perform this action.");
+                    window.location.href = "{{ route('login') }}";
+                }
+                console.error(xhr.responseText);
+            }
+        });
+    });
+
 });
 </script>
