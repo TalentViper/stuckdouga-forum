@@ -35,7 +35,7 @@ class RegisterController extends Controller
 
         $address = $request['email'];
         auth()->login($user);
-        // Toastr::success(__('Your account has been successfully created.'));
+        
         event(new Registered($user));
         return redirect()->route('verification.notice');
     }
