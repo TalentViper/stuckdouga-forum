@@ -8,8 +8,11 @@
 @section('main-content')
 
 <main id="main" class="main-content">
-
-    <div id="content" class="page-artwork">
+    @if($artwork->gallery->user->my_background)
+        <div id="content" class="page-artwork" style="background-image: url({{ static_asset('uploads/'. $artwork->gallery->user->my_background) }}) !important; background-repeat: no-repeat; background-size: 100% 100%;">
+    @else
+        <div id="content" class="page-artwork">
+    @endif
         <div class="content_box">
             <div class="container-fluit pt-4">
                 <div class="row">
@@ -98,9 +101,9 @@
                             <a id="like-button" class="pointer">
                                 <i class="bi bi-heart{{ $artwork->isLikedByUser() ? '-fill' : '' }}"></i>
                             </a>
-                            <a href="#" class="pointer">
+                            <!-- <a href="#" class="pointer">
                                 <i class="bi bi-hand-thumbs-up"></i>
-                            </a>
+                            </a> -->
                             <a href="#" class="pointer">
                                 <i class="bi bi-share"></i>
                             </a>

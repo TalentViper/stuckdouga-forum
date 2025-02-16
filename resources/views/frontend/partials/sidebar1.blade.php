@@ -1,4 +1,4 @@
-<div class="col-md-2 sider">
+<div class="col-md-2 sider" style="padding: 0;">
     <div class="side_title"><h5>{{ auth()->user()->full_name }}</h5></div>
     <div class="tag-page-gallery mb30">
         <div class="text-center">

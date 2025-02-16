@@ -14,7 +14,11 @@
     </div>
 </header>
 <main id="main" class="main-content">
-    <div id="content" class="page-member">
+    @if($user->my_background)
+        <div id="content" class="page-member" style="background-image: url({{ static_asset('uploads/'. $user->my_background) }}) !important;">
+    @else
+        <div id="content" class="page-member">
+    @endif
         <div class="content_box">
             <div class="container-fluit pt-4 p-4">
                 <div class="row">
@@ -100,7 +104,8 @@
                                         @endif
                                     @endif
 
-                                    <div class="{{ (($user->layout == 'full') ? 'col-md-12' : 'col-md-9') }} text p-0 bg-cover" style="background-image: url({{ static_asset('uploads/'. $user->my_background) }});" >
+                                    <!-- style="background-image: url({{ static_asset('uploads/'. $user->my_background) }});" -->
+                                    <div class="{{ (($user->layout == 'full' || empty($user->my_side)) ? 'col-md-12' : 'col-md-9') }} text p-0 bg-cover" >
                                         <div class="p-4 mr-2">
                                             @if(!empty($user->my_content))
                                                 <div class="my-content-profile"> @stripBBCode($user->my_content)</div>

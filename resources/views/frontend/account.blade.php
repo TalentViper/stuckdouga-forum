@@ -2,8 +2,11 @@
 
 @section('main-content')
 <main id="main" class="main-content">
-
-    <div id="content" class="page-account">
+    @if($user->my_background)
+        <div id="content" class="page-account" style="background-image: url({{ static_asset('uploads/'. $user->my_background) }}) !important; background-repeat: no-repeat; background-size: 100% 100%;">
+    @else
+        <div id="content" class="page-account">
+    @endif
         <div class="content_box pt-4">
             <div class="container-fluit p-5 pt-4">
                 <div class="row">
@@ -49,22 +52,41 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="desc bg-cover aspects" style="background-image: url({{ static_asset('uploads/'. $user->my_background) }});">
-                            @if(!empty($user->my_content))
-                                <div class="my-content-profile">@stripBBCode($user->my_content)</div>
-                            @else
-                                <h5 style="color: #999;" class="mt-4">
-                                    Upload your content here.
-                                </h5>
-                            @endif
+                        <div class="desc w-full" style="padding: 0; margin: 0;">
+                                <div class="row min-h-500">
+                                    @if($user->layout == "right")
+                                        @if(!empty($user->my_side))
+                                            <div class="col-md-3 img" style="padding-right: 0;">
+                                                <img src="{{ static_asset('uploads/'. $user->my_side) }}" alt="">
+                                            </div>
+                                        @endif
+                                    @endif
+
+                                    <!-- style="background-image: url({{ static_asset('uploads/'. $user->my_background) }}); overflow: hidden;" -->
+                                    <div class="{{ (($user->layout == 'full' || empty($user->my_side)) ? 'col-md-12' : 'col-md-9') }} text p-0 bg-cover" >
+                                        <div class="p-4 mr-2">
+                                            @if(!empty($user->my_content))
+                                                <div class="my-content-profile"> @stripBBCode($user->my_content)</div>
+                                            @else 
+                                                <h5 style="color: #999;" class="mt-4">
+                                                    Upload your content here
+                                                </h5>
+                                            @endif
+                                        </div>
+                                    </div>
+
+                                    @if($user->layout == "left")
+                                        @if(!empty($user->my_side))
+                                            <div class="col-md-3 img" style="padding-left: 0;">
+                                                <img src="{{ static_asset('uploads/'. $user->my_side) }}" alt="">
+                                            </div>
+                                        @endif
+                                    @endif
+                                </div>
                         </div>
     
                     </div>
                 </div>
-
-
-
-
             </div>
 
         </div>
@@ -75,6 +97,24 @@
 @endsection
 
 <style>
+
+    .page-account .desc img {
+        height: 100%;   
+    }
+    .h-full {
+        height: 100%;
+    }
+    .sidebar-profile {
+        width: 260px !important;
+        flex: 1;
+    }
+
+    .row>* {
+        overflow: hidden;
+    }
+    .w-flexible {
+        width: calc(100% - 260px) !important;
+    }
     h1, h2 {
         font-family: 'DrukTextWideBold', sans-serif;
     }
@@ -83,10 +123,15 @@
         text-align: left;
     }
 
+    .min-h-500 {
+        min-height: 500px;
+    }
+
     .bg-cover {
         background-repeat: no-repeat;
-        background-size: cover;
+        background-size: 100% 100%;
     }
+
     .aspects {
         object-fit: cover;
         aspect-ratio: 2/1;
