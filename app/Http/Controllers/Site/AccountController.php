@@ -340,7 +340,7 @@ class AccountController extends Controller
         // Validate the request
         
         $request->validate([
-            'thumbnail' => 'required|mimetypes:image/jpeg,image/png,image/jpg,image/gif,image/bmp,image/svg+xml,image/webp,image/avif|max:2048',
+            'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         // Handle the file upload

@@ -7,7 +7,7 @@
 
     <div id="content" class="page-latest">
         <div class="content_box">
-            <div class="container-fluit pt-4 p-4">
+            <div class="container-fluit pt-4">
                 <div class="row">
                     <div class="col-md-2 sider">
                         <div class="side_title">

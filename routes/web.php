@@ -41,7 +41,6 @@ use App\Http\Controllers\ArtWorkItemController;
 // use App\Http\Controllers\StripeController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Auth;
-use Brian2694\Toastr\Facades\Toastr;
 
 /*
 |--------------------------------------------------------------------------
@@ -81,15 +80,12 @@ Route::prefix('beta')->group(function () {
 
     Route::post('/email/verification-notification', function (Request $request) {
         $request->user()->sendEmailVerificationNotification();
-
-        Toastr::success(__('Verification email has been successfully sent!'));
+    
         return back()->with('message', 'Verification link sent!');
     })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
     Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
         $request->fulfill();
-        
-        Toastr::success(__('Email has been successfully verified!'));
         return redirect()->route('account');
     })->middleware(['auth', 'signed'])->name('verification.verify');
     

@@ -109,6 +109,9 @@
         flex: 1;
     }
 
+    .row>* {
+        overflow: hidden;
+    }
     .w-flexible {
         width: calc(100% - 260px) !important;
     }

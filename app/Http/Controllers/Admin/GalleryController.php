@@ -152,17 +152,11 @@ class GalleryController extends Controller
         $gallery->save();
 
         // Get the next gallery ID
-        $nextGallery = Gallery::where('user_id', $gallery->user->id)
-                        ->where('id', '>', $id)
-                        ->orderBy('id', 'asc')
-                        ->first();
+        $nextGallery = Gallery::where('id', '>', $id)->orderBy('id', 'asc')->first();
         $nextGalleryId = $nextGallery ? $nextGallery->id : null;
 
         // Get the previous gallery ID
-        $prevGallery = Gallery::where('user_id', $gallery->user->id)
-                        ->where('id', '<', $id)
-                        ->orderBy('id', 'desc')
-                        ->first();
+        $prevGallery = Gallery::where('id', '<', $id)->orderBy('id', 'desc')->first();
         $prevGalleryId = $prevGallery ? $prevGallery->id : null;
 
         $query = ArtWork::query()->where('gallery_id', $id)->orderBy('updated_at', 'desc');
