@@ -4,7 +4,11 @@
 
 <link rel="stylesheet" href="https://icons.getbootstrap.com/assets/font/bootstrap-icons.min.css">
 <main id="main" class="main-content">
-    <div id="content" class="page-gallery-view">
+    @if($gallery->user->my_background)
+        <div id="content" class="page-gallery-view" style="background-image: url({{ static_asset('uploads/'. $gallery->user->my_background) }}) !important; background-repeat: no-repeat; background-size: 100% 100%;">
+    @else
+        <div id="content" class="page-gallery-view">
+    @endif
         <div class="content_box">
             <div class="container-fluit pt-4 p-4">
                 <div class="row">

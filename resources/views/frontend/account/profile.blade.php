@@ -3,8 +3,12 @@
 <link rel="stylesheet" href="https://icons.getbootstrap.com/assets/font/bootstrap-icons.min.css">
 @section('main-content')
 <main id="main" class="main-content">
-
-    <div id="content" class="page-account-profile">
+    @if($my_background)   
+        <div id="content" class="page-account-profile" style="background-image: url({{ static_asset('uploads/'. $my_background) }}) !important; background-repeat: no-repeat; background-size: 100% 100%;">
+    @else
+        <div id="content" class="page-account-profile">
+    @endif
+    
         <div class="content_box">
             <div class="container-fluit p-5 pt-4">
                 <div class="row">
@@ -32,9 +36,9 @@
                                             <div class="progress-bar banner-progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
                                     </div>
-                                    <input type="text" class="banner-url" name="banner" hidden>
-                                    <input type="text" class="side-url" name="side" hidden>
-                                    <input type="text" class="my-background-url" name="my_background" hidden>
+                                    <input type="text" class="banner-url" name="banner" hidden value='{{ $banner }}'>
+                                    <input type="text" class="side-url" name="side" hidden value='{{ $side }}'>
+                                    <input type="text" class="my-background-url" name="my_background" hidden value='{{ $my_background }}'>
                                     <input type="text" class="layout" name="layout" hidden value='{{ $layout }}'>
                                     <input type="text" class="content" name="content" hidden value='{{ $content }}'>
                                 </div>
