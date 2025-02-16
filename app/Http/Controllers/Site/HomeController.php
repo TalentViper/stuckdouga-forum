@@ -111,11 +111,17 @@ class HomeController extends Controller
         );
 
         // Get the next gallery ID
-        $nextArtwork = ArtWork::where('id', '>', $id)->orderBy('id', 'asc')->first();
+        $nextArtwork = ArtWork::where('gallery_id', $artwork->gallery->id)
+                    ->where('id', '>', $id)
+                    ->orderBy('id', 'asc')
+                    ->first();
         $nextArtworkId = $nextArtwork ? $nextArtwork->id : null;
 
         // Get the previous gallery ID
-        $prevArtwork = ArtWork::where('id', '<', $id)->orderBy('id', 'desc')->first();
+        $prevArtwork = ArtWork::where('gallery_id', $artwork->gallery->id)
+                    ->where('id', '<', $id)
+                    ->orderBy('id', 'desc')
+                    ->first();
         $prevArtworkId = $prevArtwork ? $prevArtwork->id : null;
 
         return view('frontend.artwork', compact('condition', 'visibility', 'info', 'section', 'artwork', 'stype', 'background', 'nextArtworkId', 'prevArtworkId', 'sources'));

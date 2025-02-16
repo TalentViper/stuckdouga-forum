@@ -9,7 +9,7 @@
         <div class="buttons">
             <button type="button" onclick="window.location.href='{{ route('openMessageForm', ['to_admin' => $user->username]) }}'">Send Message</button>
             <button type="button" onclick="window.location.href='{{ route('account') }}'">My Account</button>
-            <button type="button" onclick="window.history.back()" >Go Back</button>
+            <button type="button" onclick="window.close()" >Go Back</button>
         </div>
     </div>
 </header>
@@ -29,7 +29,7 @@
                             <img src="{{ static_asset('images/img/account-banner.jpg') }}" alt="" class="bg-1">
                         @endif
                         <div class="user-info">
-                            <img width="160px" src="{{ $user->avatar == NULL ? ($user->gender == 'male' ? static_asset('images/img/male_default.jpg') : static_asset('images/img/female_default.jpg')) : static_asset('uploads') . '/' . $user->avatar }}" alt="">
+                            <img width="160px" src="{{ $user->avatar == NULL ? ($user->gender == 'female' ? static_asset('images/img/female_default.jpg') : static_asset('images/img/male_default.jpg')) : static_asset('uploads') . '/' . $user->avatar }}" alt="">
                             <span class="name">{{$user->full_name}}</span>
                             <span class="location">From:  {{$user->location}}</span>
                             <span class="created">Joined: {{\Carbon\Carbon::parse($user->created_at)->format('d.m.y');}}</span>
@@ -276,7 +276,16 @@
                                     @foreach($links as $link)
                                         <tr>
                                             <td class="priority">
-                                                <a href="{{ $link->url }}" target="_blank">{{ $link->name }}</a>
+                                                @php
+                                                    // Function to ensure URLs are properly formatted with a scheme
+                                                    $ensureHttp = function($url) {
+                                                        return preg_match('~^(?:f|ht)tps?://~i', $url) ? $url : 'http://' . $url;
+                                                    };
+
+                                                    // Format the URL using the helper function
+                                                    $formattedUrl = $ensureHttp($link->url);
+                                                @endphp
+                                                <a href="{{ $formattedUrl }}" target="_blank" style="text-decoration: none;">{{ $link->name }}</a>
                                             </td>
                                             <td class="description">
                                                 {{ $link->desc }}
@@ -359,8 +368,21 @@
     }
     .tab-content {
         display: none;
-        min-height: 350px;
+        min-height: 600px;
         padding: 16px;
+    }
+    #galleries {
+        position: relative;
+    }
+    
+    #galleries .gallery-content, #galleries .gallery-content1 {
+        padding-bottom: 52px;
+    }
+    .action-buttons.bottom-actions {
+        margin-top: auto;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
     }
 
     .bg-cover {
