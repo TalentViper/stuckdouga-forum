@@ -581,7 +581,7 @@ button.row_but {
 .page-latest .primary .view-buttons a,.page-latest .primary .social-buttons a,
 .page-member .primary .view-buttons a,.page-member .primary .social-buttons a {
   color: white;
-  font-size: 23px;
+  font-size: 30px;
   text-decoration: none;
   margin-left: 15px;
 }
@@ -1416,7 +1416,7 @@ button.row_but {
 }
 
 .tag-page-gallery .active {
-  font-weight: 500;
+  font-weight: 600;
   color: white!important;
 }
 
@@ -1587,8 +1587,4 @@ button.row_but {
 
 .border-bottom-divider {
   border-bottom: 1px solid #fff;
-}
-
-.text-bold {
-  font-weight: bold;
 }

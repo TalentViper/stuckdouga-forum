@@ -8,7 +8,7 @@
             <a class="mt-10 {{ Request::routeIs('account') ? 'active' : '' }}" href="{{ route('account') }}">My Account</a>
             <a class="{{ Request::routeIs('accountmessage') ? 'active' : '' }}" href="{{ route('accountmessage') }}">Messages</a>
             <a class="{{ Request::routeIs('detail') ? 'active' : '' }}" href="{{ route('detail') }}">Personal Details</a>
-            <a class="text-bold" href="#">Profile Sections:</a>
+            <a class="" href="#">Profile Sections:</a>
             <ul>
                 <li>
                     <a class="{{ Request::routeIs('profile') ? 'active' : '' }}" href="{{ route('profile') }}">Profile Info</a>
